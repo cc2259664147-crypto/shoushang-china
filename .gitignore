@@ -1,0 +1,13 @@
+node_modules/
+.pnpm-store/
+.pnpm-cache/
+.pnpm-state/
+dist/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.log

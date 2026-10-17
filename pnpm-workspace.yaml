@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+  - fixtures
+storeDir: .pnpm-store
+cacheDir: .pnpm-cache
+saveExact: true
+engineStrict: true
+allowBuilds:
+  esbuild: true

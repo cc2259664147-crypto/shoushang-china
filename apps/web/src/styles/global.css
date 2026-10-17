@@ -1,0 +1,9 @@
+/* M01 engineering check page only. Global styles are maintained by the controller. */
+:root { font-family: system-ui, sans-serif; color: #202020; background: #fff; line-height: 1.6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 880px; margin: 32px auto; padding: 0 20px; overflow-wrap: anywhere; }
+article { border: 1px solid #ccc; padding: 16px; }
+img { max-width: 100%; height: auto; }
+a { color: #124c9c; }
+a:focus-visible { outline: 3px solid #124c9c; outline-offset: 4px; }

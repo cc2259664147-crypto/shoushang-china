@@ -1,0 +1,29 @@
+{
+  "name": "shoushang-china",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24.19.0 <25",
+    "pnpm": "11.25.0"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others -n web,api \"pnpm --filter @shoushang/web dev\" \"pnpm --filter @shoushang/api dev\"",
+    "build": "pnpm typecheck && pnpm --filter @shoushang/web build && pnpm --filter @shoushang/api build",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p packages/contracts/tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:runtime": "node scripts/check-runtime.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "24.10.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "concurrently": "9.2.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4",
+    "@shoushang/fixtures": "workspace:*"
+  }
+}
