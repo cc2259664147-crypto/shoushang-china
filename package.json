@@ -13,7 +13,11 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p packages/contracts/tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check:runtime": "node scripts/check-runtime.mjs"
+    "check:runtime": "node scripts/check-runtime.mjs",
+    "m02:dev": "pnpm --filter @shoushang/papercut-verification dev",
+    "m02:typecheck": "pnpm --filter @shoushang/papercut-verification typecheck",
+    "m02:test": "pnpm --filter @shoushang/papercut-verification test",
+    "m02:build": "pnpm --filter @shoushang/papercut-verification build"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

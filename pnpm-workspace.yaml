@@ -2,6 +2,7 @@ packages:
   - apps/*
   - packages/*
   - fixtures
+  - prototypes/papercut-verification
 storeDir: .pnpm-store
 cacheDir: .pnpm-cache
 saveExact: true

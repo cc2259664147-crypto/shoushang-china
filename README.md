@@ -66,3 +66,21 @@ M01 仅 mock 内容，不访问真实内容服务。内存仓储未连接页面�
 私有仓库：https://github.com/cc2259664147-crypto/shoushang-china 。当前目录是 Git 根目录，默认分支为 main，远端名为 origin。原始 PRD 在上一级目录，保留在本地资料目录；本仓库记录代码及工程文档。
 
 后续阶段沿用本仓库，先检查 `git status`，按任务范围提交，由总控整合后 `git push origin main`。禁止强制推送和提交凭据。依赖、包缓存、dist 和 `.env` 已排除；`.gitattributes` 统一文本为 LF。Git 身份仅配置在当前仓库，未改变全局设置。
+
+## M02 隔离剪纸技术原型
+
+原型位于 `prototypes/papercut-verification`，与 M01 页面/服务分开。使用上述受管理 Node 环境。
+
+```powershell
+pnpm m02:dev       # http://127.0.0.1:5174 ，占用即报错
+pnpm m02:typecheck # 原型完整 strict 检查 + 纯核心无 DOM 检查
+pnpm m02:test      # 原型算法测试
+pnpm m02:build     # 原型类型检查与 Vite 构建
+pnpm --filter @shoushang/papercut-verification verify:browser # 保持5174运行；本机Edge/Playwright，无下载浏览器
+```
+
+也可 `cd prototypes/papercut-verification` 后分别运行 `pnpm dev`、`pnpm typecheck`、`pnpm test`、`pnpm build`。根目录原有四个同名命令仍服务 M01，不包含原型；两套检查需要分别运行。
+
+仅支持方纸、竖轴镜像、四扇区无镜像，提供三角/椭圆/水滴、数值参数、30步历史、SVG与1600×2000不透明PNG。JSON重建只作技术测试，无IndexedDB、自动草稿、作品列表和同步。刷新会失去内存状态。参数与按钮可独立操作；本原型未实现拖动。
+
+详见 [算法约定](prototypes/papercut-verification/ALGORITHM.md)、[M02交接](docs/handoffs/M02.md)。证据位于原型 `evidence/`；构建与依赖目录不提交。
