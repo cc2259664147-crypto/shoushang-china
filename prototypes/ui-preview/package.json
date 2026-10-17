@@ -1,0 +1,11 @@
+{
+  "name":"@shoushang/ui-preview","version":"0.1.0","private":true,"type":"module",
+  "scripts":{
+    "dev":"vite --host 127.0.0.1 --port 5175 --strictPort",
+    "typecheck":"tsc --noEmit -p tsconfig.json",
+    "test":"pnpm typecheck && node verify-browser.mjs",
+    "build":"pnpm typecheck && vite build"
+  },
+  "dependencies":{"@shoushang/ui":"workspace:*","react":"19.2.0","react-dom":"19.2.0"},
+  "devDependencies":{"vite":"7.3.7","typescript":"5.9.3","@playwright/test":"1.56.1","@types/react":"19.2.2","@types/react-dom":"19.2.2","@types/node":"24.10.0"}
+}

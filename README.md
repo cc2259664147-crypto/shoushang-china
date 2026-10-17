@@ -1,4 +1,4 @@
-# 手上中国：非遗技艺数字工坊 · M01
+# 手上中国：非遗技艺数字工坊 · M01–M03
 
 这是工程检查入口，尚非正式产品。代码根目录为 `C:\Users\mmcn\Desktop\shoushang-china\shoushang-china`。上级 Markdown PRD 保持原样，sources/ 未修改。
 
@@ -29,7 +29,7 @@ pnpm --filter @shoushang/api start # 构建后的 API
 pnpm --filter @shoushang/web preview # 构建后的前端 4173
 ```
 
-`apps/web/dist` 是前端静态产物；API 入口是 `apps/api/dist/server.js`（保留 node_modules 中 Fastify）。开发页通过 Vite 代理 `/health`，生产反向代理配置留待部署。Playwright 已锁定依赖及配置，M14 才添加核心流程并安装所需浏览器；M01 不宣称 E2E 验收完成。
+`apps/web/dist` 是前端静态产物；API 入口是 `apps/api/dist/server.js`（保留 node_modules 中 Fastify）。开发页通过 Vite 代理 `/health`，生产反向代理配置留待部署。Playwright 已锁定依赖及配置，M01–M03复用本机Edge检查，正式核心流程E2E留给M14；现有检查不代表正式产品验收完成。
 
 ## 结构与职责
 
@@ -40,7 +40,7 @@ pnpm --filter @shoushang/web preview # 构建后的前端 4173
 | apps/web/src/styles | 总控维护的自编全局 CSS |
 | apps/api/src | Fastify 健康检查；M12/M13 以后加入真实内容和管理服务 |
 | packages/contracts | Zod 公共模型、类型和模块端口 |
-| packages/ui | M03 基础组件，目前仅说明与空导出 |
+| packages/ui | M03 自编 CSS 基础组件与公开样式入口 |
 | packages/papercut-core | M04 纯逻辑接口 |
 | packages/artwork-renderer | M06 SVG 渲染接口 |
 | packages/local-repository | M05 接口和 M01 测试用内存实现 |
@@ -84,3 +84,19 @@ pnpm --filter @shoushang/papercut-verification verify:browser # 保持5174运行
 仅支持方纸、竖轴镜像、四扇区无镜像，提供三角/椭圆/水滴、数值参数、30步历史、SVG与1600×2000不透明PNG。JSON重建只作技术测试，无IndexedDB、自动草稿、作品列表和同步。刷新会失去内存状态。参数与按钮可独立操作；本原型未实现拖动。
 
 详见 [算法约定](prototypes/papercut-verification/ALGORITHM.md)、[M02交接](docs/handoffs/M02.md)。证据位于原型 `evidence/`；构建与依赖目录不提交。
+
+## M03 基础 UI 组件预览
+
+使用上述Node24.19.0/pnpm11.25.0环境，离线缓存已具备时可`pnpm install --frozen-lockfile --offline`。独立页面通过`@shoushang/ui`与`@shoushang/ui/styles.css`公开入口复用，无正式业务页面或持久化。所有演示均明确标识。
+
+```powershell
+pnpm m03           # 等同m03:dev
+pnpm m03:dev       # http://127.0.0.1:5175/，strictPort，占用即失败
+pnpm m03:typecheck # UI包、预览源码与Vite配置的完整strict检查
+pnpm m03:test      # 上述类型检查 + 真实Edge交互验证与截图
+pnpm m03:build     # 上述类型检查 + 独立预览构建
+```
+
+运行`m03:test`前需保持5175预览服务运行，并已安装本机Microsoft Edge。脚本使用已有Playwright1.56.1的`channel:msedge`，不会下载浏览器、安装工具或退出现有服务；无Edge或未启动服务会明确失败。M01的5173与M02的5174保持独立。构建结果在`prototypes/ui-preview/dist`；测试证据在其`evidence`目录。根typecheck/test/build不替代M03专项检查。
+
+消费方式：组合根加载一次`import '@shoushang/ui/styles.css'`，外层容器添加`className="ss-theme"`，只从`@shoushang/ui`导入组件。详见[视觉基线](docs/design/ui-foundation.md)、[组件API](docs/design/ui-components.md)、[M03交接](docs/handoffs/M03.md)。本机沙箱若阻止esbuild读取祖先目录，需要受审查的本机执行权限；不通过修改编译严格选项绕过。

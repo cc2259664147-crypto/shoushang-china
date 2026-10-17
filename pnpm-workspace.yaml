@@ -3,6 +3,7 @@ packages:
   - packages/*
   - fixtures
   - prototypes/papercut-verification
+  - prototypes/ui-preview
 storeDir: .pnpm-store
 cacheDir: .pnpm-cache
 saveExact: true

@@ -1,0 +1,53 @@
+.ss-theme {
+  --ss-paper:#f6f1e7; --ss-surface:#fff; --ss-ink:#252521; --ss-muted:#62625b; --ss-primary:#a82d26; --ss-primary-hover:#8d241e; --ss-primary-active:#721c17; --ss-border:#77776c; --ss-focus:#155e9a; --ss-soft:#ece6da; --ss-success:#27623a; --ss-warning:#77520e;
+  --ss-space-1:4px; --ss-space-2:8px; --ss-space-3:12px; --ss-space-4:16px; --ss-space-6:24px; --ss-space-8:32px; --ss-space-12:48px;
+  --ss-font:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; --ss-text-sm:14px; --ss-text-base:16px; --ss-text-lg:20px; --ss-text-xl:28px; --ss-text-display:36px; --ss-line:1.6; --ss-control-height:44px; --ss-radius:8px; --ss-dialog-radius:16px; --ss-border-width:1px; --ss-duration:120ms; --ss-spin-duration:1000ms;
+  font-family:var(--ss-font); font-size:var(--ss-text-base); line-height:var(--ss-line); color:var(--ss-ink);
+}
+.ss-button-wrap { display:inline-flex; position:relative; max-width:100%; vertical-align:middle; }
+.ss-button { box-sizing:border-box; display:inline-flex; justify-content:center; align-items:center; position:relative; min-height:var(--ss-control-height); min-width:var(--ss-control-height); max-width:100%; padding:var(--ss-space-2) var(--ss-space-4); border:var(--ss-border-width) solid var(--ss-primary); border-radius:var(--ss-radius); background:var(--ss-primary); color:var(--ss-surface); font:inherit; font-weight:600; line-height:1.5; cursor:pointer; overflow-wrap:anywhere; transition:background var(--ss-duration),box-shadow var(--ss-duration); }
+.ss-button:hover:not(:disabled) { background:var(--ss-primary-hover); }
+.ss-button:active:not(:disabled) { background:var(--ss-primary-active); box-shadow:inset 0 0 0 2px currentColor; }
+.ss-button--secondary,.ss-button--ghost { color:var(--ss-ink); background:var(--ss-surface); border-color:var(--ss-border); }
+.ss-button--ghost { background:transparent; border-color:transparent; }
+.ss-button--secondary:hover:not(:disabled),.ss-button--ghost:hover:not(:disabled),.ss-button--secondary:active:not(:disabled),.ss-button--ghost:active:not(:disabled) { background:var(--ss-soft); }
+.ss-button--danger { border-style:double; border-width:3px; padding:calc(var(--ss-space-2) - 2px) calc(var(--ss-space-4) - 2px); }
+.ss-button:disabled { cursor:not-allowed; background:var(--ss-soft); color:var(--ss-muted); border-color:var(--ss-border); border-style:dashed; }
+.ss-button[aria-busy=true] { border-style:solid; }
+.ss-button-label--loading { opacity:0; }
+.ss-button-progress { position:absolute; inset:0; display:grid; place-items:center; }
+.ss-icon-button { width:var(--ss-control-height); padding:var(--ss-space-2); flex-shrink:0; }
+.ss-icon { display:flex; }
+.ss-button:focus-visible,.ss-input:focus-visible,.ss-theme:focus-visible,.ss-dialog:focus-visible { outline:3px solid var(--ss-focus); outline-offset:3px; }
+.ss-field { display:flex; flex-direction:column; gap:var(--ss-space-2); min-width:0; }
+.ss-label { font-weight:600; overflow-wrap:anywhere; }
+.ss-required,.ss-description { font-size:var(--ss-text-sm); color:var(--ss-muted); overflow-wrap:anywhere; }
+.ss-input { box-sizing:border-box; width:100%; min-width:0; min-height:var(--ss-control-height); padding:var(--ss-space-2) var(--ss-space-3); border:var(--ss-border-width) solid var(--ss-border); border-radius:var(--ss-radius); background:var(--ss-surface); color:var(--ss-ink); font:inherit; line-height:var(--ss-line); }
+.ss-input:hover:not(:disabled) { border-color:var(--ss-ink); }
+.ss-input:disabled { background:var(--ss-soft); color:var(--ss-muted); border-style:dashed; cursor:not-allowed; opacity:1; }
+.ss-input[readonly] { background:var(--ss-paper); }
+.ss-input[aria-invalid=true] { border:2px solid var(--ss-primary); }
+.ss-textarea { min-height:120px; resize:vertical; overflow-wrap:anywhere; }
+.ss-field-error { margin:0; color:var(--ss-primary); font-size:var(--ss-text-sm); overflow-wrap:anywhere; }
+.ss-notice { border:var(--ss-border-width) solid var(--ss-border); border-left:4px solid currentColor; padding:var(--ss-space-4); border-radius:var(--ss-radius); background:var(--ss-surface); overflow-wrap:anywhere; }
+.ss-notice--info,.ss-status--info { color:var(--ss-ink); }
+.ss-notice--success,.ss-status--success { color:var(--ss-success); }
+.ss-notice--warning,.ss-status--warning { color:var(--ss-warning); }
+.ss-notice--error,.ss-status--error { color:var(--ss-primary); }
+.ss-notice-action { margin-top:var(--ss-space-3); }
+.ss-status { overflow-wrap:anywhere; }
+.ss-status:empty { min-height:0; }
+.ss-state { display:flex; align-items:center; gap:var(--ss-space-3); padding:var(--ss-space-6); border:var(--ss-border-width) dashed var(--ss-border); border-radius:var(--ss-radius); overflow-wrap:anywhere; }
+.ss-empty { flex-direction:column; text-align:center; }
+.ss-state-title { font-size:var(--ss-text-lg); line-height:1.4; margin:0; }
+.ss-spinner { display:inline-block; box-sizing:border-box; width:20px; height:20px; flex-shrink:0; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:ss-spin var(--ss-spin-duration) linear infinite; }
+@keyframes ss-spin { to { transform:rotate(360deg); } }
+.ss-dialog { box-sizing:border-box; padding:0; width:min(640px,calc(100% - 32px)); max-width:calc(100% - 32px); max-height:calc(100dvh - 32px); border:var(--ss-border-width) solid var(--ss-border); border-radius:var(--ss-dialog-radius); color:var(--ss-ink); background:var(--ss-surface); overflow:hidden; font:inherit; }
+.ss-dialog::backdrop { background:rgb(0 0 0 / 55%); }
+.ss-dialog-layout { display:flex; flex-direction:column; max-height:calc(100dvh - 34px); }
+.ss-dialog-header { display:flex; align-items:center; justify-content:space-between; gap:var(--ss-space-3); padding:var(--ss-space-4); border-bottom:var(--ss-border-width) solid var(--ss-border); flex-shrink:0; }
+.ss-dialog-title { font-size:var(--ss-text-lg); line-height:1.4; margin:0; overflow-wrap:anywhere; }
+.ss-dialog-body { padding:var(--ss-space-4); overflow:auto; overscroll-behavior:contain; min-height:0; overflow-wrap:anywhere; }
+.ss-dialog-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:var(--ss-space-2); padding:var(--ss-space-4); border-top:var(--ss-border-width) solid var(--ss-border); flex-shrink:0; }
+.ss-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+@media (prefers-reduced-motion:reduce) { .ss-spinner { animation:none; } .ss-button { transition:none; } }

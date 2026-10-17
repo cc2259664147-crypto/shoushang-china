@@ -17,7 +17,12 @@
     "m02:dev": "pnpm --filter @shoushang/papercut-verification dev",
     "m02:typecheck": "pnpm --filter @shoushang/papercut-verification typecheck",
     "m02:test": "pnpm --filter @shoushang/papercut-verification test",
-    "m02:build": "pnpm --filter @shoushang/papercut-verification build"
+    "m02:build": "pnpm --filter @shoushang/papercut-verification build",
+    "m03:dev": "pnpm --filter @shoushang/ui-preview dev",
+    "m03:typecheck": "pnpm --filter @shoushang/ui-preview typecheck",
+    "m03:test": "pnpm --filter @shoushang/ui-preview test",
+    "m03:build": "pnpm --filter @shoushang/ui-preview build",
+    "m03": "pnpm m03:dev"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

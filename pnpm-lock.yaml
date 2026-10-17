@@ -153,6 +153,37 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/node@24.10.0)(supports-color@8.1.1)(tsx@4.20.6)
 
+  prototypes/ui-preview:
+    dependencies:
+      '@shoushang/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      react:
+        specifier: 19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: 19.2.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@playwright/test':
+        specifier: 1.56.1
+        version: 1.56.1
+      '@types/node':
+        specifier: 24.10.0
+        version: 24.10.0
+      '@types/react':
+        specifier: 19.2.2
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: 19.2.2
+        version: 19.2.2(@types/react@19.2.2)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vite:
+        specifier: 7.3.7
+        version: 7.3.7(@types/node@24.10.0)(tsx@4.20.6)
+
 packages:
 
   '@esbuild/aix-ppc64@0.25.11':

@@ -21,3 +21,5 @@
 | @types/react / @types/react-dom | 19.2.2 | React类型 | MIT |
 
 不使用 Bootstrap、Element、Ant Design、shadcn/ui、预设样式组件或现成网站模板。所有 CSS 自编；SVG 是统一作品渲染方向，Canvas 仅用于最终PNG；当前示意SVG由项目原创并以CC0提供，不是未经授权网络图片。没有下载文化素材或外部字体。内存仓储不依赖浏览器，IndexedDB 留给 M05；不引入假数据库业务。
+
+M03仅复用既有React/react-dom19.2.0、Vite7.3.7、TypeScript5.9.3、Playwright1.56.1及对应类型；未增加第三方功能库、组件库、字体、图标库或Storybook。UI包仅生产依赖React。独立预览的锁文件只新增workspace importer，未升级任何依赖。浏览器验证使用本机已有Edge，未下载浏览器。CloseIcon为项目自制SVG。
