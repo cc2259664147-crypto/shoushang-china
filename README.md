@@ -60,3 +60,9 @@ M01 仅 mock 内容，不访问真实内容服务。内存仓储未连接页面�
 自编 CSS，禁止预设样式组件库与现成网站模板。依赖只用于框架、服务、校验、开发和测试，不能替代原创页面设计。必要依赖变更由总控批准并锁定。
 
 可选检查页浏览器验证（保持 pnpm dev 运行，需本机已有 Edge，不下载浏览器）：`pnpm exec node scripts/smoke-m01.mjs`。它只验证 M01 检查页，不代表正式核心流程 E2E 通过。
+
+## GitHub 版本管理
+
+私有仓库：https://github.com/cc2259664147-crypto/shoushang-china 。当前目录是 Git 根目录，默认分支为 main，远端名为 origin。原始 PRD 在上一级目录，保留在本地资料目录；本仓库记录代码及工程文档。
+
+后续阶段沿用本仓库，先检查 `git status`，按任务范围提交，由总控整合后 `git push origin main`。禁止强制推送和提交凭据。依赖、包缓存、dist 和 `.env` 已排除；`.gitattributes` 统一文本为 LF。Git 身份仅配置在当前仓库，未改变全局设置。
