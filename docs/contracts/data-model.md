@@ -35,3 +35,9 @@ reflection 的 vertical/horizontal 轴分别 x=0.5 / y=0.5，both 为两轴；ra
 用户作品与公开展馆是不同数据空间。访客本地保存不触发发布、不上传服务端。发布数量、真实传承人信息、媒体授权属于后续正式内容验收；M01 样例不足以满足 PRD 的3模板/12展品/3故事目标。
 
 Work 名称长度按 JS UTF-16 code units 校验，所有模块须同口径（常见汉字1单位、部分表情2单位）；后续如需字素簇计数，先走公共契约变更。schemaVersion 的兼容与迁移由 M05 实现，M01 拒绝非1版本。
+
+## M04算法与历史补充
+
+geometryVersion=1的正式实现基线见[算法v1](../algorithms/papercut-v1.md)，状态为实现基线已确定、待阶段审核；未批准正式发布。支持方纸vertical或radial4无镜像、三种形状、凸allowedRegion。schema中其余组合可表达但未实现，core明确失败。容差、保守曲线限制和镂空并集语义均按该规范。
+
+Work与PapercutState结构不变。历史虽然保存完整Work，但undo/redo只应用operations和palette；名称、模板、身份、revision、createdAt/updatedAt和status保持当前值。核心不更新时间/修订、不保存。完整模板快照须与历史深值相同，外部模板改动不影响已复制的作品；模板切换重新createState。M05恢复失败保留原记录并解释版本/参数错误；不借此自动清空或迁移。旧版本迁移及持久化事务不属于M04。

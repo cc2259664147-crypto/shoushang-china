@@ -1,0 +1,6 @@
+{"shape":"triangle","count":50,"history":30,"n":10,"medianMs":4.928699999999992,"maxMs":8.026999999999987}
+{"shape":"triangle","count":100,"history":30,"n":10,"medianMs":8.287800000000004,"maxMs":9.903099999999995}
+{"shape":"circle","count":50,"history":30,"n":10,"medianMs":3.276300000000049,"maxMs":6.1252999999999815}
+{"shape":"circle","count":100,"history":30,"n":10,"medianMs":9.339699999999993,"maxMs":11.337699999999927}
+{"shape":"teardrop","count":50,"history":30,"n":10,"medianMs":4.59579999999994,"maxMs":12.583900000000085}
+{"shape":"teardrop","count":100,"history":30,"n":10,"medianMs":7.247899999999959,"maxMs":11.444899999999961}

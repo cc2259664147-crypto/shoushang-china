@@ -1,0 +1,7 @@
+{"note":"Before optimization: unmodified .review-m04/audit.ts, two warmups and ten measured dispatch calls; medianMs is original script sorted[5], not middle-pair mean. Raw individual baseline samples were not emitted by that script."}
+{"shape":"triangle","count":50,"history":30,"n":10,"medianMs":6.353200000000015,"maxMs":10.6404}
+{"shape":"triangle","count":100,"history":30,"n":10,"medianMs":10.718999999999596,"maxMs":13.815700000000106}
+{"shape":"circle","count":50,"history":30,"n":10,"medianMs":72.16390000000001,"maxMs":78.54919999999993}
+{"shape":"circle","count":100,"history":30,"n":10,"medianMs":176.66920000000027,"maxMs":180.78960000000006}
+{"shape":"teardrop","count":50,"history":30,"n":10,"medianMs":743.5414000000001,"maxMs":750.2195000000002}
+{"shape":"teardrop","count":100,"history":30,"n":10,"medianMs":1781.409599999999,"maxMs":1790.5049}

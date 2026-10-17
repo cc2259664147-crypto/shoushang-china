@@ -58,3 +58,21 @@ M12 的 `createHttpContentClient(...): ContentClient` 必须实现同一端口�
 | RESOURCE_UNAVAILABLE / EXPORT_FAILED | 缺渲染资源或导出失败，可重试且不改作品 | 模块错误 |
 
 ApiError 始终有 requestId、fieldErrors（可空）。本地/mock 使用标识测试请求的固定ID；真实服务每请求生成关联ID，不暴露管理字段。M12/M13 在服务端强制权限、发布过滤和响应白名单，M01 不宣称已实现权限。
+
+## M04正式core接入
+
+`@shoushang/papercut-core`公开`createPapercutCore()`（兼容PapercutCore端口）、原有命令/状态/错误类型及Work/CutOperation/TemplateVersion/Result类型。createState/validate/dispatch均在运行时校验输入，错误包含字段路径。createState不生成时间或ID；传入已有Work，成功后得到独立快照。validate成功也返回独立、经过schema规范化的Work。
+
+```ts
+import { createPapercutCore, getWorkGeometry } from '@shoushang/papercut-core';
+const core = createPapercutCore();
+const checked = core.validate(work); // M05读入/恢复边界；失败保留原记录
+const initial = core.createState(work); // 新作品、重新打开或模板切换，清空历史
+if (initial.ok) {
+  const result = core.dispatch(initial.value, { type: 'add-cut', operation });
+  // operation的id/order、Work的时间与保存元数据由调用方提供
+}
+const geometry = getWorkGeometry(work); // M06使用原始形状、定位及对称矩阵
+```
+
+M05保存成功后可用`{...state, work: savedWork}`保留编辑历史；作品id/craftId与完整模板快照必须相同。undo/redo只恢复operations/palette，不回退名称、revision、时间等元数据。更换模板须createState，不拼接历史。`getWorkGeometry`输入unknown并返回Result，曲线数据与保守校验轮廓分离；精确类型、坐标和组合顺序见[算法v1](../algorithms/papercut-v1.md)。M06不需要重新推导控制点，不使用保守点集合代替原曲线；SVG实例隔离仍由M06设计。
