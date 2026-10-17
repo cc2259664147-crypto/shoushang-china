@@ -67,4 +67,3 @@ try{
  const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const mp=await mobile.newPage();await mp.goto('http://127.0.0.1:5174');await mp.getByRole('button',{name:'添加剪切',exact:true}).tap();await expect(mp.getByRole('status')).toContainText('操作数量：1');await mp.screenshot({path:'evidence/mobile-simulated.png',fullPage:true});await mobile.close();check('mobile viewport and touch tap SIMULATED; no real device');
  expect(errors).toEqual([]);report.pageErrors=errors;await writeFile('evidence/browser-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify({...report,performance:report.performance.map(p=>({...p,exportMs:{...p.exportMs,samples:undefined},cutCommandMs:{...p.cutCommandMs,samples:undefined},paletteCommandMs:{...p.paletteCommandMs,samples:undefined},inputToTwoFramesMs:{...p.inputToTwoFramesMs,samples:undefined}}))},null,2));
 }finally{await browser.close();}
-
