@@ -25,7 +25,11 @@
     "m03": "pnpm m03:dev",
     "m04:typecheck": "tsc --noEmit -p packages/papercut-core/tsconfig.json",
     "m04:test": "vitest run packages/papercut-core/src/core.test.ts",
-    "m04": "pnpm m04:typecheck && pnpm m04:test"
+    "m04": "pnpm m04:typecheck && pnpm m04:test",
+    "m05:dev": "pnpm --filter @shoushang/storage-verification dev",
+    "m05:typecheck": "pnpm --filter @shoushang/storage-verification typecheck",
+    "m05:test": "pnpm --filter @shoushang/storage-verification test",
+    "m05:build": "pnpm --filter @shoushang/storage-verification build"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

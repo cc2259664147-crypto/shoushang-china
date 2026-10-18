@@ -1,5 +1,7 @@
 import { PaginationSchema, WorkSchema } from '@shoushang/contracts';
 import type { LocalRepository, StorageFailure, Work } from '@shoushang/contracts';
+export { openIndexedDbRepository } from './indexeddb';
+export type { IndexedDbRepository, IndexedDbOptions, EditorStep, EditorDraft, DraftInput, CommitDraftInput, RecordIssue, RawBackup } from './indexeddb';
 
 export interface MemoryRepositoryOptions {
   readonly failure?: 'STORAGE_UNAVAILABLE' | 'QUOTA_EXCEEDED';

@@ -1,5 +1,9 @@
 # 公共契约变更请求
 
+## M05 本地仓储扩展决定（2026-10-17）
+
+现有 `LocalRepository`、`FavoriteRepository`、`Work`、`SaveWorkInput` 保持不变，避免 M04/M07/M09 既有类型受影响。独立草稿步骤与基于完成版的修订、缩略图 Blob 与状态、恢复扫描和连接生命周期仅属于浏览器存储适配器，定义在 `@shoushang/local-repository` 公开入口。原端口 `save` 仍接受合法 draft/completed Work，写主记录并将缩略图置 pending；M07 编辑已完成作品必须调用独立 `saveDraft`，明确提交才调用 `commitDraft`。这不引入公共 DTO 迁移；首次发布没有历史正式物理格式。技术基线见 `docs/storage/indexeddb-v1.md`，未虚构审核签字。
+
 M01交接时无待处理变更；M02待评审提案见下。模块会话只追加提案，不自行改 contracts。
 
 提案模板：编号、提出模块、原因、旧字段/新字段、受影响模块、旧作品兼容/迁移、测试样例、总控决定及日期。

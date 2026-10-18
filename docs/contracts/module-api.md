@@ -76,3 +76,9 @@ const geometry = getWorkGeometry(work); // M06使用原始形状、定位及对�
 ```
 
 M05保存成功后可用`{...state, work: savedWork}`保留编辑历史；作品id/craftId与完整模板快照必须相同。undo/redo只恢复operations/palette，不回退名称、revision、时间等元数据。更换模板须createState，不拼接历史。`getWorkGeometry`输入unknown并返回Result，曲线数据与保守校验轮廓分离；精确类型、坐标和组合顺序见[算法v1](../algorithms/papercut-v1.md)。M06不需要重新推导控制点，不使用保守点集合代替原曲线；SVG实例隔离仍由M06设计。
+
+## M05 IndexedDB 扩展
+
+`openIndexedDbRepository(options?)` 返回 `Result<IndexedDbRepository,StorageFailure>`，成功实例的 `persistence='indexeddb'`，调用方在卸载时 `close()`。实例保留旧 `LocalRepository` 方法，另有 `favorites`、`saveWithThumbnail`、`saveDraft/readDraft/listDrafts/discardDraft/commitDraft`、`readThumbnail/rebuildThumbnail`、`inspectRecords/exportRawBackup`。`save` 等价于没有预制图片的 `saveWithThumbnail`，原子写 pending 缩略图。草稿的 `revision` 与 `baseRevision` 分别保护草稿并发和所依据完成版；`step` 为编辑会话数据。`inspectRecords` 须与列表一起用于损坏记录提示；`exportRawBackup` 返回原始结构化数据（含 Blob），调用方下载 JSON 时需将 Blob 转为 data URL。细节见[存储设计](../storage/indexeddb-v1.md)。
+
+M05 复审后，草稿 revision 对同一 workId 在删除、提交、重建之后仍递增；它不承诺首次从 1 开始。三个编辑方法继续以调用方持有的草稿 revision 为事务内并发条件，过期值返回 `REVISION_CONFLICT`，不会影响新草稿。

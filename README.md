@@ -1,5 +1,9 @@
 # 手上中国：非遗技艺数字工坊 · M01–M03
 
+## M05 本地存储验证
+
+`pnpm m05:dev` 启动独立工具 http://127.0.0.1:5176/ （strictPort）。`pnpm m05:typecheck`、`pnpm m05:test`、`pnpm m05:build` 分别执行严格检查、自动启动验证服务的真实 Edge/IndexedDB 测试、独立构建。测试使用专属数据库名和临时持久浏览器目录，不清理真实应用数据。工具会显示作品修订、时间、草稿、测试缩略图、收藏和损坏记录；它没有接入正式网页。存储设计见 [IndexedDB v1](docs/storage/indexeddb-v1.md)。
+
 这是工程检查入口，尚非正式产品。代码根目录为 `C:\Users\mmcn\Desktop\shoushang-china\shoushang-china`。上级 Markdown PRD 保持原样，sources/ 未修改。
 
 ## 环境与安装

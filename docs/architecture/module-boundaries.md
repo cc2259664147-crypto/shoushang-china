@@ -16,6 +16,7 @@ graph TD
  fixtures --> contracts
  core --> contracts
  local --> contracts
+ local --> core
  render --> contracts
  exporter --> contracts
  content --> contracts
@@ -38,3 +39,5 @@ graph TD
 全局路由/样式、启动入口、清单和锁文件、contracts 由总控整合。模块只能改任务列出的目录。后续同一文件有交集必须串行接手，不在多个会话同时写入；M12 和 M13 的 API 子目录隔离，主服务挂载由总控负责。
 
 M01 的 memory 与 mock 是测试实现，不能作为持久化、真实内容、权限或发布的验收证据。未实现业务端点返回 404。M02 技术验证在 prototypes/papercut-verification 隔离，合入正式核心须先评审结果。契约变更记录在 docs/contracts/change-requests.md。
+
+M05：local-repository 只从 papercut-core 公开入口调用正式 Work 校验，读写均不绕过几何校验；它仍不承担 UI、图片渲染或自动保存计时。独立 storage-verification 原型只验证浏览器持久化，正式应用接线留给 M07/M09。

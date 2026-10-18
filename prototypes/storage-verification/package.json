@@ -1,0 +1,6 @@
+{
+  "name": "@shoushang/storage-verification", "version": "0.1.0", "private": true, "type": "module",
+  "scripts": {"dev":"vite --host 127.0.0.1 --port 5176 --strictPort", "typecheck":"tsc --noEmit -p tsconfig.json", "test":"pnpm typecheck && playwright test -c playwright.config.ts", "build":"pnpm typecheck && vite build"},
+  "dependencies": {"@shoushang/local-repository":"workspace:*", "@shoushang/fixtures":"workspace:*", "@shoushang/contracts":"workspace:*"},
+  "devDependencies": {"vite":"7.3.7", "typescript":"5.9.3", "@playwright/test":"1.56.1", "@types/node":"24.10.0"}
+}
