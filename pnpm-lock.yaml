@@ -85,6 +85,9 @@ importers:
       '@shoushang/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@shoushang/papercut-core':
+        specifier: workspace:*
+        version: link:../papercut-core
 
   packages/content-client:
     dependencies:
