@@ -6,6 +6,11 @@
   "dependencies": {
     "@shoushang/contracts": "workspace:*",
     "@shoushang/content-client": "workspace:*",
+    "@shoushang/papercut-core": "workspace:*",
+    "@shoushang/artwork-renderer": "workspace:*",
+    "@shoushang/artwork-exporter": "workspace:*",
+    "@shoushang/local-repository": "workspace:*",
+    "@shoushang/ui": "workspace:*",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },

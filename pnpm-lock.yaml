@@ -51,12 +51,27 @@ importers:
 
   apps/web:
     dependencies:
+      '@shoushang/artwork-exporter':
+        specifier: workspace:*
+        version: link:../../packages/artwork-exporter
+      '@shoushang/artwork-renderer':
+        specifier: workspace:*
+        version: link:../../packages/artwork-renderer
       '@shoushang/content-client':
         specifier: workspace:*
         version: link:../../packages/content-client
       '@shoushang/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
+      '@shoushang/local-repository':
+        specifier: workspace:*
+        version: link:../../packages/local-repository
+      '@shoushang/papercut-core':
+        specifier: workspace:*
+        version: link:../../packages/papercut-core
+      '@shoushang/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -76,6 +91,9 @@ importers:
 
   packages/artwork-exporter:
     dependencies:
+      '@shoushang/artwork-renderer':
+        specifier: workspace:*
+        version: link:../artwork-renderer
       '@shoushang/contracts':
         specifier: workspace:*
         version: link:../contracts

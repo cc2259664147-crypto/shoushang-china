@@ -1,0 +1,25 @@
+{
+  "environment": "Windows, local Microsoft Edge via Playwright, 2026-10-18 Asia/Shanghai",
+  "scope": "M08 real browser validation; failure cases are explicitly injected",
+  "tests": {
+    "m08Playwright": 10,
+    "m07Regression": 17,
+    "m08Vitest": 8
+  },
+  "sample": "sample.png",
+  "screenshots": ["desktop.png", "narrow.png"],
+  "pixelChecks": {
+    "dimensions": [1600, 2000],
+    "allAlpha255": true,
+    "cardCornerRgba": [248, 243, 233, 255],
+    "paperRgba": [184, 32, 37, 255],
+    "holeColorObserved": [255, 255, 238, 255],
+    "downloadBytesEqualPreviewBytes": true
+  },
+  "performanceMilliseconds": {
+    "scope": "exportCard wall time including font readiness, image decode, Canvas composition and PNG encoding; local Edge; no page startup",
+    "cold": [169.2],
+    "warm": [46.1, 77.6, 46.3, 62.3, 63.0],
+    "warmMedian": 62.3
+  }
+}
