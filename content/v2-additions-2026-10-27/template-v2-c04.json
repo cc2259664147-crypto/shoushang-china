@@ -1,0 +1,41 @@
+{
+  "id": "template-v2-c04",
+  "craftId": "craft-papercut",
+  "version": 1,
+  "name": "自由造型：花形与几何",
+  "difficulty": "advanced",
+  "steps": [
+    "在左侧折叠域选择几何或花形工具",
+    "按下并拖动确定图形大小，按住 Shift 可锁定比例",
+    "展开检查对称效果并保存作品"
+  ],
+  "enabled": true,
+  "geometry": {
+    "basePaper": { "kind": "square" },
+    "symmetry": { "kind": "reflection", "axis": "vertical" },
+    "allowedRegion": [
+      { "x": 0.06, "y": 0.06 },
+      { "x": 0.44, "y": 0.06 },
+      { "x": 0.44, "y": 0.94 },
+      { "x": 0.06, "y": 0.94 }
+    ]
+  },
+  "allowedCuts": [
+    { "shape": "circle", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "triangle", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "teardrop", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "ellipse", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "rectangle", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "star", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 },
+    { "shape": "petal", "minWidth": 0.03, "maxWidth": 0.18, "minHeight": 0.03, "maxHeight": 0.18 }
+  ],
+  "rules": { "minEdgeGap": 0.015, "maxOperations": 80 },
+  "recommendedColors": ["#B82025", "#276B62", "#E59C38"],
+  "license": {
+    "name": "项目生成数字练习",
+    "attribution": "《手上中国》项目设计，AI辅助整理；未使用第三方模板素材"
+  },
+  "digitalNotice": "项目生成的数字几何练习，不复刻地方传统工序，不保证可直接进行实体剪裁。",
+  "geometryVersion": 1,
+  "rendererVersion": 1
+}

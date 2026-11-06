@@ -3,6 +3,99 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const browserModule = (path: string) => '/@fs/' + resolve(path).replaceAll('\\', '/');
+test.beforeAll(async ({ browser }) => { console.log('M14 M08 browser version', browser.version()); });
+
+test('M14 unsupported emoji and rare CJK names explicitly disclose the original font boundary', async ({ page }) => {
+  await page.goto(`/workshop/papercut?m07db=m08-test-${crypto.randomUUID()}`);
+  await page.getByRole('button', { name: '使用模板' }).click();
+  await page.getByLabel('作品名称').fill('😀𠮷'); await page.keyboard.press('Tab');
+  await page.getByRole('button', { name: '生成 PNG 作品卡' }).click();
+  await expect(page.getByText('作品卡已生成；名称含内置字体未覆盖字符，显示取决于设备，请检查预览')).toBeVisible();
+  await expect(page.getByRole('link', { name: '下载 PNG' })).toBeVisible();
+});
+
+test('M14 actual shard network failure is explicit and retry loads the real missing resources', async ({ page }) => {
+  await page.goto(`/workshop/papercut?m07db=m08-test-${crypto.randomUUID()}`);
+  await page.getByRole('button', { name: '使用模板' }).click();
+  const pattern = /\.woff(?:\?|$)/u;
+  await page.route(pattern, route => route.abort('failed'));
+  await page.getByRole('button', { name: '生成 PNG 作品卡' }).click();
+  await expect(page.getByText(/RESOURCE_UNAVAILABLE/)).toBeVisible();
+  await expect(page.locator('.ws-export-result img')).toHaveCount(0);
+  await page.unroute(pattern);
+  await page.getByRole('button', { name: '重试生成 PNG' }).click();
+  await expect(page.getByText('作品卡已生成')).toBeVisible();
+});
+
+test('M14 injected slow resource task reports ten seconds, cancels, retries and isolates late completion', async ({ page }) => {
+  await page.goto(`/workshop/papercut?m07db=m08-test-${crypto.randomUUID()}`);
+  await page.getByRole('button', { name: '使用模板' }).click();
+  await page.evaluate(() => {
+    const fontLoad = FontFace.prototype.load, decode = HTMLImageElement.prototype.decode;
+    FontFace.prototype.load = function () { return new Promise(resolve => setTimeout(resolve, 6000)).then(() => fontLoad.call(this)); };
+    let first = true;
+    HTMLImageElement.prototype.decode = function () {
+      if (!first || !this.src.startsWith('blob:')) return decode.call(this);
+      first = false;
+      return new Promise(resolve => setTimeout(resolve, 6000)).then(() => decode.call(this));
+    };
+  });
+  await page.getByRole('button', { name: '生成 PNG 作品卡' }).click();
+  await expect(page.getByText('生成已超过10秒，可取消后重试')).toBeVisible({ timeout: 14000 });
+  await page.getByRole('button', { name: '取消生成' }).click();
+  await expect(page.getByText('已取消本次生成')).toBeVisible();
+  await page.getByRole('button', { name: '生成 PNG 作品卡' }).click();
+  await expect(page.getByText('作品卡已生成')).toBeVisible();
+  const current = await page.locator('.ws-export-result img').getAttribute('src');
+  await page.waitForTimeout(3500);
+  expect(await page.locator('.ws-export-result img').getAttribute('src')).toBe(current);
+  await page.evaluate(() => {
+    const encode = HTMLCanvasElement.prototype.toBlob;
+    Object.defineProperty(window, '__m14LateEncodeFinished', { value: false, writable: true });
+    HTMLCanvasElement.prototype.toBlob = function (this: HTMLCanvasElement, callback: BlobCallback, type?: string, quality?: number) {
+      setTimeout(() => encode.call(this, blob => {
+        (window as unknown as { __m14LateEncodeFinished: boolean }).__m14LateEncodeFinished = true;
+        callback(blob);
+      }, type, quality), 1500);
+    };
+  });
+  await page.getByRole('button', { name: '生成 PNG 作品卡' }).click();
+  await page.getByRole('button', { name: '返回首页', exact: true }).click();
+  const leave = page.getByRole('button', { name: '放弃修改并离开', exact: true });
+  if (await leave.isVisible()) await leave.click();
+  await expect.poll(() => page.evaluate(() => (window as unknown as { __m14LateEncodeFinished: boolean }).__m14LateEncodeFinished)).toBe(true);
+  await expect(page.locator('.ws-export-result')).toHaveCount(0);
+  expect(await page.evaluate(async url => { try { await fetch(url!); return true; } catch { return false; } }, current)).toBe(false);
+});
+
+test('M14 original cmap boundary shards really load; arbitrary supported titles match original glyph metrics and pixels', async ({ page }) => {
+  await page.goto('/workshop/papercut');
+  const metadata = JSON.parse(await readFile(resolve('packages/artwork-exporter/src/fonts/generation.json'), 'utf8')) as { variations: { selector: number; base: number }[] };
+  const variationTitles: string[] = [];
+  for (let i = 0; i < metadata.variations.length; i += 15) variationTitles.push(metadata.variations.slice(i, i + 15).map(({ base, selector }) => String.fromCodePoint(base, selector)).join(''));
+  const result = await page.evaluate(async ({ exporterUrl, fixtureUrl, originalUrl, variationTitles }) => {
+    const { createArtworkExporter } = await import(exporterUrl) as typeof import('@shoushang/artwork-exporter');
+    const { createFixtureWork } = await import(fixtureUrl) as typeof import('@shoushang/fixtures');
+    const original = new FontFace('M14Original', `url("${originalUrl}")`); await original.load(); document.fonts.add(original);
+    // Latin/combining, CJK Extension A, adjacent pages and supported supplementary symbols/CJK (last shard).
+    const names = ['ABCxyz0123，。！？é', '㐀㐁一丁丿乀仿伀龥', '\u{1F110}\u{1F111}\u{3106C}剪纸', ...variationTitles];
+    const reports = [];
+    for (const name of names) {
+      const work = createFixtureWork(); work.name = name;
+      const output = await createArtworkExporter().exportCard({ work, width: 600, height: 750 });
+      const pixels = (family: string) => {
+        const canvas = document.createElement('canvas'); canvas.width = 1200; canvas.height = 100;
+        const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
+        ctx.font = `32px "${family}"`; ctx.fillText(name, 10, 50);
+        return { width: ctx.measureText(name).width, data: Array.from(ctx.getImageData(0, 0, 1200, 100).data) };
+      };
+      const a = pixels('M14Original'), b = pixels('ShouShangNotoSansSC');
+      reports.push({ name, ok: output.ok, widthEqual: a.width === b.width, pixelsEqual: a.data.every((v, i) => v === b.data[i]) });
+    }
+    return reports;
+  }, { exporterUrl: browserModule('packages/artwork-exporter/src/index.ts'), fixtureUrl: browserModule('fixtures/src/index.ts'), originalUrl: browserModule('packages/artwork-exporter/src/fonts/NotoSansSC-Regular.otf'), variationTitles });
+  for (const row of result) { expect(row.ok).toBe(true); expect(row.widthEqual, row.name).toBe(true); expect(row.pixelsEqual, row.name).toBe(true); }
+});
 
 test('M08 real Edge PNG, pixels, preview and download match', async ({ page }) => {
   await page.goto(`/workshop/papercut?m07db=m08-test-${crypto.randomUUID()}`);
@@ -99,6 +192,13 @@ test('M08 direct browser boundaries, snapshot, dates and warm export timing', as
   expect(report.unsafe).not.toMatch(/[<>:"/\\|?*]/);
   expect(report.offset).toContain('2026-10-18');
   expect(report.snapshot).toContain('原始名称');
+  // On-demand fonts: explicitly load the exact title's resources before the
+  // existing offline-reuse assertion. This is regression setup, not perf warmup.
+  expect(await page.evaluate(async ({ exporterUrl, fixtureUrl }) => {
+    const { createArtworkExporter } = await import(exporterUrl) as typeof import('@shoushang/artwork-exporter');
+    const { createFixtureWork } = await import(fixtureUrl) as typeof import('@shoushang/fixtures');
+    return (await createArtworkExporter().exportCard({ work: createFixtureWork() })).ok;
+  }, { exporterUrl, fixtureUrl })).toBe(true);
   await context.setOffline(true);
   const offline = await page.evaluate(async ({ exporterUrl, fixtureUrl }) => {
     const { createArtworkExporter } = await import(exporterUrl) as typeof import('@shoushang/artwork-exporter');
@@ -107,6 +207,16 @@ test('M08 direct browser boundaries, snapshot, dates and warm export timing', as
     return result.ok ? 'ok' : result.error.code;
   }, { exporterUrl, fixtureUrl });
   expect(offline).toBe('ok');
+  const newTitle = async () => page.evaluate(async ({ exporterUrl, fixtureUrl }) => {
+    const { createArtworkExporter } = await import(exporterUrl) as typeof import('@shoushang/artwork-exporter');
+    const { createFixtureWork } = await import(fixtureUrl) as typeof import('@shoushang/fixtures');
+    const work = createFixtureWork(); work.name = '㐀';
+    const result = await createArtworkExporter().exportCard({ work });
+    return result.ok ? 'ok' : result.error.code;
+  }, { exporterUrl, fixtureUrl });
+  expect(await newTitle()).toBe('RESOURCE_UNAVAILABLE');
+  await context.setOffline(false);
+  expect(await newTitle()).toBe('ok');
   console.log('M08 Edge export timings ms', JSON.stringify(report));
 });
 

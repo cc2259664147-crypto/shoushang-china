@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shoushang/contracts": ["../../packages/contracts/src/index.ts"]
+    }
+  },
+  "include": ["./*.ts"],
+  "exclude": []
+}

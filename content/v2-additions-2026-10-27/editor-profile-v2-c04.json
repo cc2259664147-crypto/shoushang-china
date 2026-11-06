@@ -1,0 +1,28 @@
+{
+  "profile": {
+    "profileId": "editor-profile-v2-c04",
+    "profileSchemaVersion": 2,
+    "profileVersion": 1,
+    "sourceTemplate": {
+      "id": "template-v2-c04",
+      "version": 1,
+      "snapshotSha256": "187de73e66f30db0e3cf1b6adf9d2772484eca76fa9293b8165a975a67ba881a"
+    },
+    "allowedTools": {
+      "parametric": ["circle", "triangle", "teardrop", "ellipse", "rectangle", "star", "petal"],
+      "freehand": {
+        "enabled": true,
+        "minArea": 0.00001,
+        "minPerimeter": 0.01,
+        "maxPoints": 512
+      }
+    },
+    "maxTotalFreehandPoints": 20000,
+    "geometryVersion": 2,
+    "rendererVersion": 2
+  },
+  "lifecycle": {
+    "newWorkEnabled": true,
+    "historicalMode": "editable"
+  }
+}

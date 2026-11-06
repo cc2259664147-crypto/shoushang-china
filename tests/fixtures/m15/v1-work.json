@@ -1,0 +1,114 @@
+{
+  "id": "work-m15-v1-compatibility",
+  "name": "M15 v1 兼容基准作品",
+  "craftId": "craft-papercut",
+  "templateSnapshot": {
+    "id": "template-v1-c01",
+    "craftId": "craft-papercut",
+    "version": 1,
+    "name": "方纸镜影：成对留白",
+    "difficulty": "beginner",
+    "steps": [
+      "选择纸色并观察左半区",
+      "用圆形或水滴形成成对留白",
+      "展开、调整并保存"
+    ],
+    "enabled": true,
+    "geometry": {
+      "basePaper": {
+        "kind": "square"
+      },
+      "symmetry": {
+        "kind": "reflection",
+        "axis": "vertical"
+      },
+      "allowedRegion": [
+        {
+          "x": 0.06,
+          "y": 0.08
+        },
+        {
+          "x": 0.44,
+          "y": 0.08
+        },
+        {
+          "x": 0.44,
+          "y": 0.92
+        },
+        {
+          "x": 0.06,
+          "y": 0.92
+        }
+      ]
+    },
+    "allowedCuts": [
+      {
+        "shape": "circle",
+        "minWidth": 0.025,
+        "maxWidth": 0.16,
+        "minHeight": 0.025,
+        "maxHeight": 0.16
+      },
+      {
+        "shape": "teardrop",
+        "minWidth": 0.03,
+        "maxWidth": 0.15,
+        "minHeight": 0.03,
+        "maxHeight": 0.15
+      }
+    ],
+    "rules": {
+      "minEdgeGap": 0.015,
+      "maxOperations": 30
+    },
+    "recommendedColors": [
+      "#B82025",
+      "#E59C38",
+      "#276B62"
+    ],
+    "license": {
+      "name": "项目生成数字练习",
+      "attribution": "《手上中国》项目设计，AI辅助整理；未使用第三方模板素材"
+    },
+    "digitalNotice": "项目生成的数字几何练习，不复刻地方传统工序，不保证可直接进行实体剪裁。",
+    "geometryVersion": 1,
+    "rendererVersion": 1
+  },
+  "palette": {
+    "paper": "#B82025",
+    "background": "#F2D9A6"
+  },
+  "operations": [
+    {
+      "id": "cut-m15-circle",
+      "shape": "circle",
+      "center": {
+        "x": 0.2,
+        "y": 0.3
+      },
+      "width": 0.08,
+      "height": 0.08,
+      "angleDeg": 0,
+      "order": 0,
+      "parameterVersion": 1
+    },
+    {
+      "id": "cut-m15-teardrop",
+      "shape": "teardrop",
+      "center": {
+        "x": 0.3,
+        "y": 0.62
+      },
+      "width": 0.08,
+      "height": 0.1,
+      "angleDeg": 15,
+      "order": 1,
+      "parameterVersion": 1
+    }
+  ],
+  "status": "completed",
+  "schemaVersion": 1,
+  "revision": 1,
+  "createdAt": "2026-10-23T00:00:00.000Z",
+  "updatedAt": "2026-10-23T00:00:00.000Z"
+}

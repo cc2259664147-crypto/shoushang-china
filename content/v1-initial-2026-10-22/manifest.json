@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "contentSet": "v1-initial-2026-10-22",
+  "counts": { "crafts": 1, "templates": 3, "exhibits": 12, "stories": 3, "media": 15 },
+  "contentInput": "content/v1-initial-2026-10-22/records.json",
+  "mediaManifest": "docs/content/assets/m14-3c/manifest.json",
+  "initializer": "scripts/content/initialize-v1.ts",
+  "reviewBoundary": "Automated technical intake only; not human editorial approval, legal approval, or competition authorization.",
+  "normalStartupSeedsContent": false,
+  "overwriteNonEmptyDatabase": false
+}

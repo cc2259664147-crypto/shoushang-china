@@ -5,14 +5,15 @@
   "type": "module",
   "dependencies": {
     "@shoushang/contracts": "workspace:*",
-    "fastify": "5.6.2"
+    "fastify": "5.12.6",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "esbuild": "0.25.11"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "esbuild src/server.ts --bundle --platform=node --target=node24 --format=esm --external:fastify --outfile=dist/server.js",
+    "build": "esbuild src/server.ts --bundle --platform=node --target=node24 --format=esm --external:fastify --external:sharp --outfile=dist/server.js && esbuild src/admin/decoder-worker.ts --bundle --platform=node --target=node24 --format=esm --external:sharp --outfile=dist/admin/decoder-worker.js && esbuild src/admin/decoder-worker.ts --bundle --platform=node --target=node24 --format=esm --external:sharp --outfile=dist/decoder-worker.js && esbuild src/admin/maintenance.ts --bundle --platform=node --target=node24 --format=esm --external:fastify --external:sharp --outfile=dist/admin/maintenance.js",
     "start": "node dist/server.js"
   }
 }

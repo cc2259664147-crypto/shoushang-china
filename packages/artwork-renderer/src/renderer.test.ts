@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { createFixtureWork } from '@shoushang/fixtures';
 import type { CutOperation, Work } from '@shoushang/contracts';
 import { createArtworkRenderer } from './index';
+import v1GoldenWork from '../../../tests/fixtures/m15/v1-work.json';
+import v1FoldedSvg from '../../../tests/fixtures/m15/v1-render-folded.svg?raw';
+import v1UnfoldedSvg from '../../../tests/fixtures/m15/v1-render-unfolded.svg?raw';
 
 const renderer = createArtworkRenderer();
 function work(radial = false): Work {
@@ -33,6 +36,10 @@ function deepFreeze(value: object): void {
 }
 
 describe('artwork renderer', () => {
+  it('keeps the M15 v1 folded and unfolded golden SVG byte-for-byte', () => {
+    expect(svg(v1GoldenWork as Work, 'folded', 800, 800)).toBe(v1FoldedSvg);
+    expect(svg(v1GoldenWork as Work, 'unfolded', 800, 800)).toBe(v1UnfoldedSvg);
+  });
   it('renders an empty square and the core vertical base domain at one fixed paper scale', () => {
     const w = work();
     const full = drawing(svg(w, 'unfolded', 500, 300));
@@ -100,6 +107,15 @@ describe('artwork renderer', () => {
     const output = drawing(svg(w));
     expect(output).not.toContain('<script');
     expect(output).not.toContain('<foreignObject');
+  });
+
+  it('rejects enumerable __proto__ input without polluting prototypes', () => {
+    const polluted = work() as Work & Record<string, unknown>;
+    Object.defineProperty(polluted, '__proto__', { value: { injected: true }, enumerable: true });
+    const result = renderer.render({ work: polluted, width: 100, height: 100, view: 'unfolded' });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.code).toBe('INVALID_INPUT');
+    expect((Object.prototype as { injected?: unknown }).injected).toBeUndefined();
   });
 
   it.each(['schemaVersion','geometryVersion','rendererVersion','parameterVersion'] as const)('rejects unknown %s', field => {

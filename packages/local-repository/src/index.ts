@@ -1,7 +1,9 @@
 import { PaginationSchema, WorkSchema } from '@shoushang/contracts';
 import type { LocalRepository, StorageFailure, Work } from '@shoushang/contracts';
 export { openIndexedDbRepository } from './indexeddb';
-export type { IndexedDbRepository, IndexedDbOptions, EditorStep, EditorDraft, DraftInput, CommitDraftInput, RecordIssue, RawBackup } from './indexeddb';
+export type { IndexedDbRepository, IndexedDbOptions, EditorStep, EditorDraft, EditorDraftV2, ValidatedStoredDraft, DraftInput, CommitDraftInput, SaveV2Input, V2DraftInput, CommitV2DraftInput, SaveV1AsV2Input, SaveV1AsV2Result, SaveV1DraftAsV2Input, StoredThumbnail, ManageWorkInput, RenameWorkInput, ManagedWork, ManagedAnyWork, RecordIssue, RawBackup } from './indexeddb';
+export { canonicalizeJsonJcs, sha256CanonicalJson, validateNewOrSaveAsWorkV2, validateStoredWork } from './v2-validation';
+export type { AnyWork, StorageValidationOptions, ValidatedStoredWork } from './v2-validation';
 
 export interface MemoryRepositoryOptions {
   readonly failure?: 'STORAGE_UNAVAILABLE' | 'QUOTA_EXCEEDED';

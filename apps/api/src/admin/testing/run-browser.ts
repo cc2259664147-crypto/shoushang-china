@@ -1,0 +1,13 @@
+import { mkdtempSync, mkdirSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
+import { randomBytes } from 'node:crypto';
+import { spawn } from 'node:child_process';
+import sharp from 'sharp';
+const root = mkdtempSync(join(tmpdir(), 'm13-browser-'));
+const evidence = resolve(process.argv[2] ?? 'apps/api/src/admin/evidence/m13-implementation-20261019/browser');
+mkdirSync(evidence, { recursive: true });
+await sharp({ create: { width: 900, height: 700, channels: 3, background: '#aa252c' } }).png().toFile(join(root, 'sample.png'));
+const pnpm = process.env.npm_execpath ?? join(dirname(dirname(process.execPath)), 'node_modules/pnpm/bin/pnpm.mjs');
+const child = spawn(process.execPath, [pnpm, 'exec', 'playwright', 'test', '--config', 'apps/web/src/features/admin/testing/playwright.config.ts'], { env: { ...process.env, M13_TEST_ROOT: root, M13_TEST_PASSWORD: randomBytes(32).toString('base64url'), M13_TEST_EVIDENCE: evidence }, stdio: 'inherit', windowsHide: true });
+child.on('exit', code => { process.stdout.write(`Isolated browser artifacts: ${root}\n`); process.exitCode = code ?? 1; });

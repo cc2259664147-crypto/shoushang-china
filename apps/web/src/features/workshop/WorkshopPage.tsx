@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { TemplateVersionV1Schema } from '@shoushang/contracts';
 import type { ContentClient, CutOperation, TemplateVersion, Work } from '@shoushang/contracts';
+import { generateUuid } from '@shoushang/content-client';
 import { createArtworkRenderer } from '@shoushang/artwork-renderer';
 import { Button, Dialog, EmptyState, FormField, InlineNotice, LoadingState, NumberInput, StatusMessage, TextInput } from '@shoushang/ui';
 import { WorkshopSession } from './session';
@@ -14,8 +16,8 @@ const renderer = createArtworkRenderer();
 const paperColors = ['#B82025', '#E59C38', '#276B62', '#445566', '#8C4B86', '#F2D9A6'];
 const steps = ['template', 'color', 'cut', 'preview', 'save'] as const;
 const stepName = { template: '选模板', color: '选纸色', cut: '剪切', preview: '展开预览', save: '保存' };
-function initialCandidate(template: TemplateVersion, shape: Candidate['shape']): Candidate { const limits = template.allowedCuts.find(x => x.shape === shape); return { shape, center: { x: 0.25, y: 0.5 }, width: Math.max(limits?.minWidth ?? 0.02, Math.min(0.1, limits?.maxWidth ?? 0.1)), height: Math.max(limits?.minHeight ?? 0.02, Math.min(0.1, limits?.maxHeight ?? 0.1)), angleDeg: 0, parameterVersion: 1 }; }
-export function WorkshopPage({ contentClient, onExit, registerLeaveGuard, databaseName, testFault }: { contentClient: ContentClient; onExit: () => void; registerLeaveGuard?: (guard: (() => Promise<boolean>) | null) => void; databaseName?: string; testFault?: 'quota' | 'thumbnail' }) {
+function initialCandidate(template: TemplateVersion, shape: Candidate['shape']): Candidate { const limits = template.allowedCuts.find(x => x.shape === shape); const points = template.geometry.allowedRegion; const coordinate = (key: 'x' | 'y') => Number((points.reduce((sum, point) => sum + point[key], 0) / points.length).toFixed(6)); const center = { x: coordinate('x'), y: coordinate('y') }; return { shape, center, width: Math.max(limits?.minWidth ?? 0.02, Math.min(0.1, limits?.maxWidth ?? 0.1)), height: Math.max(limits?.minHeight ?? 0.02, Math.min(0.1, limits?.maxHeight ?? 0.1)), angleDeg: 0, parameterVersion: 1 }; }
+export function WorkshopPage({ contentClient, onExit, onWorks, initialWork, initialTemplateId, registerLeaveGuard, databaseName, testFault }: { contentClient: ContentClient; onExit: () => void; onWorks?: () => void; initialTemplateId?: string; initialWork?: {id:string;version:'draft'|'stored-draft'|'completed'}; registerLeaveGuard?: (guard: (() => Promise<boolean>) | null) => void; databaseName?: string; testFault?: 'quota' | 'thumbnail' }) {
   const session = useMemo(() => new WorkshopSession(contentClient, () => openIndexedDbRepository(databaseName ? { name: databaseName, ...(testFault === 'quota' ? { testQuotaAfterWrite: true } : {}) } : {})), [contentClient, databaseName, testFault]);
   const snapshot = useSyncExternalStore(session.subscribe, session.snapshot, session.snapshot);
   const [candidate, setCandidate] = useState<Candidate | null>(null);
@@ -24,6 +26,7 @@ export function WorkshopPage({ contentClient, onExit, registerLeaveGuard, databa
   const [view, setView] = useState<'folded' | 'unfolded'>('folded');
   const [name, setName] = useState('');
   const [openId, setOpenId] = useState('');
+  const [openedNotice,setOpenedNotice] = useState('');
   const [busy, setBusy] = useState(false);
   const [leaveOperation, setLeaveOperation] = useState<'save' | 'discard' | null>(null);
   const [switchOperation, setSwitchOperation] = useState<'save' | 'discard' | null>(null);
@@ -31,7 +34,32 @@ export function WorkshopPage({ contentClient, onExit, registerLeaveGuard, databa
   const leaveToken = useRef(0);
   const switchToken = useRef(0);
   const state = snapshot.state;
-  useEffect(() => { void session.start(); return () => session.dispose(); }, [session]);
+  useEffect(() => {
+    let active = true;
+    void session.start().then(async () => {
+      if (!active) return;
+      if (!initialWork) {
+        if (initialTemplateId) {
+          try {
+            const linked = await contentClient.getTemplate(initialTemplateId);
+            if (!active) return;
+            const legacyTemplate = linked.ok ? TemplateVersionV1Schema.safeParse(linked.value) : null;
+            if (linked.ok && legacyTemplate?.success && legacyTemplate.data.id === initialTemplateId && legacyTemplate.data.enabled && legacyTemplate.data.craftId === 'craft-papercut') {
+              // newWork performs the existing core validation; never replace a work chosen meanwhile.
+              if (!session.snapshot().state) session.newWork(legacyTemplate.data);
+            } else setOpenedNotice('关联模板不可用；请自行选择可用模板。');
+          } catch { if (active) setOpenedNotice('关联模板核验失败；请返回展品重试或自行选择可用模板。'); }
+        }
+        return;
+      }
+      if (initialWork.version !== 'draft' && session.snapshot().drafts.some(d => d.workId === initialWork.id)) {
+        setOpenedNotice(initialWork.version === 'stored-draft' ? '此作品另有编辑草稿，已优先继续编辑草稿；主记录草稿仍保留。' : '此作品有编辑草稿，已优先继续草稿；完成版尚未被覆盖。');
+        await session.restore(initialWork.id);
+      } else if (initialWork.version === 'draft') await session.restore(initialWork.id);
+      else await session.openCompleted(initialWork.id);
+    });
+    return () => { active = false; session.dispose(); };
+  }, [session, initialWork?.id, initialWork?.version, initialTemplateId, contentClient]);
   useEffect(() => { const handler = (event: BeforeUnloadEvent) => { if (session.hasUncommitted()) event.preventDefault(); }; window.addEventListener('beforeunload', handler); return () => window.removeEventListener('beforeunload', handler); }, [session]);
   useEffect(() => { registerLeaveGuard?.(() => { if (!session.hasUncommitted()) return Promise.resolve(true); setDialog('leave'); return new Promise<boolean>(resolve => { leaveResolver.current = resolve; }); }); return () => registerLeaveGuard?.(null); }, [registerLeaveGuard, session]);
   useEffect(() => { if (state) setName(state.work.name); }, [state?.work.id]);
@@ -66,10 +94,11 @@ export function WorkshopPage({ contentClient, onExit, registerLeaveGuard, databa
     else if (target) { await (target.kind === 'draft' ? session.restore(target.id) : session.openCompleted(target.id)); setCandidate(null); setView('folded'); }
   }
   const allowedShapes = state?.work.templateSnapshot.allowedCuts ?? [];
-  const candidateOperation: CutOperation | null = candidate && state ? { ...candidate, id: crypto.randomUUID(), order: state.work.operations.length } : null;
+  const candidateOperation: CutOperation | null = candidate && state ? { ...candidate, id: generateUuid(), order: state.work.operations.length } : null;
   const canCut = candidateOperation && state ? session.core.validate({ ...state.work, operations: [...state.work.operations, candidateOperation] }).ok : false;
   const setNumber = (key: 'x' | 'y' | 'width' | 'height' | 'angleDeg', value: number | null) => { if (!candidate || value === null || !Number.isFinite(value)) return; if (key === 'x' || key === 'y') setCandidate({ ...candidate, center: { ...candidate.center, [key]: Math.max(0, Math.min(1, value)) } }); else setCandidate({ ...candidate, [key]: value }); };
-  return <main className="ws-page ss-theme"><header className="ws-header"><div><p className="ws-eyebrow">手上中国 · 数字工坊</p><h1>剪纸工坊</h1><p>开发样例模板，仅用于阶段交互验证，并非正式非遗内容。</p></div><Button intent="secondary" onClick={() => { if (session.hasUncommitted()) { setDialog('leave'); leaveResolver.current = allowed => { if (allowed) onExit(); }; } else onExit(); }}>返回工程检查页</Button></header>
+  return <main className="ws-page ss-theme"><header className="ws-header"><div><p className="ws-eyebrow">手上中国 · 数字工坊</p><h1>剪纸工坊</h1><p>用对称、留白与重复创作数字剪纸；模板说明介绍各自的练习目标与适用边界。</p></div><div><Button intent="secondary" onClick={() => { if (session.hasUncommitted()) { setDialog('leave'); leaveResolver.current = allowed => { if (allowed) onExit(); }; } else onExit(); }}>返回首页</Button>{onWorks&&<Button intent="secondary" onClick={() => { if (session.hasUncommitted()) { setDialog('leave'); leaveResolver.current = allowed => { if (allowed) onWorks(); }; } else onWorks(); }}>我的作品</Button>}</div></header>
+    {openedNotice&&<InlineNotice tone="info">{openedNotice}</InlineNotice>}
     <nav className="ws-steps" aria-label="工坊步骤">{steps.map(step => <Button key={step} intent={snapshot.step === step ? 'primary' : 'ghost'} disabled={!state && step !== 'template'} onClick={() => { session.setStep(step); setView(step === 'preview' || step === 'save' ? 'unfolded' : 'folded'); }}>{stepName[step]}</Button>)}</nav>
     {snapshot.storageError && <InlineNotice tone="error">本地存储不可用：{snapshot.storageError}。可继续在当前页面创作，但无法保存；请勿关闭页面。</InlineNotice>}
     {snapshot.issues.length > 0 && <InlineNotice tone="warning">发现 {snapshot.issues.length} 条损坏或不兼容的原始记录，已保留。<Button intent="secondary" onClick={() => { void session.downloadBackup(); }}>下载原始备份</Button></InlineNotice>}

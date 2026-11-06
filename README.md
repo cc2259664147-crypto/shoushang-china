@@ -1,106 +1,113 @@
-# 手上中国：非遗技艺数字工坊 · M01–M03
+# 手上中国：非遗技艺数字工坊
 
-## M05 本地存储验证
+“手上中国”是一个中国剪纸主题的本地优先网页应用。访客可以浏览展品与人物故事，在数字工坊中选择模板、剪切、折叠预览、保存作品并导出 PNG。访客作品保存在当前浏览器，管理后台默认关闭。
 
-`pnpm m05:dev` 启动独立工具 http://127.0.0.1:5176/ （strictPort）。`pnpm m05:typecheck`、`pnpm m05:test`、`pnpm m05:build` 分别执行严格检查、自动启动验证服务的真实 Edge/IndexedDB 测试、独立构建。测试使用专属数据库名和临时持久浏览器目录，不清理真实应用数据。工具会显示作品修订、时间、草稿、测试缩略图、收藏和损坏记录；它没有接入正式网页。存储设计见 [IndexedDB v1](docs/storage/indexeddb-v1.md)。
-
-这是工程检查入口，尚非正式产品。代码根目录为 `C:\Users\mmcn\Desktop\shoushang-china\shoushang-china`。上级 Markdown PRD 保持原样，sources/ 未修改。
+本包是 V1.0 初版候选。版本化内容集 `v1-initial-2026-10-22` 提供 3 套基础模板、12 件独立展品、3 篇故事及 15 项配套媒体，另提供一套自由造型模板。包内文件完整性可用 `DELIVERY-MANIFEST.json` 与 `scripts/delivery/verify-package.mjs` 自行核对；构建、初始化和浏览器流程的实测记录由交付方随批次目录保存，不随本压缩包分发。真人教学、手机真机、队伍资料和官方规则澄清仍须分别完成，不能据此宣称比赛已批准提交。
 
 ## 环境与安装
 
-锁定 Node.js 24.19.0（24 LTS）、pnpm 11.25.0。使用当前受管理运行时，不全局安装、不修改系统设置。PowerShell 当前窗口可运行：
+- Node.js `>=24.19.0 <25`
+- pnpm `11.25.0`
+- Windows、macOS 或 Linux；以下命令使用 PowerShell
+
+在解压后的项目根目录运行。需要网络取得锁文件指定的依赖；不需要全局修改 PATH 或包配置。不要使用 `--prod`，构建、初始化和精简包检查需要包内声明的开发工具。
 
 ```powershell
-$env:PATH = 'C:\Users\mmcn\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin;' + $env:PATH
-Set-Location 'C:\Users\mmcn\Desktop\shoushang-china\shoushang-china'
+node --version
+pnpm --version
 pnpm install --frozen-lockfile
-pnpm dev
+pnpm check:runtime
+pnpm typecheck
+pnpm build
+pnpm test:delivery
 ```
 
-包管理器已在本机受管理路径可用。所有版本精确声明，锁文件锁定传递依赖。pnpm 缓存/存储路径通过工作区配置限定在代码目录内。不需要全局工具；工作区仅放行 esbuild 的必要安装校验脚本。端口被占用时明确报错，不静默换端口。
+`test:delivery` 是包内可运行的真实初始化集成检查，使用独立临时库核对首次初始化、重复执行、已有库保护以及账号/会话清理。它不替代开发仓库的全部单元测试，也不会初始化下文的演示库。首次执行需允许本机回环 HTTP 和子进程。
 
-打开 http://127.0.0.1:5173 ，看到“项目已启动”、`mock` 模式、通过内容访问层取得的“开发占位：几何纸样”及自制示意。后端 http://127.0.0.1:3001/health 返回 `status: ok`、`contentMode: mock`、`database: not-initialized`。Ctrl+C 停止两个开发服务。健康检查不代表数据库已就绪。
+## 初始化完整内容
 
-## 命令
+数据库、媒体和备份必须位于项目外的私有目录。`.env.example` 仅供参考，不会被命令自动载入。先完成上面的构建，再显式初始化一个新的空目录：
 
 ```powershell
-pnpm dev           # 同时启动 Vite 5173 / Fastify 3001
-pnpm typecheck     # 全项目 strict + contracts 无 DOM 检查
-pnpm test          # 契约、mock、内存仓储、健康接口
-pnpm build         # 类型检查、web 静态构建、API 构建
-pnpm check:runtime # :memory: SQLite 引擎能力检查，不初始化数据库业务
-pnpm --filter @shoushang/api start # 构建后的 API
-pnpm --filter @shoushang/web preview # 构建后的前端 4173
+$demoRoot = Join-Path $env:LOCALAPPDATA ('shoushang-china/v1-' + [guid]::NewGuid().ToString('N'))
+pnpm content:initialize -- --root $demoRoot
 ```
 
-`apps/web/dist` 是前端静态产物；API 入口是 `apps/api/dist/server.js`（保留 node_modules 中 Fastify）。开发页通过 Vite 代理 `/health`，生产反向代理配置留待部署。Playwright 已锁定依赖及配置，M01–M03复用本机Edge检查，正式核心流程E2E留给M14；现有检查不代表正式产品验收完成。
+正式内容输入为 `content/v1-initial-2026-10-22/records.json`，集合说明为同目录 `manifest.json`。初始化工具使用数据库公开封装建立工艺/模板，再通过正常后台受控 HTTP 接口上传媒体、写入来源许可、录入并技术审核内容。内容和媒体使用正常分配的 ID，映射记录在私有根目录的 `v1-initialization.json`。初始化用随机临时账号完成工作后停用这些账号并撤销会话；没有默认管理员或可供登录的默认密码。自动化技术审核和 AI 受托编辑不等于真人审核、法务签字或组委会批准。
 
-## 结构与职责
+成功后得到 `content.sqlite`、`media/`、`backups/` 和完成回执。同版本成功目录再次执行只检查并返回 `unchanged`，不会重复灌入或覆盖修订。已有数据库、非空目录和未完成批次默认拒绝。失败会以非零状态退出；已进入初始化的失败现场保留 `v1-initialization.failed.json`，请保留现场诊断，另选新的空目录重试，不删除原库、不直接修改业务表或复制测试库补齐。
 
-| 目录 | 用途 |
-| --- | --- |
-| apps/web/src/app | 总控组合根和检查页，后续负责路由 |
-| apps/web/src/features | home / workshop / gallery / stories / my-works / admin 隔离目录 |
-| apps/web/src/styles | 总控维护的自编全局 CSS |
-| apps/api/src | Fastify 健康检查；M12/M13 以后加入真实内容和管理服务 |
-| packages/contracts | Zod 公共模型、类型和模块端口 |
-| packages/ui | M03 自编 CSS 基础组件与公开样式入口 |
-| packages/papercut-core | M04 纯逻辑接口 |
-| packages/artwork-renderer | M06 SVG 渲染接口 |
-| packages/local-repository | M05 接口和 M01 测试用内存实现 |
-| packages/artwork-exporter | M08 PNG 导出接口 |
-| packages/content-client | ContentClient 模拟适配器，后续 HTTP 保持同接口 |
-| fixtures | 确定性开发占位数据，与公开 DTO 同 schema |
-| docs | 架构、数据契约、模块任务、交接与依赖清单 |
+普通 API 启动不会播种、创建账号或重置密码。`apps/api/src/database/development.ts` 仍是开发专用的单模板空内容入口，不适用于本包的完整演示。
 
-模块协作先读 AGENTS.md、docs/tasks/Mxx.md。详见 [模块边界](docs/architecture/module-boundaries.md)、[数据模型](docs/contracts/data-model.md)、[模块 API](docs/contracts/module-api.md)、[第三方依赖及许可](docs/third-party-dependencies.md)、[M01 交接](docs/handoffs/M01.md)。
+## 构建后运行与演示
 
-## 能力边界
-
-M01 仅 mock 内容，不访问真实内容服务。内存仓储未连接页面，刷新后数据丢失；IndexedDB 留给 M05。SVG 示意是项目自制 CC0 几何图，不是文化展品。无真实人物、采访和荣誉；故事明确开发占位，不可直接发布。SQLite 采用 Node 24 内置 node:sqlite（SQLite 公有领域）；业务表、迁移、鉴权、备份和真实内容 API 留给 M12/M13。
-
-正式首页、工坊、展馆搜索收藏、故事页、我的作品、PNG、后台和持久化均未开发。首发个人作品只保存在当前浏览器，不含注册、云同步、评论、支付、多技艺编辑器。正式公开展馆与个人作品隔离。
-
-自编 CSS，禁止预设样式组件库与现成网站模板。依赖只用于框架、服务、校验、开发和测试，不能替代原创页面设计。必要依赖变更由总控批准并锁定。
-
-可选检查页浏览器验证（保持 pnpm dev 运行，需本机已有 Edge，不下载浏览器）：`pnpm exec node scripts/smoke-m01.mjs`。它只验证 M01 检查页，不代表正式核心流程 E2E 通过。
-
-## GitHub 版本管理
-
-私有仓库：https://github.com/cc2259664147-crypto/shoushang-china 。当前目录是 Git 根目录，默认分支为 main，远端名为 origin。原始 PRD 在上一级目录，保留在本地资料目录；本仓库记录代码及工程文档。
-
-后续阶段沿用本仓库，先检查 `git status`，按任务范围提交，由总控整合后 `git push origin main`。禁止强制推送和提交凭据。依赖、包缓存、dist 和 `.env` 已排除；`.gitattributes` 统一文本为 LF。Git 身份仅配置在当前仓库，未改变全局设置。
-
-## M02 隔离剪纸技术原型
-
-原型位于 `prototypes/papercut-verification`，与 M01 页面/服务分开。使用上述受管理 Node 环境。
+在终端一继续使用刚才的 `$demoRoot`，或将其设置为已初始化的私有根目录绝对路径：
 
 ```powershell
-pnpm m02:dev       # http://127.0.0.1:5174 ，占用即报错
-pnpm m02:typecheck # 原型完整 strict 检查 + 纯核心无 DOM 检查
-pnpm m02:test      # 原型算法测试
-pnpm m02:build     # 原型类型检查与 Vite 构建
-pnpm --filter @shoushang/papercut-verification verify:browser # 保持5174运行；本机Edge/Playwright，无下载浏览器
+$env:CONTENT_DATABASE_PATH = Join-Path $demoRoot 'content.sqlite'
+$env:ADMIN_MEDIA_ROOT = Join-Path $demoRoot 'media'
+$env:ADMIN_ENABLED = '0'
+$env:HOST = '127.0.0.1'
+$env:PORT = '3001'
+pnpm --filter @shoushang/api start
 ```
 
-也可 `cd prototypes/papercut-verification` 后分别运行 `pnpm dev`、`pnpm typecheck`、`pnpm test`、`pnpm build`。根目录原有四个同名命令仍服务 M01，不包含原型；两套检查需要分别运行。
+普通公开模式需要 `ADMIN_MEDIA_ROOT` 读取已获公开引用的图片，即使后台关闭也要设置。此模式不要设置 `ADMIN_ORIGIN`、`ADMIN_SECURITY_MODE` 或 `ADMIN_BACKUP_ROOT`；若当前终端留有旧后台配置，请使用全新的 PowerShell 窗口。目录绝不能由静态服务器公开。
 
-仅支持方纸、竖轴镜像、四扇区无镜像，提供三角/椭圆/水滴、数值参数、30步历史、SVG与1600×2000不透明PNG。JSON重建只作技术测试，无IndexedDB、自动草稿、作品列表和同步。刷新会失去内存状态。参数与按钮可独立操作；本原型未实现拖动。
-
-详见 [算法约定](prototypes/papercut-verification/ALGORITHM.md)、[M02交接](docs/handoffs/M02.md)。证据位于原型 `evidence/`；构建与依赖目录不提交。
-
-## M03 基础 UI 组件预览
-
-使用上述Node24.19.0/pnpm11.25.0环境，离线缓存已具备时可`pnpm install --frozen-lockfile --offline`。独立页面通过`@shoushang/ui`与`@shoushang/ui/styles.css`公开入口复用，无正式业务页面或持久化。所有演示均明确标识。
+在终端二、同一解压项目根目录运行：
 
 ```powershell
-pnpm m03           # 等同m03:dev
-pnpm m03:dev       # http://127.0.0.1:5175/，strictPort，占用即失败
-pnpm m03:typecheck # UI包、预览源码与Vite配置的完整strict检查
-pnpm m03:test      # 上述类型检查 + 真实Edge交互验证与截图
-pnpm m03:build     # 上述类型检查 + 独立预览构建
+$env:API_PROXY_TARGET = 'http://127.0.0.1:3001'
+pnpm --filter @shoushang/web preview
 ```
 
-运行`m03:test`前需保持5175预览服务运行，并已安装本机Microsoft Edge。脚本使用已有Playwright1.56.1的`channel:msedge`，不会下载浏览器、安装工具或退出现有服务；无Edge或未启动服务会明确失败。M01的5173与M02的5174保持独立。构建结果在`prototypes/ui-preview/dist`；测试证据在其`evidence`目录。根typecheck/test/build不替代M03专项检查。
+打开 [本地预览](http://127.0.0.1:4173/)。建议依次演示展馆搜索与详情、来源许可、三篇故事；随后在工坊逐一体验三套模板，剪切、保存、刷新恢复并导出 PNG，再到作品管理查看。模板名称为“方纸镜影：成对留白”“方纸节奏：疏密与方向”“四向回旋：中心与边缘”。访客作品与服务器展馆内容相互独立，不会自动上传。
 
-消费方式：组合根加载一次`import '@shoushang/ui/styles.css'`，外层容器添加`className="ss-theme"`，只从`@shoushang/ui`导入组件。详见[视觉基线](docs/design/ui-foundation.md)、[组件API](docs/design/ui-components.md)、[M03交接](docs/handoffs/M03.md)。本机沙箱若阻止esbuild读取祖先目录，需要受审查的本机执行权限；不通过修改编译严格选项绕过。
+两个服务分别用各自终端的 `Ctrl+C` 停止。`/health` 仅表示服务存活，`/ready` 还会实际检查数据库。本包是需要 Node 依赖和本地服务的应用，不能直接双击 `index.html` 运行。公网 HTTPS、同源反向代理、操作系统权限、监控和持久卷需要目标环境另行配置。
+
+## 可选后台维护与备份
+
+后台默认关闭。确需维护时先停止 API，设置完整配置；以下沿用同一私有根目录：
+
+```powershell
+$env:ADMIN_ENABLED = '1'
+$env:ADMIN_SECURITY_MODE = 'loopback-http'
+$env:ADMIN_ORIGIN = 'http://127.0.0.1:4173'
+$env:ADMIN_MEDIA_ROOT = Join-Path $demoRoot 'media'
+$env:ADMIN_BACKUP_ROOT = Join-Path $demoRoot 'backups'
+node apps/api/dist/admin/maintenance.js create-account $env:CONTENT_DATABASE_PATH local-admin admin
+pnpm --filter @shoushang/api start
+```
+
+维护命令在隐藏终端输入密码两次；不把密码写进参数、环境变量、日志或文件。打开 [后台](http://127.0.0.1:4173/admin) 使用自行创建的账号。后台操作有角色、CSRF、修订冲突和媒体许可检查，不能绕过这些入口直接修改数据库。
+
+完整鉴权、维护、联合备份和离线恢复步骤见 [API 运行说明](docs/api/integration.md)。数据库备份不包含媒体；后台联合备份同时保留数据库、媒体和私有凭证。恢复必须停服务并进入全新的不存在目录。恢复副本停用账号并撤销会话，安全及许可台账复核后才可逐一启用。
+
+## 内容、AI 与许可
+
+三套模板是项目生成的数字练习，AI 参与了设计与整理；它们不构成地方传统工序、实体可剪性或真人教学验收。故事页面现展示周淑英照片、张秀芳《桃花柳燕》和陈秋日《秋实》图片，图片来源与署名见第三方署名清单。数据库仍保留项目生成的备用示意封面。没有虚构真人作者、采访、合同或独占著作权。来源、署名和修改说明见：
+
+- [内容定版状态](docs/content/content-finalization.md)
+- [第三方署名](docs/content/ATTRIBUTION.md)
+- [媒体权利台账](docs/content/media-rights.md)
+- [第三方依赖与字体许可](docs/third-party-dependencies.md)
+
+历史 E-R06、E-R15、E-R16因比赛复制与再分发依据不足退出当前内容集，其原图及旧记录保留在原仓库历史资料中，不放入本次参赛候选包。现用新记录 E-R17“百福”（CC BY-SA 3.0）、E-R18“金鱼”和 E-R19“花边”（台湾文化记忆库，CC BY 3.0 TW）按各自来源保留作者、许可链接和处理说明。第三方署名在匿名版中同样保留；“匿名”不免除署名或相同方式共享义务。
+
+## 检查命令与故障排查
+
+精简交付包随附 `test:delivery` 检查，不附开发仓库全部 `*.test.*` / `*.spec.*`。包内必需命令是本页的 `pnpm typecheck`、`pnpm build`、`pnpm test:delivery` 和显式内容初始化。不要在精简包执行 `pnpm test`，该命令仅适用于保留完整测试文件的开发仓库：
+
+```powershell
+# 仅在完整开发仓库执行
+pnpm test -- --maxWorkers=1 --no-file-parallelism
+```
+
+- 页面为空：确认使用正式内容初始化且 API 指向对应 `content.sqlite`；单模板开发初始化不带展品和故事。
+- 图片不可读：检查 API 的 `ADMIN_MEDIA_ROOT` 与初始化回执一致，且媒体未被下架或撤权；不要将私有目录改成静态目录。
+- `/health` 成功而 `/ready` 失败：检查数据库路径、初始化结果和文件权限。
+- 后台路由不存在：默认关闭时属预期行为；启用时检查全部配置及精确网页 Origin。
+- 端口占用：只停止自己启动的旧服务，或同步修改 API 端口、代理地址及后台 Origin。
+- 初始化失败或拒绝：保留错误现场并选择新的包外空目录，不覆盖已有维护内容。
+
+真人教学、五名独立用户、iOS/Android 真机、真实队伍资料、冲突赛事要求与目标生产部署均有各自验收边界。候选包范围与核验方法见 [交付说明](docs/delivery/README.md)。

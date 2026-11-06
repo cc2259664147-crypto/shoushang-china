@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CraftSchema, CutOperationSchema, ExhibitSchema, FavoriteSchema, HealthSchema, MediaSchema, ContentQuerySchema, StorySchema, TemplateVersionSchema, WorkSchema, ApiErrorSchema } from './index';
+import { CraftSchema, CutOperationSchema, ExhibitSchema, FavoriteSchema, HealthSchema, ReadinessSchema, MediaSchema, ContentQuerySchema, StorySchema, TemplateVersionSchema, WorkSchema, ApiErrorSchema } from './index';
 import { crafts, createFixtureWork, exhibits, fixtureTime, stories, templates } from '@shoushang/fixtures';
 
 describe('public contracts', () => {
@@ -27,13 +27,22 @@ describe('public contracts', () => {
     expect(ExhibitSchema.safeParse({ ...exhibits[0], passwordHash: 'hidden' }).success).toBe(false);
     expect(MediaSchema.safeParse({ ...exhibits[0]?.media[0], proofRef: '/private/proof' }).success).toBe(false);
     expect(MediaSchema.safeParse({ ...exhibits[0]?.media[0], url: 'javascript:alert(1)' }).success).toBe(false);
+    expect(MediaSchema.safeParse({ ...exhibits[0]?.media[0], source: '馆藏页', modification: '仅格式转换' }).success).toBe(true);
+    expect(MediaSchema.safeParse({ ...exhibits[0]?.media[0], source: '' }).success).toBe(false);
+    expect(MediaSchema.safeParse({ ...exhibits[0]?.media[0], modification: ' ' }).success).toBe(false);
   });
   it('normalizes search and refuses invalid pagination or oversized keyword', () => {
     expect(ContentQuerySchema.parse({ q: '  PAPER  ' })).toEqual({ q: 'paper', page: 1, pageSize: 12 });
     for (const query of [{ page: 0 }, { pageSize: 51 }, { page: 1.5 }, { q: 'a'.repeat(101) }]) expect(ContentQuerySchema.safeParse(query).success).toBe(false);
   });
   it('validates common health and error envelopes', () => {
-    expect(HealthSchema.safeParse({ status: 'ok', service: '@shoushang/api', version: '0.1.0', contentMode: 'mock', database: 'not-initialized' }).success).toBe(true);
+    const identity = { service: '@shoushang/api', version: '0.1.0', contentMode: 'http' };
+    expect(HealthSchema.safeParse({ status: 'ok', ...identity }).success).toBe(true);
+    expect(HealthSchema.safeParse({ status: 'ok', ...identity, contentMode: 'mock', database: 'not-initialized' }).success).toBe(false);
+    expect(ReadinessSchema.safeParse({ status: 'ready', database: 'ready', ...identity }).success).toBe(true);
+    expect(ReadinessSchema.safeParse({ status: 'not-ready', database: 'unavailable', ...identity }).success).toBe(true);
+    expect(ReadinessSchema.safeParse({ status: 'ready', database: 'unavailable', ...identity }).success).toBe(false);
+    expect(ReadinessSchema.safeParse({ status: 'ready', database: 'ready', ...identity, path: '/private/db' }).success).toBe(false);
     expect(ApiErrorSchema.safeParse({ code: 'FORBIDDEN', message: '无权限', requestId: 'test', fieldErrors: [] }).success).toBe(true);
     expect(ApiErrorSchema.safeParse({ code: 'SUCCESS', message: 'x' }).success).toBe(false);
   });

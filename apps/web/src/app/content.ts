@@ -1,3 +1,3 @@
-import { createMockContentClient } from '@shoushang/content-client';
+import { createHttpContentClient } from '@shoushang/content-client';
 // The composition root selects the adapter; feature pages only consume ContentClient.
-export const contentClient = createMockContentClient();
+export const contentClient = createHttpContentClient();

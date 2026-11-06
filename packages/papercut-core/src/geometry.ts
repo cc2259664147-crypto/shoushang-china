@@ -34,17 +34,21 @@ function hull(curve: Cubic,depth=0): Point[] | undefined {
  const left=hull([a,ab,abc,m],depth+1),right=hull([m,bcd,cd,d],depth+1);
  return left && right ? [...left,...right] : undefined;
 }
-export function cutGeometry(o: CutOperation): CutGeometry | undefined {
- const shape=localShape(o),r=o.angleDeg*Math.PI/180;
- const placement={a:Math.cos(r),b:Math.sin(r),c:-Math.sin(r),d:Math.cos(r),e:o.center.x,f:o.center.y};
+export function conservativeLocalContour(shape: LocalShape): Point[] | undefined {
  let points:Point[]=[];
  if(shape.kind==='polygon')points=shape.vertices;
  else if(shape.kind==='ellipse') { const n=GEOMETRY_TOLERANCES.ellipseSides; points=Array.from({length:n},(_,i)=>({x:shape.radiusX*Math.cos((i+.5)*2*Math.PI/n)/Math.cos(Math.PI/n),y:shape.radiusY*Math.sin((i+.5)*2*Math.PI/n)/Math.cos(Math.PI/n)})); }
  else for(const curve of shape.curves){const p=hull(curve);if(!p)return undefined;points.push(...p);}
+ return points.map(point=>({...point}));
+}
+export function cutGeometry(o: CutOperation): CutGeometry | undefined {
+ const shape=localShape(o),r=o.angleDeg*Math.PI/180;
+ const placement={a:Math.cos(r),b:Math.sin(r),c:-Math.sin(r),d:Math.cos(r),e:o.center.x,f:o.center.y};
+ const points=conservativeLocalContour(shape);if(!points)return undefined;
  return {operationId:o.id,localShape:shape,placement,conservativeContour:points.map(p=>apply(placement,p))};
 }
-export function symmetry(t:TemplateVersion): AffineTransform[] {
+export function symmetry(t:Pick<TemplateVersion,'geometry'>): AffineTransform[] {
  const identity={a:1,b:0,c:0,d:1,e:0,f:0};
  return t.geometry.symmetry.kind==='reflection'?[identity,{a:-1,b:0,c:0,d:1,e:1,f:0}]:[identity,{a:0,b:1,c:-1,d:0,e:1,f:0},{a:-1,b:0,c:0,d:-1,e:1,f:1},{a:0,b:-1,c:1,d:0,e:0,f:1}];
 }
-export function baseDomain(t:TemplateVersion):Point[]{return t.geometry.symmetry.kind==='reflection'?[{x:0,y:0},{x:.5,y:0},{x:.5,y:1},{x:0,y:1}]:[{x:.5,y:.5},{x:1,y:.5},{x:1,y:1},{x:.5,y:1}];}
+export function baseDomain(t:Pick<TemplateVersion,'geometry'>):Point[]{return t.geometry.symmetry.kind==='reflection'?[{x:0,y:0},{x:.5,y:0},{x:.5,y:1},{x:0,y:1}]:[{x:.5,y:.5},{x:1,y:.5},{x:1,y:1},{x:.5,y:1}];}

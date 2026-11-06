@@ -1,4 +1,6 @@
+import { TemplateVersionV1Schema } from '@shoushang/contracts';
 import type { ContentClient, CutOperation, PapercutCore, PapercutState, TemplateVersion, Work } from '@shoushang/contracts';
+import { generateUuid } from '@shoushang/content-client';
 import type { EditorDraft, EditorStep, IndexedDbRepository, RecordIssue } from '@shoushang/local-repository';
 import { createPapercutCore } from '@shoushang/papercut-core';
 import { openIndexedDbRepository } from '@shoushang/local-repository';
@@ -31,12 +33,15 @@ export class WorkshopSession {
     const ticket = ++this.epoch;
     const [templates, connection] = await Promise.all([this.content.listTemplates({ craftId: 'craft-papercut', pageSize: 50 }), this.open()]);
     if (this.disposed || ticket !== this.epoch) { if (connection.ok) connection.value.close(); return; }
-    this.publish({ templateLoading: false, templates: templates.ok ? templates.value.items : [], templateError: templates.ok ? '' : templates.error.message, storageError: connection.ok ? '' : connection.error.message });
+    this.publish({ templateLoading: false, templates: templates.ok ? templates.value.items.flatMap(template => {
+      const parsed = TemplateVersionV1Schema.safeParse(template);
+      return parsed.success ? [parsed.data] : [];
+    }) : [], templateError: templates.ok ? '' : templates.error.message, storageError: connection.ok ? '' : connection.error.message });
     if (!connection.ok) return;
     this.repo = connection.value;
     await this.refreshSaved();
   }
-  async refreshTemplates() { this.publish({ templateLoading: true, templateError: '' }); const r = await this.content.listTemplates({ craftId: 'craft-papercut', pageSize: 50 }); if (!this.disposed) this.publish({ templateLoading: false, templates: r.ok ? r.value.items : [], templateError: r.ok ? '' : r.error.message }); }
+  async refreshTemplates() { this.publish({ templateLoading: true, templateError: '' }); const r = await this.content.listTemplates({ craftId: 'craft-papercut', pageSize: 50 }); if (!this.disposed) this.publish({ templateLoading: false, templates: r.ok ? r.value.items.flatMap(template => { const parsed = TemplateVersionV1Schema.safeParse(template); return parsed.success ? [parsed.data] : []; }) : [], templateError: r.ok ? '' : r.error.message }); }
   async refreshSaved() {
     if (!this.repo) return;
     const [drafts, issues] = await Promise.all([this.repo.listDrafts(), this.repo.inspectRecords()]);
@@ -52,7 +57,7 @@ export class WorkshopSession {
   newWork(template: TemplateVersion) {
     if (!template.enabled || template.craftId !== 'craft-papercut') { this.failure('此模板目前不可新建作品。'); return false; }
     const now = new Date().toISOString();
-    const work: Work = { id: crypto.randomUUID(), name: '未命名作品', craftId: template.craftId, templateSnapshot: structuredClone(template), palette: { paper: template.recommendedColors[0] ?? '#B82025', background: '#FFFFEE' }, operations: [], status: 'draft', schemaVersion: 1, revision: 0, createdAt: now, updatedAt: now };
+    const work: Work = { id: generateUuid(), name: '未命名作品', craftId: template.craftId, templateSnapshot: structuredClone(template), palette: { paper: template.recommendedColors[0] ?? '#B82025', background: '#FFFFEE' }, operations: [], status: 'draft', schemaVersion: 1, revision: 0, createdAt: now, updatedAt: now };
     const checked = this.core.createState(work);
     if (!checked.ok) { this.failure(`模板暂不支持：${checked.error.message}`); return false; }
     this.cancelTimer(); this.epoch++; this.blocked = false;
@@ -142,7 +147,7 @@ export class WorkshopSession {
     const current = this.value.state; if (!current) return false;
     this.cancelTimer(); await this.queue; this.epoch++; this.blocked = false;
     const now = new Date().toISOString();
-    const work: Work = { ...current.work, id: crypto.randomUUID(), name: `${current.work.name.slice(0, 27)}副本`, status: 'draft', revision: 0, createdAt: now, updatedAt: now };
+    const work: Work = { ...current.work, id: generateUuid(), name: `${current.work.name.slice(0, 27)}副本`, status: 'draft', revision: 0, createdAt: now, updatedAt: now };
     const state = this.core.createState(work); if (!state.ok) { this.failure(state.error.message); return false; }
     this.publish({ state: state.value, draftRevision: null, baseRevision: null, generation: 1, persistedGeneration: 0, status: '编辑中', error: '' }); this.schedule(); return true;
   }

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《手上中国》候选内容人工审阅</title>
+  <style>
+    :root { color-scheme: light; --ink:#251b18; --muted:#6d5c55; --paper:#fffaf2; --card:#fff; --line:#dfd2c5; --red:#9d2d27; --gold:#c28b38; --warn:#fff2d7; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif; color:var(--ink); background:#efe8de; line-height:1.7; }
+    a { color:#7b241f; overflow-wrap:anywhere; }
+    a:focus-visible, button:focus-visible { outline:3px solid #1769aa; outline-offset:3px; }
+    header { background:linear-gradient(135deg,#4a1715,#9d2d27); color:#fff; padding:36px max(20px,calc((100vw - 1180px)/2)); }
+    header h1 { margin:0 0 10px; font-size:clamp(1.8rem,4vw,3rem); }
+    header p { max-width:850px; margin:8px 0; }
+    .notice { background:#fff3c7; color:#4a2d12; border:2px solid #d89c35; padding:14px 18px; font-weight:700; border-radius:10px; }
+    nav { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+    nav a { color:#fff; border:1px solid rgba(255,255,255,.6); border-radius:999px; padding:9px 15px; text-decoration:none; min-height:44px; display:inline-flex; align-items:center; }
+    main { max-width:1180px; margin:0 auto; padding:28px 18px 60px; }
+    section { margin:36px 0 60px; scroll-margin-top:16px; }
+    h2 { font-size:clamp(1.45rem,3vw,2.1rem); border-bottom:3px solid var(--gold); padding-bottom:8px; }
+    .intro, .status-box { background:var(--paper); border:1px solid var(--line); padding:18px; border-radius:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr)); gap:22px; }
+    article { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; box-shadow:0 4px 16px rgba(50,28,20,.08); }
+    article .body { padding:18px; }
+    article h3 { margin:0 0 6px; font-size:1.3rem; }
+    .candidate { color:var(--red); font-weight:800; letter-spacing:.04em; }
+    figure { margin:0; background:#eee5db; }
+    figure a { display:block; }
+    figure img { display:block; width:100%; height:300px; object-fit:contain; background:#f4eee7; }
+    figcaption { padding:10px 14px; font-size:.9rem; color:var(--muted); background:#faf6ef; }
+    dl { margin:14px 0; display:grid; grid-template-columns:minmax(82px,auto) 1fr; gap:5px 12px; }
+    dt { font-weight:700; color:#543a32; }
+    dd { margin:0; min-width:0; overflow-wrap:anywhere; }
+    .copy { white-space:pre-line; }
+    .decision { background:var(--warn); border-left:5px solid #d58d24; padding:10px 12px; }
+    .tag { display:inline-block; padding:3px 9px; margin:2px 4px 2px 0; border-radius:999px; background:#efe2db; font-size:.85rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .actions a { min-height:44px; display:inline-flex; align-items:center; padding:7px 12px; border:1px solid #9d2d27; border-radius:8px; text-decoration:none; }
+    .story img { height:260px; }
+    .template img { height:360px; }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; background:#241e1c; color:#fff8eb; padding:14px; border-radius:8px; overflow:auto; }
+    footer { max-width:1180px; margin:0 auto 36px; padding:0 18px; color:var(--muted); }
+    @media (max-width:520px) { figure img { height:240px; } .template img { height:300px; } dl { grid-template-columns:1fr; } dt { margin-top:6px; } }
+    @media print { nav { display:none; } body { background:white; } article { break-inside:avoid; box-shadow:none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>《手上中国》候选内容人工审阅</h1>
+    <p class="notice">候选内容人工审阅，非正式发布页面</p>
+    <p>审阅版本：M14-3E / 2026-10-21。页面是基于现有草稿与台账制作的离线快照，不是正式内容库，也不会保存任何审核选择。</p>
+    <nav aria-label="页内导航">
+      <a href="#exhibits">12件展品</a><a href="#stories">3篇故事</a><a href="#templates">3套模板</a><a href="decisions.md">填写决定表</a><a href="intake-plan.md">查看录入方案</a>
+    </nav>
+  </header>
+  <main>
+    <div class="intro">
+      <strong>使用方式：</strong>逐项查看图片和文案，再到 <a href="decisions.md">decisions.md</a> 记录决定、修改意见、审核人、实际日期与版本。本页没有本地存储或自动提交功能。展品“采用”、使用条件落实、模板真人教学体验和正式发布批准是四类独立决定，不能相互代替。
+    </div>
+
+    <section id="exhibits">
+      <h2>十二件当前展品候选</h2>
+      <p class="status-box">当前集合严格对应 manifest 的 E-R01—08、E-R13—16。E-R09—12 是归档研究素材，不在本区，也不计入十二件。所有条目仍为“文案待人工审、未入库、未发布”。</p>
+      <div class="grid" id="exhibit-grid"></div>
+    </section>
+
+    <section id="stories">
+      <h2>三篇人物故事候选</h2>
+      <p class="status-box">封面均为项目数字示意／编辑封面，非肖像，也不是人物本人作品或现场照片。当前十二件替换展品没有证据属于三位人物，正式展品关联保持为空。</p>
+      <div class="grid" id="story-grid"></div>
+    </section>
+
+    <section id="templates">
+      <h2>三套候选模板与教学样张</h2>
+      <p class="status-box">以下是机器验证通过的原创数字练习候选。AI辅助坐标设计、自动化操作和说明整理；它们不复刻地方传统工序。机器验证通过不等于真人教学验收、实体可剪性或正式用途批准。</p>
+      <div class="grid" id="template-grid"></div>
+      <article style="margin-top:22px"><div class="body">
+        <h3>持续隔离人工预览</h3>
+        <p>在代码根目录执行：</p>
+        <pre>pnpm build
+node tests/m14/template-teaching-preview.mjs</pre>
+        <p>控制台会打印类似 <code>http://127.0.0.1:5214/?m07db=m07-test-m14-3c-manual-&lt;随机ID&gt;</code> 的实际地址。只用全新无痕或独立浏览器上下文打开。数据写入系统临时目录中新建的 <code>m14-3b-manual-preview-*</code>，其中包含 <code>content.sqlite</code>、<code>api.log</code> 和 <code>web.log</code>；不会读取正式库。</p>
+        <p>在启动终端按 Enter 或 Ctrl+C 停止，随后关闭独立浏览器上下文。完整步骤见 <a href="../template-teaching.md">教学说明</a>，记录填写到 <a href="../../qa/template-manual-review.md">人工教学验收表</a>。</p>
+      </div></article>
+    </section>
+  </main>
+  <footer>状态：可视化审阅包已准备，等待负责人实际审阅。正式发布 0；G-CONTENT 未关闭；M14 未完成。</footer>
+  <script>
+    "use strict";
+    const exhibits = [
+      {id:"E-R01",title:"春字环形剪纸",image:"../assets/m14-3c/spring-upload.webp",original:"../assets/m14-3c/spring-original.png",summary:"红色环形图案围绕“春”字展开。",body:"图中“春”字居于中央，周围重复的红色剪纸线条构成环形；画面还保留了拍摄背景。本件只介绍文件页所称的中国剪纸和实际可见构图，不附会地方流派或吉祥寓意。",meta:"Lanneixi 自述自作；页面日期 2022-12-06；地区未注明；剪纸作品／春字、环形、红色。",alt:"红色剪纸环绕中央“春”字，圆环外可见拍摄背景。",caption:"Lanneixi 自作声明的春字剪纸照片；上传候选转为有损 WebP。",source:"https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png",license:"CC BY-SA 4.0",credit:"Lanneixi / CC BY-SA 4.0",modification:"原件未修改；上传候选有损转 WebP，须说明。",question:"确认编辑选题、署名呈现和有损转换说明。"},
+      {id:"E-R02",title:"猪年剪纸",image:"../assets/m14-3c/pig-original.jpg",original:"../assets/m14-3c/pig-original.jpg",summary:"以猪形为中心的红色剪纸。",body:"图片中猪的轮廓由镂空曲线与花形装饰组成。文件页将作品称为猪年剪纸；这里只描述可见画面和该题名，不推断地域或特定民俗寓意。",meta:"Fanghong 自述制作；页面日期 2007-02-18；地区未注明；剪纸作品／猪形、花形、红色。",alt:"红色猪形剪纸，身体与周边有花形及曲线镂空。",caption:"Fanghong 制作声明；PawełMM 于2018年清理现行图背景。",source:"https://commons.wikimedia.org/wiki/File:Chinese_paper_cutting-Pig.jpg",license:"CC BY-SA 3.0",credit:"Fanghong；背景清理 PawełMM / CC BY-SA 3.0",modification:"本包未修改现行原图；Commons 历史记录含背景清理。",question:"确认现行图修改历史和双方署名的呈现方式。"},
+      {id:"E-R03",title:"狗年剪纸",image:"../assets/m14-3c/dog-original.jpg",original:"../assets/m14-3c/dog-original.jpg",summary:"红色狗形及花卉线条构成的剪纸。",body:"画面以狗的侧面轮廓为主体，周围见曲线与花形留白。文件页称其为狗年剪纸；不把照片上的形象直接解释为某一传统寓意。",meta:"Fanghong 自述制作；页面日期 2005-12-23；地区未注明；剪纸作品／狗形、花形、红色。",alt:"红色狗形剪纸，周围有花形与曲线镂空。",caption:"Fanghong 制作声明；Bjankuloski06 于2018年移除现行图边框。",source:"https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg",license:"CC BY-SA 3.0",credit:"Fanghong；去边框 Bjankuloski06 / CC BY-SA 3.0",modification:"本包未修改现行原图；Commons 历史记录含边框移除。",question:"确认现行图修改历史和双方署名的呈现方式。"},
+      {id:"E-R04",title:"公鸡与晨光剪纸",image:"../assets/m14-3c/rooster-original.png",original:"../assets/m14-3c/rooster-original.png",summary:"公鸡形剪纸置于向外放射的直线之间。",body:"公鸡位于画面中部，身后有从左下向外展开的长直线，四周是重复卷曲装饰的边框。标题是本项目按可见图形拟定的编辑名，原文件只有“Chinese paper-cut”说明；不赋予“报晓”之外的传统寓意。",meta:"Fanghong 自述制作；文件上传 2005-01-19，创作年代未注明；地区未注明；剪纸作品／公鸡、放射线、边框。",alt:"红色公鸡剪纸站在横线之上，左下向外放射的直线伸向带卷曲装饰的方形边框。",caption:"Fanghong 自述制作；本包保留 456×374 原图，未改。",source:"https://commons.wikimedia.org/wiki/File:RoosterHarbingerOfDawn.png",license:"CC BY-SA 3.0",credit:"Fanghong / CC BY-SA 3.0",modification:"本包未修改原图。",question:"原图仅 456×374；决定是否满足展陈与比赛材料视觉质量。"},
+      {id:"E-R05",title:"盗灵芝剪纸",image:"../assets/m14-3c/daolingzhi-original.jpg",original:"../assets/m14-3c/daolingzhi-original.jpg",summary:"四个人物剪影构成一幅题为《盗灵芝》的剪纸。",body:"画面左侧一人头戴繁复冠饰并举长刃，中间一人也举长刃；右侧后方为长须、手持物件者，前方另有一名较小的人物。四人均为黑纸剪影，内部以细条镂空分出衣纹、发饰与面部。上方有“盗灵芝”三字题名。本件只介绍图谱所载题名与画面可见内容，不凭外观指认角色、性别或寓意。",meta:"未注明作者；图谱著录年代为1920年前；北京鲁迅博物馆藏，图谱未标产地；剪纸作品／人物、剪影、白蛇传。",alt:"黑色剪纸共四个人物，左侧与中间两人各举长刃，右侧后方一人长须，前方另有一名较小的人物，上方有“盗灵芝”题字。",caption:"佚名《盗灵芝》剪纸，北京鲁迅博物馆藏；图为《北京鲁迅博物馆藏画选》1986年图版扫描。",source:"https://commons.wikimedia.org/wiki/File:Daolingzhi.jpg",license:"Public domain（PD-scan / PD-old-70）",credit:"佚名《盗灵芝》剪纸，北京鲁迅博物馆藏；Commons 公有领域扫描。",modification:"本包未修改原图。",question:"复核馆藏、图版署名和“四人物”客观描述。"},
+      {"id":"E-R17","title":"百福字剪纸","image":"../assets/m14-3c/hundred-fu-upload.webp","original":"../assets/m14-3c/hundred-fu-original.jpg","summary":"同一红纸画面排列多种福字字形，展示文字与留白的组合","body":"画面以红色纸面承接多行不同写法的福字，白色镂空与保留的红色连线共同构成阅读节奏。Commons 文件页题为《100 Fu (a papercut)》，注明图像日期为2006年1月15日，图像作者为 Patricia BjaalandWelch，并提供 CC BY-SA 3.0 许可。本展品按整幅图像中的同一件百福构图计一件，不把字形裁切另计作品；剪纸制作者和创作年代没有单独著录。","meta":"剪纸制作者未单独注明；图像 Patricia BjaalandWelch；图像记录日期2006-01-15；作品创作年代未注明；未注明","alt":"白色背景上的红色百福字剪纸，多行不同福字以白色镂空排列，上方保留红色文字。","caption":"Patricia BjaalandWelch，《100 Fu (a papercut)》 / Wikimedia Commons / CC BY-SA 3.0","source":"https://commons.wikimedia.org/wiki/File:100_Fu_(a_papercut).JPG","license":"CC BY-SA 3.0","credit":"Patricia BjaalandWelch，《100 Fu (a papercut)》 / Wikimedia Commons / CC BY-SA 3.0","modification":"原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。此派生图继续按CC BY-SA 3.0分发。后台会完整解码为PNG并生成缩略图。","question":"AI受托编辑和公开许可技术核对；真人签字另列。"},
+      {id:"E-R07",title:"双喜字剪纸",image:"../assets/m14-3c/double-happiness-original.jpg",original:"../assets/m14-3c/double-happiness-original.jpg",summary:"红色剪纸“囍”字立于白色台面。",body:"字形以粗笔画构成，笔画交接处留出横向长条镂空；纸张对折痕迹与刀口清晰可见，作品呈立体竖立状态。本件只介绍作者自述的剪纸技法与可见形制，不附会婚俗寓意。",meta:"OlgaTkachenko 自述自作；页面日期 2019-02-05；地区未注明；作者为乌克兰籍，题材为汉字“囍”；剪纸作品／囍字、红色、立体。",alt:"红色剪纸“囍”字立在白色台面上，笔画间有横向长条镂空，可见折痕与刀口。",caption:"OlgaTkachenko 以剪纸技法制作的双喜字剪纸，CC BY-SA 4.0。",source:"https://commons.wikimedia.org/wiki/File:%D0%86%D1%94%D1%80%D0%BE%D0%B3%D0%BB%D1%96%D1%84_%22%D0%9F%D0%BE%D0%B4%D0%B2%D1%96%D0%B9%D0%BD%D0%B5_%D1%89%D0%B0%D1%81%D1%82%D1%8F%22.jpg",license:"CC BY-SA 4.0",credit:"OlgaTkachenko / CC BY-SA 4.0",modification:"本包未修改原图。",question:"决定乌克兰籍作者所作中国文字题材剪纸是否符合“中国剪纸作品”的编辑定位。"},
+      {id:"E-R08",title:"柴门霍夫剪纸圆盘",image:"../assets/m14-3c/zamenhof-original.jpg",original:"../assets/m14-3c/zamenhof-original.jpg",summary:"红色圆形剪纸，中心嵌绿色柴门霍夫胸像。",body:"圆盘满布镂空的花叶、枝条与小动物纹样，中心留出圆形开光，内贴绿色剪出的柴门霍夫侧面胸像，胸像之后为红色五角星。本件只描述可见构图与页面所记场合，不评价人物生平。",meta:"Zhang Xuesong（雪松）；2007年12月6日；页面记为第七届中国世界语大会；剪纸作品／圆形、花卉、人物胸像。",alt:"红色圆形剪纸满布花叶与小动物镂空，中心圆形开光内为绿色柴门霍夫胸像。",caption:"Zhang Xuesong（雪松）柴门霍夫剪纸圆盘，2007年第七届中国世界语大会，CC0 1.0；原图800×600。",source:"https://commons.wikimedia.org/wiki/File:%C4%88ina_tonda%C4%B5o_kun_Zamenhof.jpg",license:"CC0 1.0",credit:"Zhang Xuesong（雪松），CC0 1.0",modification:"本包未修改原图。",question:"原图仅 800×600；页面未分开声明制作者与摄影者，需确认视觉质量与署名口径。"},
+      {"id":"E-R18","title":"金鱼剪纸","image":"../assets/m14-3c/goldfish-paper-cut-upload.webp","original":"../assets/m14-3c/goldfish-paper-cut-original.jpg","summary":"两尾黑色金鱼围绕中央文字，细长镂空呈现鱼鳍和尾部","body":"照片中的黑色纸形以两尾金鱼和中央文字组成连续图案，鱼鳞以弧线重复，鱼鳍与尾部由细长留白展开。国家文化记忆库记录其由蔡坤政、蔡佐骏制作，完成于2019年8月，用于生命礼仪装饰；本页保留这一用途，不将其改写为春节窗花。该记录的数位物件按 CC BY 3.0 TW + 提供，摄影贡献者为林思维，建档单位为宜兰县政府文化局。本展品按整件鱼形构图计一件，不将两尾鱼拆分计数。","meta":"蔡坤政、蔡佐骏（蔡佐駿）；2019年8月；台湾宜兰","alt":"浅色粗糙底面上的黑色剪纸，两尾金鱼在中央文字两侧相向，鳞片、鱼鳍和长尾由镂空线条表现。","caption":"金魚剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW","source":"https://tcmb.culture.tw/zh-tw/detail?id=283402&indexCode=Culture_Object","license":"CC BY 3.0 TW（原页标注 CC BY 3.0 TW +；本集采用3.0台湾）","credit":"金魚剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW","modification":"原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。派生图继续按CC BY 3.0 TW分发。后台会完整解码为PNG并生成缩略图。","question":"AI受托编辑和公开许可技术核对；真人签字另列。"},
+      {"id":"E-R19","title":"花边剪纸组","image":"../assets/m14-3c/border-paper-cut-upload.webp","original":"../assets/m14-3c/border-paper-cut-original.jpg","summary":"黑色花边纸形横向展开，曲线与镂空形成重复节奏","body":"照片中多条黑色花边横向排列，卷曲的外缘、中央圆形和放射状留白形成连续节奏。国家文化记忆库将本组著录为蔡坤政、蔡佐骏合作制作的生命礼仪用花边剪纸，完成于2019年8月；摄影贡献者为林思维，建档单位为宜兰县政府文化局，数位物件标注 CC BY 3.0 TW +。本项目按该独立记录的整组花边计一件，不将同框各条或裁切另计作品，也不把它与金鱼剪纸视为同一作品。","meta":"蔡坤政、蔡佐骏（蔡佐駿）；2019年8月；台湾宜兰","alt":"浅色底面上横向摆放的黑色花边剪纸，卷曲边缘与中央圆形镂空组成重复纹样。","caption":"花邊剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW","source":"https://tcmb.culture.tw/zh-tw/detail?id=283404&indexCode=Culture_Object","license":"CC BY 3.0 TW（原页标注 CC BY 3.0 TW +；本集采用3.0台湾）","credit":"花邊剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW","modification":"原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。派生图继续按CC BY 3.0 TW分发。后台会完整解码为PNG并生成缩略图。","question":"AI受托编辑和公开许可技术核对；真人签字另列。"},
+      {id:"E-R13",title:"北京五段纸制节庆牌楼剪纸",image:"../assets/m14-3c/beijing-five-part-paper-arch-original.jpg",original:"../assets/m14-3c/beijing-five-part-paper-arch-original.jpg",summary:"一张黑白档案照片记录了横跨多条街巷的五段纸制节庆牌楼。",body:"牌楼中央段最高，两侧分列较低的门洞；上部以连续几何镂空、圆形花饰和成排垂饰组成，立柱顶端另有小型装饰。画面前方可见步行者、手推车与停留人群。馆藏说明明确记载，这类临时牌楼以红纸按传统 jianzhi 剪纸技法制成，节期结束后拆除。本稿不据黑白照片推定具体节日、纹样寓意或制作者。",meta:"制作者未注明；晚清（1796—1912）；北京；一次性纸制节庆牌楼；Skušek 收藏相册第124张，拍摄者未注明。",alt:"黑白档案照片中，一座五段纸制牌楼横跨街巷，中央段较高，两侧门洞上布满几何镂空和圆形花饰，前方有人群与手推车。",caption:"北京五段纸制节庆牌楼剪纸，制作者未注明，晚清；Skušek 收藏相册第124张，斯洛文尼亚民族志博物馆藏。",source:"https://vazcollections.si/predmeti/fotografija-petdelni-praznicni-slavolok-iz-papirja/",license:"CC BY-SA 4.0",credit:"斯洛文尼亚民族志博物馆 / VAZ，CC BY-SA 4.0",modification:"公开原图原样保存；未裁切、调色、放大，保留相册白边。",question:"这是已拆除的一次性纸制牌楼的黑白档案照片，不是保存至今的平面剪纸实物图；决定展品口径、视觉质量及相同方式共享落实方式。"},
+      {id:"E-R14",title:"北京三段纸制节庆牌楼剪纸",image:"../assets/m14-3c/beijing-three-part-paper-arch-original.jpg",original:"../assets/m14-3c/beijing-three-part-paper-arch-original.jpg",summary:"一张黑白档案照片记录了三段结构的纸制节庆牌楼。",body:"中央门洞上方是密集的网格与圆形装饰，两侧段各有几何镂空面板；四根高立柱顶部见成组装饰，横向纸带把三段结构连为一体。画面下缘可见行人，背后为城门式建筑。馆藏说明明确记载，这类牌楼以红纸按传统 jianzhi 剪纸技法制作并在节后拆除。本稿不辨认模糊匾额，也不推定节日、寓意或制作者。",meta:"制作者未注明；晚清（1796—1912）；北京；一次性纸制节庆牌楼；Skušek 收藏相册第125张，拍摄者未注明。",alt:"黑白档案照片中，一座三段纸制牌楼立在城门式建筑前，中央门洞上方有网格与圆形装饰，两侧面板为几何镂空，画面下缘可见行人。",caption:"北京三段纸制节庆牌楼剪纸，制作者未注明，晚清；Skušek 收藏相册第125张，斯洛文尼亚民族志博物馆藏。",source:"https://vazcollections.si/predmeti/fotografija-tridelni-praznicni-slavolok-iz-papirja/",license:"CC BY-SA 4.0",credit:"斯洛文尼亚民族志博物馆 / VAZ，CC BY-SA 4.0",modification:"公开原图原样保存；未裁切、调色、放大，保留相册白边。",question:"这是已拆除的一次性纸制牌楼的黑白档案照片，不是保存至今的平面剪纸实物图；决定展品口径、视觉质量及相同方式共享落实方式。"}
+    ];
+
+    const stories = [
+      {id:"S-C01",title:"周淑英：从画、刻、染阅读蔚县剪纸",image:"../assets/m14-3c/story-editorial-s01-upload.png",alt:"项目原创数字剪纸图案编辑封面，非周淑英肖像或作品。",identity:"周淑英；剪纸（蔚县剪纸）第四批国家级非物质文化遗产代表性传承人；河北蔚县。",summary:"官方条目记录了她学习画、刻、染及多件代表作品；本篇以已公开的经历与作品题名为线索。",paragraphs:["周淑英的条目归于剪纸（蔚县剪纸）。页面介绍她师从周永明，学习画、刻、染相关工序。读者可由此理解人物与该项目的联系；具体工序展示需另有可用图像和审核。〔SRC-01 行47—48〕","该条目列出《清明上河图》《百蝶图》《生命树》《农家乐》《彩福图》《牡丹》等代表作。本篇只保留题名，不推断每件作品的年代、画面或寓意。〔SRC-01 行48〕","数字工坊的镜像切口是项目原创练习，可帮助初学者观察对称与留白；它不再现蔚县剪纸的画、刻、染，也不复制周淑英作品。〔项目设计判断，T-C01〕"],source:"https://www.ihchina.cn/ccr_detail/2757.html",association:"工艺候选：剪纸；模板候选：T-C01。当前十二件展品无有依据的正式关联，exhibitIds 留空。",question:"核对称谓和逐段事实；批准非肖像编辑封面用途；不得把封面描述成人物作品。"},
+      {id:"S-C02",title:"张秀芳：扬州剪纸中的线条与镂空",image:"../assets/m14-3c/story-editorial-s02-upload.png",alt:"项目原创数字剪纸图案编辑封面，非张秀芳肖像或作品。",identity:"张秀芳；剪纸（扬州剪纸）第一批国家级非物质文化遗产代表性传承人；江苏扬州。",summary:"官方条目记录她从少年时期学习扬州剪纸，并列出三件代表作品。",paragraphs:["张秀芳的官方条目写明她13岁开始学习扬州剪纸。项目条目另介绍扬州剪纸的线条与构图特点；本篇把人物经历和项目资料并列阅读，不把项目总体特征无条件归于某件单作。〔SRC-02 行47—48；SRC-04 行57〕","官方条目描述她的剪纸注重镂空与线条衔接。实际纸作的连贯与受力不能从数字画面推断，展示技法需配有经许可的原作资料。〔SRC-02 行48〕","人物条目列《琼花》《鸟语花香》《五十云鹤挂屏》为代表作。三个题名可供后续作品页链接；单件图像、创作年代和馆藏待核。〔SRC-02 行48〕"],source:"https://www.ihchina.cn/ccr_detail/2619.html",association:"工艺候选：剪纸；模板候选：T-C02。当前十二件展品无有依据的正式关联，exhibitIds 留空。",question:"核对13岁学习经历、项目资料与单件作品边界；批准非肖像编辑封面用途。"},
+      {id:"S-C03",title:"陈秋日：由学习经历进入漳浦剪纸",image:"../assets/m14-3c/story-editorial-s03-upload.png",alt:"项目原创数字剪纸图案编辑封面，非陈秋日肖像或作品。",identity:"陈秋日；剪纸（漳浦剪纸）第三批国家级非物质文化遗产代表性传承人；福建漳浦。页面民族栏与正文不一致，本稿不使用民族信息。",summary:"官方条目记录她14岁参加县剪纸培训班及两件具名代表作。",paragraphs:["陈秋日的官方条目写明，她14岁参加县剪纸培训班，先后向陈金、林桃学习。年龄为网页所述，不能推算具体年份。〔SRC-03 行47—48〕","条目介绍她的构图和线条，并列出《兔年如意》《老鼠娶亲》。本稿仅使用经核对的题名，不将项目风格、作品寓意或获奖详情补写为单件事实。〔SRC-03 行48；项目背景 SRC-05〕","四向几何练习可作为理解重复结构的数字入口，却不等于漳浦剪纸的制作方法或陈秋日的创作流程。〔项目设计判断，T-C03〕"],source:"https://www.ihchina.cn/art/detail/id/2676.html",association:"工艺候选：剪纸；模板候选：T-C03。当前十二件展品无有依据的正式关联，exhibitIds 留空。",question:"核对称谓、学习经历和民族信息不采用的边界；批准非肖像编辑封面用途。"}
+    ];
+
+    const templates = [
+      {id:"T-C01",title:"镜像成对留白",image:"../../qa/evidence/m14-3c-teaching-29a4bcaada7949db9a40f3a301e90cd3/c01-teaching.png",goal:"观察一个基础域切口怎样在中轴两侧出现成对留白，并比较圆形与水滴的节奏。",config:"测试ID template-dev-c01 v1；方纸、vertical、左半允许区；圆／水滴；8步教学作品。",boundary:"原创数字几何练习；不再现蔚县剪纸的画、刻、染，不证明实体纸桥连贯。",question:"真人能否找到模板、独立完成8步并解释镜像结果；标题、配色、美感及用途是否批准。"},
+      {id:"T-C02",title:"三角／水滴线形节奏",image:"../../qa/evidence/m14-3c-teaching-29a4bcaada7949db9a40f3a301e90cd3/c02-teaching.png",goal:"比较尖角与曲线镂空的疏密和朝向。",config:"测试ID template-dev-c02 v1；方纸、vertical、左半允许区；三角／水滴，无圆工具；8步教学作品。",boundary:"原创数字几何练习；线形排布不等于扬州剪纸工序，也不证明实体结构受力。",question:"真人是否注意到无圆工具、能完成角度调整并理解线形节奏；标题、配色、美感及用途是否批准。"},
+      {id:"T-C03",title:"四向重复",image:"../../qa/evidence/m14-3c-teaching-29a4bcaada7949db9a40f3a301e90cd3/c03-teaching.png",goal:"区分一个象限内的位置与展开后四象限旋转复制的位置和方向。",config:"测试ID template-dev-c03 v1；方纸、radial4 无镜像、右下基础域；圆／三角／水滴；8步教学作品。",boundary:"原创数字几何练习；不等于漳浦剪纸制作方法。右下区域与初始工具已通过机器验证，仍需真人体验。",question:"真人能否理解右下基础域、四向旋转结果及数字模拟边界；标题、配色、美感及用途是否批准。"}
+    ];
+
+    const el = (tag, cls, text) => { const n=document.createElement(tag); if(cls) n.className=cls; if(text!==undefined) n.textContent=text; return n; };
+    const addPair = (dl, label, value) => { dl.append(el("dt","",label),el("dd","copy",value)); };
+    for (const item of exhibits) {
+      const card=el("article"); card.id=item.id.toLowerCase();
+      const fig=el("figure"), link=el("a"); link.href=item.original; link.title="打开本地原文件";
+      const img=el("img"); img.src=item.image; img.alt=item.alt; link.append(img); fig.append(link,el("figcaption","",item.caption));
+      const body=el("div","body"); body.append(el("div","candidate",item.id),el("h3","",item.title));
+      body.append(el("p","","摘要："+item.summary),el("p","","正文："+item.body));
+      const dl=el("dl"); addPair(dl,"作者／年代／地区",item.meta); addPair(dl,"alt",item.alt); addPair(dl,"许可",item.license); addPair(dl,"署名",item.credit); addPair(dl,"修改",item.modification); body.append(dl);
+      const q=el("p","decision","待决定："+item.question); body.append(q);
+      const actions=el("div","actions"), source=el("a","","具体来源页"), original=el("a","","本地高清／原文件"), decide=el("a","","去决定表"); source.href=item.source; source.target="_blank"; source.rel="noreferrer"; original.href=item.original; decide.href="decisions.md#"+item.id.toLowerCase(); actions.append(source,original,decide); body.append(actions); card.append(fig,body); document.querySelector("#exhibit-grid").append(card);
+    }
+    for (const item of stories) {
+      const card=el("article","story"); card.id=item.id.toLowerCase(); const fig=el("figure"), img=el("img"); img.src=item.image; img.alt=item.alt; fig.append(img,el("figcaption","",item.alt));
+      const body=el("div","body"); body.append(el("div","candidate",item.id),el("h3","",item.title),el("p","",item.identity),el("p","","摘要："+item.summary)); item.paragraphs.forEach((p,i)=>body.append(el("p","","正文"+(i+1)+"："+p)));
+      const dl=el("dl"); addPair(dl,"实际关联",item.association); addPair(dl,"封面状态","项目数字示意／编辑封面，非肖像、非人物作品；PNG为后台上传候选，正式用途待审。"); body.append(dl,el("p","decision","待决定："+item.question));
+      const actions=el("div","actions"), source=el("a","","人物事实来源"), citations=el("a","","逐段来源表"), cover=el("a","","本地封面"), decide=el("a","","去决定表"); source.href=item.source; source.target="_blank"; source.rel="noreferrer"; citations.href="../fact-sources.md"; cover.href=item.image; decide.href="decisions.md#"+item.id.toLowerCase(); actions.append(source,citations,cover,decide); body.append(actions); card.append(fig,body); document.querySelector("#story-grid").append(card);
+    }
+    for (const item of templates) {
+      const card=el("article","template"); card.id=item.id.toLowerCase(); const fig=el("figure"), link=el("a"); link.href=item.image; const img=el("img"); img.src=item.image; img.alt=item.title+"的1600×2000教学PNG样张"; link.append(img); fig.append(link,el("figcaption","",item.id+" 真实教学PNG；机器生成的隔离测试作品，不是传统作品或人工验收结果。"));
+      const body=el("div","body"); body.append(el("div","candidate",item.id),el("h3","",item.title)); const dl=el("dl"); addPair(dl,"学习目标",item.goal); addPair(dl,"技术配置",item.config); addPair(dl,"数字边界",item.boundary); addPair(dl,"AI参与","AI辅助坐标设计、自动化操作和说明整理；没有真人教学签字，也不据此主张独占权利。"); body.append(dl,el("p","decision","待决定："+item.question)); const actions=el("div","actions"), imgLink=el("a","","打开教学PNG"), tutorial=el("a","","逐步教程"), decide=el("a","","去决定表"); imgLink.href=item.image; tutorial.href="../template-teaching.md#"+item.id.toLowerCase(); decide.href="decisions.md#"+item.id.toLowerCase(); actions.append(imgLink,tutorial,decide); body.append(actions); card.append(fig,body); document.querySelector("#template-grid").append(card);
+    }
+  </script>
+</body>
+</html>

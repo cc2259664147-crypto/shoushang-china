@@ -16,7 +16,7 @@ else console.error(result.error.code);
 
 工厂场景 normal/empty/failure；empty 对列表是成功空数组、详情为 NOT_FOUND，failure 为 NETWORK_ERROR；normal 查询 missing ID 返回 NOT_FOUND。均无随机数。返回深复制，避免调用者污染 fixtures。示例数据加载时执行同一 Zod 校验。
 
-M12 的 `createHttpContentClient(...): ContentClient` 必须实现同一端口，入参/响应均校验，query URL 编码，10秒超时、读取最多重试1次、请求取消/过期响应不覆盖新查询。尚未实现 HTTP 工厂，M01 不发送假业务成功。公开路由对应 PRD `/api/v1/home|crafts|templates|exhibits|stories`，目前后端仅 `/health`。
+M12 的 `createHttpContentClient(...): ContentClient` 必须实现同一端口，入参/响应均校验，query URL 编码，10秒超时、读取最多重试1次、请求取消/过期响应不覆盖新查询。M12 HTTP 工厂已实现并由本轮总控接入。公开路由为 `/api/v1/home|crafts|templates|exhibits|stories`（模板、展品、故事包含 /:id）。`/health` 使用 HealthSchema 仅报告服务存活，contentMode=http；`/ready` 使用 ReadinessSchema 实际读取数据库，ready 返回200，不可读返回503/not-ready。健康 DTO 变更见 CR-M12-02，不改变 ContentClient 方法签名或 Work。
 
 ## 剪纸命令与渲染
 
@@ -25,6 +25,8 @@ M12 的 `createHttpContentClient(...): ContentClient` 必须实现同一端口�
 `ArtworkRenderer.render({work,width,height,view:'folded'|'unfolded'})` → `{svg,width,height,rendererVersion:1}`。width/height 为正整数 CSS 逻辑像素，适配保持单位方纸比例并居中；SVG 自包含、无脚本或外链，不改写作品。缺少旧算法版本返回 UNSUPPORTED_VERSION，非法几何返回 GEOMETRY_INVALID。M01 仅接口，没有假渲染。
 
 ## 本地仓储
+
+M09 包级公开扩展：`IndexedDbRepository.renameWork({workId,name,expectedWorkRevision,expectedDraftRevision})` 返回 `{work,draft}`，`deleteWork({workId,expectedWorkRevision,expectedDraftRevision})` 返回 `{workId}`。两种 expected 值均必须给出；`null` 表示确认时该版本不存在，不能忽略检查。事务内任一版本新增、消失或修订改变则 `REVISION_CONFLICT`，不写入。改名同时保留完成版和草稿各自内容，推进两者修订及草稿基线；若原草稿基线已落后则冲突。完成版缩略图转 pending，调用方按新修订重建。删除原子移除两版本和缩略图，保留草稿修订高水位。原端口和现有方法不变；数据库物理版本仍为 3。
 
 `LocalRepository.persistence: memory|indexeddb`；list({status?,page?,pageSize?}) 按更新时间倒序、同时间按id；read(id)；save({work,expectedRevision})；delete(id,expectedRevision)。成功返回保存后的 Work（含实际 revision/时间）；删除成功 `{id}`。保存/删除预期失败类型为 StorageFailure 判别联合。
 
@@ -82,3 +84,30 @@ M05保存成功后可用`{...state, work: savedWork}`保留编辑历史；作品
 `openIndexedDbRepository(options?)` 返回 `Result<IndexedDbRepository,StorageFailure>`，成功实例的 `persistence='indexeddb'`，调用方在卸载时 `close()`。实例保留旧 `LocalRepository` 方法，另有 `favorites`、`saveWithThumbnail`、`saveDraft/readDraft/listDrafts/discardDraft/commitDraft`、`readThumbnail/rebuildThumbnail`、`inspectRecords/exportRawBackup`。`save` 等价于没有预制图片的 `saveWithThumbnail`，原子写 pending 缩略图。草稿的 `revision` 与 `baseRevision` 分别保护草稿并发和所依据完成版；`step` 为编辑会话数据。`inspectRecords` 须与列表一起用于损坏记录提示；`exportRawBackup` 返回原始结构化数据（含 Blob），调用方下载 JSON 时需将 Blob 转为 data URL。细节见[存储设计](../storage/indexeddb-v1.md)。
 
 M05 复审后，草稿 revision 对同一 workId 在删除、提交、重建之后仍递增；它不承诺首次从 1 开始。三个编辑方法继续以调用方持有的草稿 revision 为事务内并发条件，过期值返回 `REVISION_CONFLICT`，不会影响新草稿。
+
+## M13 管理服务端口（2026-10-19）
+
+实现入口 apps/api/src/admin/index.ts：`adminRoutes(app,{database,origin,securityMode,listenHost,mediaRoot,backupRoot})`，宿主仍唯一拥有 ContentDatabase/close。生产 securityMode=https，Origin 必须 HTTPS；显式 loopback-http 同时要求回环 Origin、listenHost 和实际监听地址，宿主 listen 后调用 `assertAdminListener`，模块逐管理请求再次核验。挂载与全局路由仍由后续总控处理。
+
+`database.admin` 提供受控账号维护、会话/挑战/限流、contents/content/history/vocabulary、save/submit/review/publish/unpublish/restore、stageMedia/license/proof/reviewMedia/revokeMedia/mediaFile、audits/accounts/disable、queueBackup/backupStatus/startBackup/backupSnapshot/finishBackup 和明确离线维护方法。管理写入参数 Access 包含服务端令牌摘要和 requestId，不接受请求体 actor/role；身份与角色在 BEGIN IMMEDIATE 内重验。没有公共 SQL/连接/通用事务回调。
+
+HTTP 基础路径 /api/v1/admin。页面及客户端入口在 apps/web/src/features/admin/index.ts：AdminPage、createAdminHttpClient、AdminHttpError；客户端同源 Cookie + 内存 CSRF，不使用公开 ContentClient 写入。管理 JSON 成功/失败继续沿用 Result/ApiError envelope；注销204；新草稿/图片201；备份202仅接受任务。分页默认12/上限50。401会话无效、403权限或Origin/CSRF、409修订或幂等冲突必须保留表单，不盲覆盖/重试。
+
+实际方法/路径、请求字段和返回值的完整清单见 apps/api/src/admin/README.md。媒体二进制上传不引入 multipart；普通管理请求256KiB、图片5MiB。公开图片 /api/v1/media/:id/original|thumbnail 逐次核验 approved、当前公开引用、工艺可见性、撤权和文件哈希，无静态目录。proof 只走鉴权后台入口，上传者或管理员可读，内部许可 URL 不投影公开 DTO。
+
+publish/unpublish/restore/disable/revoke/backup 用 Idempotency-Key（16～128字母数字下划线短横线）；同 actor/op/key 同规范请求重放已提交结果，异请求409。发布同时检查 expectedLatest、expectedPublic（含null）、当前待审修订和审核绑定。历史恢复生成新草稿，不能原位修改历史或复活撤权媒体。精确 API 参数和已有 ContentClient/Work 无不兼容变化。
+
+M13幂等补充：已受理的业务拒绝通过内部SAVEPOINT撤销操作后，在同一外层事务保存拒绝结果与失败审计，重启后同键同请求仍重放拒绝，同键异请求409。内部存储故障不伪造持久结果；语法或身份验证失败发生在受理之前。最终验证与未验证的部署边界见M13交接。
+
+
+## M13 审核退回修复（2026-10-19）
+
+发布只接受当前修订最新审核的 reviewId，且结论为 approved；旧通过之后出现退回或新通过，旧 reviewId 均返回 INVALID_INPUT (400)。审核与发布在 BEGIN IMMEDIATE 中串行判定。前端管理 client.call 第四参可为显式操作键；每次确认弹窗生成新键，原弹窗失败重试沿用，取消后重开为新操作。自动 true 模式仅在确认成功或合法4xx响应后释放键；传输/5xx/解析失败保留。
+
+## M14-2A 内部公开读取版本
+
+ContentDatabase新增 `readPublicSnapshotSince(knownVersion?: string)` → `{version, snapshot}`；snapshot为原readPublicSnapshot结果或null（仅传入版本与当前同实例版本相同）。调用方持有的旧快照必须与该token绑定；没有可复用值时不得用null伪造空集。版本检查和必要的行/撤权集合读取同一已钉住SQLite读事务，覆盖本连接total_changes与外部连接data_version变化，不使用TTL。原readPublicSnapshot、M12写入、database.admin事务不变。
+
+PublicContentService的内部公开快照仅供私有查询方法读取，所有对外方法返回独立副本；snapshot仍返回完整公开结构。单服务保留一份，原公开行≤10000且公开JSON UTF-8≤8MiB；超限不保留而非返回空/截断。每次请求仍校验查询参数、检查数据库版本；关闭/读取错误继续失败，不回退缓存。HTTP的requestId/no-store/错误与公开字段不变。没有迁移或新增生产依赖。
+
+兼容读取边界：`readPublicSnapshot()`无参仍完整返回原始公开读取；新增内部重载`readPublicSnapshot(knownVersion: string | undefined)`返回上述带版本结果，`readPublicSnapshotSince`显式委托此重载。两条路径均经过原受控读取/故障边界；原应用测试注入读取故障时，即使命中缓存也保持公开500与ready503，不返回旧缓存成功。

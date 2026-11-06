@@ -10,6 +10,8 @@
 
 ## 端口与流程
 
+M09 管理扩展在现有物理 v3 store 上增加包级 `renameWork` 与 `deleteWork`，不新增 store 或迁移。调用方必须传完成版和草稿两个预期修订，`null` 严格表示不存在。改名在同一事务中核对后只更新名称、时间和必要修订元数据，完成版缩略图置 pending；旧草稿基线不匹配时拒绝，不能借改名消除编辑冲突。删除在同一事务中核对后移除 works、drafts、thumbnails，保留 draftRevisions。原有 `save/saveWithThumbnail/delete` 不改变，管理页不得调用它们模拟安全改名或整件删除。
+
 保留 `LocalRepository`、`FavoriteRepository`、`Work`、`SaveWorkInput` 不变。公开扩展提供 `saveWithThumbnail`、`saveDraft/readDraft/listDrafts/discardDraft/commitDraft`、`readThumbnail/rebuildThumbnail`、`inspectRecords/exportRawBackup` 和 `close`，工厂返回 `persistence='indexeddb'`。普通 `save` 等价于缩略图状态 `pending` 的原子保存，不保留旧图为最新。Blob 由调用方在事务外准备；M06 尚未提供正式渲染，验证页图片为自制测试图。页面的 1 秒自动保存调度由 M07 负责。
 
 新作品先 `saveDraft`，占一个名额；明确完成保存用 `commitDraft`，同事务写完成版、ready/pending 缩略图并删除草稿。旧端口 `save` 仍接受合法 Work 的 draft/completed 状态，但它写主记录，不承担编辑会话自动保存；M07 必须用 `saveDraft` 编辑已有完成版。直接 `save/saveWithThumbnail` 同事务清除关联草稿，防止旧草稿覆盖新版本。取消编辑用 `discardDraft`；删除完成版用 `delete`，同时移除草稿和缩略图。只有草稿的新作品可通过 `discardDraft` 删除。恢复先校验结构、版本与 M04 几何，并返回步骤；异常记录仍可导出原始备份。
@@ -25,3 +27,23 @@
 缩略图的 `workRevision` 必须与完成版修订相同。新保存未提供 Blob 则原子写 `pending`，不能把旧图标为最新。`rebuildThumbnail` 仅在当前完成版修订仍等于生成时修订时写入，否则冲突，旧异步任务不能回写。缩略图 Blob 数据和作品同事务提交；失败不损坏旧完成版。事务内不等待渲染、网络或其他异步工作。
 
 收藏以 exhibitId 唯一，重复 put 保留首次 createdAt，remove 不存在的引用也成功且幂等；只存引用，不查询远端是否下架。所有读写结果与调用方入参隔离。
+
+## M15-6A 校验边界
+
+M15-6A 仅新增独立的 v1/v2 存储前校验：v1 继续复用既有 core 语义；v2 在恢复或新建/另存前校验严格 schema、core 几何、唯一 profile 注册项、完整 profile 快照以及模板 RFC 8785/JCS UTF-8 SHA-256。profile 生命周期不参与不可变快照深值比较；停用仅阻止新建/另存，历史恢复按 `editable` 或 `read-export-only` 返回访问模式。本阶段未接入 IndexedDB 事务，未修改物理版本、store 或 index，也未实现真实读写、迁移和页面接线。
+
+## M15-6B 共存只读接入
+
+物理数据库仍为 `shoushang-local-v1` v3，原有五个 store 与 index 不变；`works` 和 `drafts` 可直接共存 v1/v2。新增 `readAnyWork/listAnyWorks/readAnyDraft/listAnyDrafts` 在只读事务完成并取得结构化克隆后，才在事务外执行 M15-6A 的 profile、几何和异步摘要校验；列表先过滤合法记录再计算 `total` 与分页，单条坏记录保留供 `inspectRecords` 和 `exportRawBackup` 检查。旧 v1 接口语义不变；通用读取遇到 v2 但未配置 profile 注册表时明确失败。本阶段不提供 v2 写入、v1→v2 迁移或页面接线。
+
+## M15-6C v2 原子写入
+
+新增独立的 `saveV2WithThumbnail/saveV2Draft/commitV2Draft/discardV2Draft/readAnyThumbnail/rebuildV2Thumbnail`，旧 v1 接口不变。v2 schema、几何、profile 深值、模板摘要和生命周期均在 readwrite 事务前校验；更新先取得只读快照，事务内再按完整快照、schemaVersion 和 revision 复核。作品、草稿、高水位和缩略图继续共用物理 v3 的既有 store，成功仅在 transaction complete 后返回；停用 profile 只拒绝新建，`read-export-only` 禁止创作写入但允许读取和重建当前 revision 的缩略图。本阶段仍不实现 v1→v2 另存迁移、profile 自动选择或页面接线。
+
+## M15-6D v1 另存 v2
+
+新增 `saveV1AsV2`：严格读取 v1 源记录，以其模板 id、version 和 JCS SHA-256 在注册表中唯一匹配启用的 profile，把参数切口逐字段转换为 v2 parametric 操作，并调用完整 v2 校验。随后在单个 readwrite 事务中复核源 revision 与完整签名、新 ID create-only 和统一 100 件限额，再原子写入 v2 草稿及高水位，或完成版及 ready/pending 缩略图；源 v1 作品、草稿、缩略图和 revision 均不改。数据库仍为物理 v3，store/index 不变；页面接线不在本阶段。
+
+## M15-6D2 v1 独立草稿另存 v2
+
+新增 `saveV1DraftAsV2`：只读取源 `drafts` 中的合法 v1 草稿，以草稿的 `work`（名称、配色、操作、模板快照、步骤）转换，绝不使用同 ID 完成版代替。事务前完成严格校验、唯一启用 profile 的模板 id/version/JCS SHA-256 匹配、参数切口转 v2 parametric 和完整 v2 校验，并保存源草稿及存在时同 ID 完成版的完整签名；单个 readwrite 事务复核草稿/完成版 revision 与签名、`baseRevision`、新 ID create-only 和 100 件上限，仅原子写目标 `drafts` 与 `draftRevisions`，源记录、源缩略图和高水位不变。数据库仍为物理 v3，store/index 不变。

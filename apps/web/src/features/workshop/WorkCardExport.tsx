@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Work } from '@shoushang/contracts';
-import { createArtworkExporter } from '@shoushang/artwork-exporter';
+import { createArtworkExporter, unsupportedCardCharacters } from '@shoushang/artwork-exporter';
 import { Button, StatusMessage } from '@shoushang/ui';
 
 const exporter = createArtworkExporter();
@@ -33,7 +33,9 @@ export function WorkCardExport({ work }: { work: Work }) {
       const next = { url: URL.createObjectURL(blob), filename: result.value.filename };
       if (previewRef.current) URL.revokeObjectURL(previewRef.current.url);
       previewRef.current = next;
-      setPreview(next); setPhase('success'); setMessage('作品卡已生成');
+      setPreview(next); setPhase('success'); setMessage(unsupportedCardCharacters(work.name).length
+        ? '作品卡已生成；名称含内置字体未覆盖字符，显示取决于设备，请检查预览'
+        : '作品卡已生成');
     } catch {
       if (token === generation.current) { setPhase('error'); setMessage('作品卡生成失败，请重试'); }
     } finally { window.clearTimeout(slowTimer); if (token === generation.current) lock.current = false; }

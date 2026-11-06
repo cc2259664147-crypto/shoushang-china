@@ -1,11 +1,14 @@
-import type { ApiError, ContentQuery, Craft, CutOperation, Exhibit, Favorite, Page, Result, Story, TemplateVersion, Work } from './model';
+import type {
+  ApiError, BrushCandidateV2, BrushCutV2, ContentQuery, Craft, CutOperation, Exhibit, Favorite, FreehandCandidateV2,
+  FreehandCutV2, Page, ParametricCutV2, PublicTemplate, Result, Story, Work, WorkV2,
+} from './model';
 
 /** Query ports have identical semantics for mock and future HTTP adapters. */
 export interface ContentClient {
   readonly mode: 'mock' | 'http';
   listCrafts(): Promise<Result<Craft[]>>;
-  listTemplates(query?: ContentQuery): Promise<Result<Page<TemplateVersion>>>;
-  getTemplate(id: string): Promise<Result<TemplateVersion>>;
+  listTemplates(query?: ContentQuery): Promise<Result<Page<PublicTemplate>>>;
+  getTemplate(id: string): Promise<Result<PublicTemplate>>;
   listExhibits(query?: ContentQuery): Promise<Result<Page<Exhibit>>>;
   getExhibit(id: string): Promise<Result<Exhibit>>;
   listStories(query?: ContentQuery): Promise<Result<Page<Story>>>;
@@ -22,6 +25,34 @@ export interface PapercutCore {
   createState(work: Work): Result<PapercutState, CoreError>;
   validate(work: Work): Result<Work, CoreError>;
   dispatch(state: PapercutState, command: PapercutCommand): Result<PapercutState, CoreError>;
+}
+export type PapercutCommandV2 =
+  | { type: 'add-parametric-cut'; operation: ParametricCutV2 }
+  | { type: 'add-freehand-cut'; candidate: FreehandCandidateV2 }
+  | { type: 'add-brush-cut'; candidate: BrushCandidateV2 }
+  | { type: 'update-cut'; operationId: string; change:
+    | { type: 'translate'; dx: number; dy: number }
+    | { type: 'transform-parametric'; center: ParametricCutV2['center']; width: number; height: number; angleDeg: number }
+  }
+  | { type: 'duplicate-cut'; operationId: string; newOperationId: string; dx: number; dy: number }
+  | { type: 'delete-cut'; operationId: string }
+  | { type: 'clear-cuts' }
+  | { type: 'undo' }
+  | { type: 'redo' }
+  | { type: 'set-palette'; palette: WorkV2['palette'] };
+export interface PapercutStateV2 {
+  readonly work: WorkV2;
+  readonly canUndo: boolean;
+  readonly canRedo: boolean;
+}
+export interface PapercutSessionV2 {
+  current(): PapercutStateV2;
+  dispatch(command: PapercutCommandV2): Result<PapercutStateV2, CoreError>;
+}
+export interface PapercutCoreV2 {
+  prepareFreehandCut(work: WorkV2, candidate: FreehandCandidateV2): Result<FreehandCutV2, CoreError>;
+  prepareBrushCut(work: WorkV2, candidate: BrushCandidateV2): Result<BrushCutV2, CoreError>;
+  createSession(work: WorkV2): Result<PapercutSessionV2, CoreError>;
 }
 export interface RenderInput { readonly work: Work; readonly width: number; readonly height: number; readonly view: 'unfolded' | 'folded' }
 export interface RenderOutput { readonly svg: string; readonly width: number; readonly height: number; readonly rendererVersion: 1 }

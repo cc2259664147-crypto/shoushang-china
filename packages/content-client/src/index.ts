@@ -36,4 +36,7 @@ export function createMockContentClient(scenario: MockScenario = 'normal'): Cont
     async getHome() { return scenario === 'failure' ? unavailable() : copy({ exhibits: scenario === 'empty' ? [] : exhibits, stories: scenario === 'empty' ? [] : stories }); },
   };
 }
-// M12 supplies createHttpContentClient(...): ContentClient and validates all network DTOs.
+export { createHttpContentClient } from './http';
+export type { HttpContentClientOptions } from './http';
+export { generateUuid } from './uuid';
+export type { UuidCrypto } from './uuid';

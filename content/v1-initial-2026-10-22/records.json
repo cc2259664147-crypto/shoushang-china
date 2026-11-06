@@ -1,0 +1,1145 @@
+{
+  "schemaVersion": 1,
+  "status": "V1 versioned content snapshot; explicit isolated technical intake; AI delegated editorial review disclosed; no human signature or competition approval",
+  "generatedFrom": [
+    "content/v1-initial-2026-10-22/records.json"
+  ],
+  "inputFingerprint": {},
+  "mappings": [
+    {
+      "candidate": "E-R01",
+      "kind": "exhibit",
+      "proposedId": "exhibit-spring-ring",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R02",
+      "kind": "exhibit",
+      "proposedId": "exhibit-pig-papercut",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R03",
+      "kind": "exhibit",
+      "proposedId": "exhibit-dog-papercut",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R04",
+      "kind": "exhibit",
+      "proposedId": "exhibit-rooster-dawn",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R05",
+      "kind": "exhibit",
+      "proposedId": "exhibit-daolingzhi",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R07",
+      "kind": "exhibit",
+      "proposedId": "exhibit-double-happiness",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R08",
+      "kind": "exhibit",
+      "proposedId": "exhibit-zamenhof-disc",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R13",
+      "kind": "exhibit",
+      "proposedId": "exhibit-beijing-five-part-arch",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R14",
+      "kind": "exhibit",
+      "proposedId": "exhibit-beijing-three-part-arch",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "S-C01",
+      "kind": "story",
+      "proposedId": "story-zhou-shuying",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "S-C02",
+      "kind": "story",
+      "proposedId": "story-zhang-xiufang",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "S-C03",
+      "kind": "story",
+      "proposedId": "story-chen-qiuri",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "T-C01",
+      "kind": "template",
+      "proposedId": "template-papercut-mirror-pairs",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "T-C02",
+      "kind": "template",
+      "proposedId": "template-papercut-linear-rhythm",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "T-C03",
+      "kind": "template",
+      "proposedId": "template-papercut-fourfold",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R17",
+      "kind": "exhibit",
+      "proposedId": "exhibit-v1-hundred-fu",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R18",
+      "kind": "exhibit",
+      "proposedId": "exhibit-v1-goldfish-paper-cut",
+      "databaseConflictStatus": "not-checked"
+    },
+    {
+      "candidate": "E-R19",
+      "kind": "exhibit",
+      "proposedId": "exhibit-v1-border-paper-cut",
+      "databaseConflictStatus": "not-checked"
+    }
+  ],
+  "exhibits": [
+    {
+      "candidate": "E-R01",
+      "proposedId": "exhibit-spring-ring",
+      "title": "春字环形剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "春字",
+        "环形",
+        "红色"
+      ],
+      "summary": "红色环形图案围绕“春”字展开",
+      "description": "图中“春”字居于中央，周围重复的红色剪纸线条构成环形；画面还保留了拍摄背景。本件只介绍文件页所称的中国剪纸和实际可见构图，不附会地方流派或吉祥寓意。",
+      "dateLabel": "页面日期2022-12-06",
+      "region": "未注明",
+      "creator": "Lanneixi",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色剪纸环绕中央“春”字，圆环外可见拍摄背景",
+      "caption": "Lanneixi 自作声明的春字剪纸照片；上传候选转为有损 WebP。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png) Summary/Licensing/File history；CC BY-SA 4.0，署名见 ATTRIBUTION；关联故事/模板：无证据，留空；文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Chinese Paper Cutting",
+          "author": "Lanneixi（文件页自述 Own work）",
+          "url": "https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "文件页自作声明、逐文件 CC BY-SA 4.0 与历史已核对；仅候选",
+          "note": "上传者自述自作及开放许可，无已知相反证据；正式选题及署名呈现待负责人审核"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R01"
+        }
+      },
+      "sortOrder": 1,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R02",
+      "proposedId": "exhibit-pig-papercut",
+      "title": "猪年剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "猪形",
+        "花形",
+        "红色"
+      ],
+      "summary": "以猪形为中心的红色剪纸",
+      "description": "图片中猪的轮廓由镂空曲线与花形装饰组成。文件页将作品称为猪年剪纸；这里只描述可见画面和该题名，不推断地域或特定民俗寓意。",
+      "dateLabel": "页面日期2007-02-18",
+      "region": "未注明",
+      "creator": "Fanghong",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色猪形剪纸，身体与周边有花形及曲线镂空",
+      "caption": "Fanghong 制作声明；PawełMM 于2018年清理现行图背景。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:Chinese_paper_cutting-Pig.jpg) Description/Licensing/File history；CC BY-SA 3.0；关联留空；文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Chinese paper cutting-Pig",
+          "author": "Fanghong（原上传自述 Made by）",
+          "url": "https://commons.wikimedia.org/wiki/File:Chinese_paper_cutting-Pig.jpg",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "原作自作声明、逐文件 CC BY-SA 3.0 与修改历史已核对；仅候选",
+          "note": "原上传者自述 Made by；现行图有背景清理记录，正式署名呈现待负责人审核"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R02"
+        }
+      },
+      "sortOrder": 2,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R03",
+      "proposedId": "exhibit-dog-papercut",
+      "title": "狗年剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "狗形",
+        "花形",
+        "红色"
+      ],
+      "summary": "红色狗形及花卉线条构成的剪纸",
+      "description": "画面以狗的侧面轮廓为主体，周围见曲线与花形留白。文件页称其为狗年剪纸；不把照片上的形象直接解释为某一传统寓意。",
+      "dateLabel": "页面日期2005-12-23",
+      "region": "未注明",
+      "creator": "Fanghong",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色狗形剪纸，周围有花形与曲线镂空",
+      "caption": "Fanghong 制作声明；Bjankuloski06 于2018年移除现行图边框。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg) Description/Licensing/File history；CC BY-SA 3.0；关联留空；文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "DogYearPaperCutting",
+          "author": "Fanghong（原上传自述 Made by）",
+          "url": "https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "原作自作声明、逐文件 CC BY-SA 3.0 与修改历史已核对；仅候选",
+          "note": "原上传者自述 Made by；现行图有去边框记录，正式署名呈现待负责人审核"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R03"
+        }
+      },
+      "sortOrder": 3,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R04",
+      "proposedId": "exhibit-rooster-dawn",
+      "title": "公鸡与晨光剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "公鸡",
+        "放射线",
+        "边框"
+      ],
+      "summary": "公鸡形剪纸置于向外放射的直线之间",
+      "description": "公鸡位于画面中部，身后有从左下向外展开的长直线，四周是重复卷曲装饰的边框。标题是本项目按可见图形拟定的编辑名，原文件只有“Chinese paper-cut”说明；不赋予“报晓”之外的传统寓意。",
+      "dateLabel": "创作年代未注明",
+      "region": "未注明",
+      "creator": "Fanghong",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色公鸡剪纸站在横线之上，左下向外放射的直线伸向带卷曲装饰的方形边框",
+      "caption": "Fanghong 自述制作；本包保留456×374原图，未改。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:RoosterHarbingerOfDawn.png) 图注、Licensing 与 File history；CC BY-SA 3.0；关联留空；低分辨率需人工视觉审，未入库未发布。",
+      "sources": [
+        {
+          "title": "RoosterHarbingerOfDawn",
+          "author": "Fanghong（文件页 Made by myself）",
+          "url": "https://commons.wikimedia.org/wiki/File:RoosterHarbingerOfDawn.png",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "作者自作声明、文件历史与 CC BY-SA 3.0 标记已核对；仅候选",
+          "note": "文件页缺独立原作档案；自作声明及开放许可无已知矛盾，正式选题与低分辨率视觉适用性待审"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R04"
+        }
+      },
+      "sortOrder": 4,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R05",
+      "proposedId": "exhibit-daolingzhi",
+      "title": "盗灵芝剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "人物",
+        "剪影",
+        "白蛇传"
+      ],
+      "summary": "四个人物剪影构成一幅题为《盗灵芝》的剪纸",
+      "description": "画面左侧一人头戴繁复冠饰并举长刃，中间一人也举长刃；右侧后方为长须、手持物件者，前方另有一名较小的人物。四人均为黑纸剪影，内部以细条镂空分出衣纹、发饰与面部。上方有“盗灵芝”三字题名。本件只介绍图谱所载题名与画面可见内容，不凭外观指认角色、性别或寓意。",
+      "dateLabel": "1920年前",
+      "region": "图谱未标产地",
+      "creator": "未注明",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "黑色剪纸共四个人物，左侧与中间两人各举长刃，右侧后方一人长须，前方另有一名较小的人物，上方有“盗灵芝”题字",
+      "caption": "佚名《盗灵芝》剪纸，北京鲁迅博物馆藏；图为《北京鲁迅博物馆藏画选》1986年图版扫描。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:Daolingzhi.jpg) Artwork/Licensing（medium=剪纸，PD-scan/PD-old-70）；关联留空；文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "盗灵芝",
+          "author": "佚名（Commons 标注 Anonymous，1920年前）",
+          "url": "https://commons.wikimedia.org/wiki/File:Daolingzhi.jpg",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "Commons 文件页 medium=剪纸、date=1920年前、institution=北京鲁迅博物馆 与 PD 扫描标记已核对；仅候选",
+          "note": "底本1920年前佚名剪纸已过保护期，扫描件标 PD-scan/PD-old-70；实物尺寸著录为 375×190 mm，画面为一幅题为《盗灵芝》的四人物组合，按一件计，不拆分计数；人物身份不凭外观推断"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R05"
+        }
+      },
+      "sortOrder": 5,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R07",
+      "proposedId": "exhibit-double-happiness",
+      "title": "双喜字剪纸",
+      "category": "中国文字题材剪纸",
+      "tags": [
+        "囍字",
+        "红色",
+        "立体"
+      ],
+      "summary": "红色剪纸“囍”字立于白色台面",
+      "description": "字形以粗笔画构成，笔画交接处留出横向长条镂空；纸张对折痕迹与刀口清晰可见，作品呈立体竖立状态。本件只介绍作者自述的剪纸技法与可见形制，不附会婚俗寓意。",
+      "dateLabel": "页面日期2019-02-05",
+      "region": "未注明",
+      "creator": "OlgaTkachenko",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色剪纸“囍”字立在白色台面上，笔画间有横向长条镂空，可见折痕与刀口",
+      "caption": "OlgaTkachenko 以剪纸技法制作的双喜字剪纸，CC BY-SA 4.0。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:%D0%86%D1%94%D1%80%D0%BE%D0%B3%D0%BB%D1%96%D1%84_%22%D0%9F%D0%BE%D0%B4%D0%B2%D1%96%D0%B9%D0%BD%D0%B5_%D1%89%D0%B0%D1%81%D1%82%D1%8F%22.jpg) Self-published work／CC BY-SA 4.0；关联留空；文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Ієрогліф Подвійне щастя",
+          "author": "OlgaTkachenko（文件页自述 Own work）",
+          "url": "https://commons.wikimedia.org/wiki/File:%D0%86%D1%94%D1%80%D0%BE%D0%B3%D0%BB%D1%96%D1%84_%22%D0%9F%D0%BE%D0%B4%D0%B2%D1%96%D0%B9%D0%BD%D0%B5_%D1%89%D0%B0%D1%81%D1%82%D1%8F%22.jpg",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "文件页 Self-published work、自作声明与 CC BY-SA 4.0 已核对；仅候选",
+          "note": "作者自述自作并以剪纸技法（цзяньчжі）制作，无已知相反证据；作者为乌克兰籍，作品取中国囍字题材，是否计入中国剪纸作品须负责人判定；署名与相同方式共享条件须落实"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R07"
+        }
+      },
+      "sortOrder": 6,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R08",
+      "proposedId": "exhibit-zamenhof-disc",
+      "title": "柴门霍夫剪纸圆盘",
+      "category": "剪纸作品",
+      "tags": [
+        "圆形",
+        "花卉",
+        "人物胸像"
+      ],
+      "summary": "红色圆形剪纸，中心嵌绿色柴门霍夫胸像",
+      "description": "圆盘满布镂空的花叶、枝条与小动物纹样，中心留出圆形开光，内贴绿色剪出的柴门霍夫侧面胸像，胸像之后为红色五角星。本件只描述可见构图与页面所记场合，不评价人物生平。",
+      "dateLabel": "2007-12-06",
+      "region": "未注明",
+      "creator": "Zhang Xuesong（雪松）",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "红色圆形剪纸满布花叶与小动物镂空，中心圆形开光内为绿色柴门霍夫胸像",
+      "caption": "Zhang Xuesong（雪松）柴门霍夫剪纸圆盘，2007年第七届中国世界语大会，CC0 1.0；原图800×600。",
+      "sourceNote": "[文件页](https://commons.wikimedia.org/wiki/File:%C4%88ina_tonda%C4%B5o_kun_Zamenhof.jpg) cc-zero；关联留空；低分辨率需人工视觉审，文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Ĉina tondaĵo kun Zamenhof",
+          "author": "Zhang Xuesong（雪松，Commons author 字段）",
+          "url": "https://commons.wikimedia.org/wiki/File:%C4%88ina_tonda%C4%B5o_kun_Zamenhof.jpg",
+          "accessedAt": "2026-10-20T00:00:00+08:00",
+          "citation": "文件页 cc-zero 标记、Ipernityreview 复核记录与署名字段已核对；仅候选",
+          "note": "Commons author 字段署名 Zhang Xuesong（雪松），页面未另行声明制作者与摄影者是否同一人；CC0 由上传者作出并于 2017-01-31 经 Commons 信任用户复核；原图仅 800×600，正式展示质量待人工审"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R08"
+        }
+      },
+      "sortOrder": 7,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R13",
+      "proposedId": "exhibit-beijing-five-part-arch",
+      "title": "北京五段纸制节庆牌楼剪纸",
+      "category": "剪纸应用档案影像",
+      "tags": [
+        "临时节庆装置",
+        "牌楼",
+        "几何纹样"
+      ],
+      "summary": "一张黑白档案照片记录了横跨多条街巷的五段纸制节庆牌楼",
+      "description": "牌楼中央段最高，两侧分列较低的门洞；上部以连续几何镂空、圆形花饰和成排垂饰组成，立柱顶端另有小型装饰。画面前方可见步行者、手推车与停留人群。馆藏说明明确记载，这类临时牌楼以红纸按传统 jianzhi 剪纸技法制成，节期结束后拆除。本稿不据黑白照片推定具体节日、纹样寓意或制作者。",
+      "dateLabel": "晚清（1796—1912）",
+      "region": "北京",
+      "creator": "未注明",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "黑白档案照片中，一座五段纸制牌楼横跨街巷，中央段较高，两侧门洞上布满几何镂空和圆形花饰，前方有人群与手推车",
+      "caption": "北京五段纸制节庆牌楼剪纸，制作者未注明，晚清；Skušek 收藏相册第124张，斯洛文尼亚民族志博物馆藏。",
+      "sourceNote": "[机构记录页](https://vazcollections.si/predmeti/fotografija-petdelni-praznicni-slavolok-iz-papirja/)及 Europeana 固定记录 /525/RF0724 标 CC BY-SA 4.0；关联留空；1200×1200黑白档案图视觉质量待人工审，文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Fotografija Petdelni praznični slavolok iz papirja",
+          "author": "未注明（晚清北京一次性纸制节庆牌楼，馆藏记录明确为传统 jianzhi 剪纸技法）",
+          "url": "https://vazcollections.si/predmeti/fotografija-petdelni-praznicni-slavolok-iz-papirja/",
+          "accessedAt": "2026-10-21T00:00:00+08:00",
+          "citation": "机构具体记录页、Europeana固定记录 /525/RF0724 与 CC BY-SA 4.0 媒体字段已核对；画面与三段牌楼为不同相册号、不同结构的独立临时作品；候选资料齐备",
+          "note": "来源页将图像明确标为 CC BY-SA 4.0，并把画面中的晚清北京节庆牌楼明确著录为传统 jianzhi 剪纸技法、红纸制作的一次性作品；制作者与摄影者姓名未注明。使用时须署名来源、附许可链接、说明修改，改编图像按相同或兼容许可分发；仍需人工判断1200×1200黑白档案图的展陈质量"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R13"
+        }
+      },
+      "sortOrder": 8,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R14",
+      "proposedId": "exhibit-beijing-three-part-arch",
+      "title": "北京三段纸制节庆牌楼剪纸",
+      "category": "剪纸应用档案影像",
+      "tags": [
+        "临时节庆装置",
+        "牌楼",
+        "几何纹样"
+      ],
+      "summary": "一张黑白档案照片记录了三段结构的纸制节庆牌楼",
+      "description": "中央门洞上方是密集的网格与圆形装饰，两侧段各有几何镂空面板；四根高立柱顶部见成组装饰，横向纸带把三段结构连为一体。画面下缘可见行人，背后为城门式建筑。馆藏说明明确记载，这类牌楼以红纸按传统 jianzhi 剪纸技法制作并在节后拆除。本稿不辨认模糊匾额，也不推定节日、寓意或制作者。",
+      "dateLabel": "晚清（1796—1912）",
+      "region": "北京",
+      "creator": "未注明",
+      "meaning": "未核实，不展示寓意断言",
+      "alt": "黑白档案照片中，一座三段纸制牌楼立在城门式建筑前，中央门洞上方有网格与圆形装饰，两侧面板为几何镂空，画面下缘可见行人",
+      "caption": "北京三段纸制节庆牌楼剪纸，制作者未注明，晚清；Skušek 收藏相册第125张，斯洛文尼亚民族志博物馆藏。",
+      "sourceNote": "[机构记录页](https://vazcollections.si/predmeti/fotografija-tridelni-praznicni-slavolok-iz-papirja/)及 Europeana 固定记录 /525/RF0725 标 CC BY-SA 4.0；关联留空；1200×1200黑白档案图视觉质量待人工审，文案待审、未入库未发布。",
+      "sources": [
+        {
+          "title": "Fotografija Tridelni praznični slavolok iz papirja",
+          "author": "未注明（晚清北京一次性纸制节庆牌楼，馆藏记录明确为传统 jianzhi 剪纸技法）",
+          "url": "https://vazcollections.si/predmeti/fotografija-tridelni-praznicni-slavolok-iz-papirja/",
+          "accessedAt": "2026-10-21T00:00:00+08:00",
+          "citation": "机构具体记录页、Europeana固定记录 /525/RF0725 与 CC BY-SA 4.0 媒体字段已核对；画面与五段牌楼为不同相册号、不同结构的独立临时作品；候选资料齐备",
+          "note": "来源页将图像明确标为 CC BY-SA 4.0，并把画面中的晚清北京节庆牌楼明确著录为传统 jianzhi 剪纸技法、红纸制作的一次性作品；制作者与摄影者姓名未注明。使用时须署名来源、附许可链接、说明修改，改编图像按相同或兼容许可分发；仍需人工判断1200×1200黑白档案图的展陈质量"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R14"
+        }
+      },
+      "sortOrder": 9,
+      "decisionStatus": "delegated-draft-opinion",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R17",
+      "proposedId": "exhibit-v1-hundred-fu",
+      "title": "百福字剪纸",
+      "category": "文字题材剪纸",
+      "tags": [
+        "福字",
+        "文字",
+        "红色"
+      ],
+      "summary": "同一红纸画面排列多种福字字形，展示文字与留白的组合",
+      "description": "画面以红色纸面承接多行不同写法的福字，白色镂空与保留的红色连线共同构成阅读节奏。Commons 文件页题为《100 Fu (a papercut)》，注明图像日期为2006年1月15日，图像作者为 Patricia BjaalandWelch，并提供 CC BY-SA 3.0 许可。本展品按整幅图像中的同一件百福构图计一件，不把字形裁切另计作品；剪纸制作者和创作年代没有单独著录。",
+      "dateLabel": "图像记录日期2006-01-15；作品创作年代未注明",
+      "region": "未注明",
+      "creator": "剪纸制作者未单独注明；图像 Patricia BjaalandWelch",
+      "meaning": "不增加未经来源支持的寓意断言",
+      "alt": "白色背景上的红色百福字剪纸，多行不同福字以白色镂空排列，上方保留红色文字。",
+      "caption": "Patricia BjaalandWelch，《100 Fu (a papercut)》 / Wikimedia Commons / CC BY-SA 3.0",
+      "sourceNote": "https://commons.wikimedia.org/wiki/File:100_Fu_(a_papercut).JPG",
+      "sources": [
+        {
+          "title": "100 Fu (a papercut)",
+          "author": "剪纸制作者未单独注明；文件页将图像声明为 Own work",
+          "url": "https://commons.wikimedia.org/wiki/File:100_Fu_(a_papercut).JPG",
+          "accessedAt": "2026-10-23T00:00:00+08:00",
+          "citation": "Commons具体文件页Own work、图像作者、CC BY-SA 3.0及整幅图核对。",
+          "note": "公开逐件许可支持网站、缩略图、必要格式转换及比赛包复制分发；保留作者、来源、许可和修改说明，不暗示原作者或机构背书。剪纸制作者未单独著录，不以摄影作者冒充制作者。"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R17"
+        }
+      },
+      "sortOrder": 10,
+      "decisionStatus": "AI-delegated-editorial-and-technical-review; no-human-signature",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R18",
+      "proposedId": "exhibit-v1-goldfish-paper-cut",
+      "title": "金鱼剪纸",
+      "category": "剪纸作品",
+      "tags": [
+        "金鱼",
+        "镂空",
+        "礼仪装饰"
+      ],
+      "summary": "两尾黑色金鱼围绕中央文字，细长镂空呈现鱼鳍和尾部",
+      "description": "照片中的黑色纸形以两尾金鱼和中央文字组成连续图案，鱼鳞以弧线重复，鱼鳍与尾部由细长留白展开。国家文化记忆库记录其由蔡坤政、蔡佐骏制作，完成于2019年8月，用于生命礼仪装饰；本页保留这一用途，不将其改写为春节窗花。该记录的数位物件按 CC BY 3.0 TW + 提供，摄影贡献者为林思维，建档单位为宜兰县政府文化局。本展品按整件鱼形构图计一件，不将两尾鱼拆分计数。",
+      "dateLabel": "2019年8月",
+      "region": "台湾宜兰",
+      "creator": "蔡坤政、蔡佐骏（蔡佐駿）",
+      "meaning": "不增加未经来源支持的寓意断言",
+      "alt": "浅色粗糙底面上的黑色剪纸，两尾金鱼在中央文字两侧相向，鳞片、鱼鳍和长尾由镂空线条表现。",
+      "caption": "金魚剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW",
+      "sourceNote": "https://tcmb.culture.tw/zh-tw/detail?id=283402&indexCode=Culture_Object",
+      "sources": [
+        {
+          "title": "金魚剪紙",
+          "author": "蔡坤政、蔡佐骏（原页署名：蔡坤政、蔡佐駿）",
+          "url": "https://tcmb.culture.tw/zh-tw/detail?id=283402&indexCode=Culture_Object",
+          "accessedAt": "2026-10-23T00:00:00+08:00",
+          "citation": "国家文化记忆库具体记录、数位物件CC BY 3.0 TW +、创作者、摄影者与Commons转存原图逐项核对。",
+          "note": "公开逐件许可支持网站、缩略图、必要格式转换及比赛包复制分发；保留作者、来源、许可和修改说明，不暗示原作者或机构背书。来源记录将数字物件与描述文字许可分开，使用数字物件CC BY 3.0 TW，未将CC0文字许可误作图片许可。"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R18"
+        }
+      },
+      "sortOrder": 11,
+      "decisionStatus": "AI-delegated-editorial-and-technical-review; no-human-signature",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "E-R19",
+      "proposedId": "exhibit-v1-border-paper-cut",
+      "title": "花边剪纸组",
+      "category": "剪纸作品组",
+      "tags": [
+        "花边",
+        "连续纹样",
+        "礼仪装饰"
+      ],
+      "summary": "黑色花边纸形横向展开，曲线与镂空形成重复节奏",
+      "description": "照片中多条黑色花边横向排列，卷曲的外缘、中央圆形和放射状留白形成连续节奏。国家文化记忆库将本组著录为蔡坤政、蔡佐骏合作制作的生命礼仪用花边剪纸，完成于2019年8月；摄影贡献者为林思维，建档单位为宜兰县政府文化局，数位物件标注 CC BY 3.0 TW +。本项目按该独立记录的整组花边计一件，不将同框各条或裁切另计作品，也不把它与金鱼剪纸视为同一作品。",
+      "dateLabel": "2019年8月",
+      "region": "台湾宜兰",
+      "creator": "蔡坤政、蔡佐骏（蔡佐駿）",
+      "meaning": "不增加未经来源支持的寓意断言",
+      "alt": "浅色底面上横向摆放的黑色花边剪纸，卷曲边缘与中央圆形镂空组成重复纹样。",
+      "caption": "花邊剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW",
+      "sourceNote": "https://tcmb.culture.tw/zh-tw/detail?id=283404&indexCode=Culture_Object",
+      "sources": [
+        {
+          "title": "花邊剪紙",
+          "author": "蔡坤政、蔡佐骏（原页署名：蔡坤政、蔡佐駿）",
+          "url": "https://tcmb.culture.tw/zh-tw/detail?id=283404&indexCode=Culture_Object",
+          "accessedAt": "2026-10-23T00:00:00+08:00",
+          "citation": "国家文化记忆库具体记录、数位物件CC BY 3.0 TW +、创作者、摄影者与Commons转存原图逐项核对。",
+          "note": "公开逐件许可支持网站、缩略图、必要格式转换及比赛包复制分发；保留作者、来源、许可和修改说明，不暗示原作者或机构背书。来源记录将数字物件与描述文字许可分开，使用数字物件CC BY 3.0 TW，未将CC0文字许可误作图片许可。"
+        }
+      ],
+      "storyIds": [],
+      "templateIds": [],
+      "bindings": {
+        "craftId": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "mediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "E-R19"
+        }
+      },
+      "sortOrder": 12,
+      "decisionStatus": "AI-delegated-editorial-and-technical-review; no-human-signature",
+      "publishGate": "not-approved"
+    }
+  ],
+  "stories": [
+    {
+      "candidate": "S-C01",
+      "proposedId": "story-zhou-shuying",
+      "title": "周淑英｜纸上的颜色",
+      "personName": "周淑英",
+      "personBio": "剪纸（蔚县剪纸）第四批国家级代表性传承人。",
+      "region": "河北蔚县",
+      "summary": "从画、刻、染的工序，走近蔚县剪纸的色彩。",
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "在河北蔚县，周淑英跟随父亲周永明学习剪纸，也学会了画、刻、染的工序。她在染色上探索出多种方法，包括雾染和叠染。戏曲人物、花鸟鱼虫，都曾成为她的创作题材。"
+        },
+        {
+          "type": "paragraph",
+          "text": "官方人物条目列出的代表作有《百蝶图》《生命树》和《牡丹》。2025年春节前，新华社记录了她创作生肖蛇剪纸、向爱好者介绍作品的情景。节令有了新的主题，剪纸也有了与观众见面的新机会。"
+        }
+      ],
+      "timeline": [],
+      "sources": [
+        {
+          "title": "中国非遗网人物条目",
+          "author": "中国非物质文化遗产网",
+          "url": "https://www.ihchina.cn/ccr_detail/2757.html",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "师承、工序、染法、题材及代表作。",
+          "note": "公开资料改写，非采访。"
+        },
+        {
+          "title": "新华社2025年报道",
+          "author": "新华社",
+          "url": "https://www.xinhuanet.com/photo/20250103/04738abbe3814546b3adb98f8eed0a1c/c.html",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "生肖蛇剪纸创作及介绍活动。",
+          "note": "公开资料改写，非采访。"
+        }
+      ],
+      "exhibitIds": [],
+      "bindings": {
+        "craftIds": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "coverMediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "S-C01"
+        },
+        "templateId": {
+          "status": "pending-controlled-template-intake",
+          "candidate": "T-C01"
+        }
+      },
+      "sortOrder": 1,
+      "decisionStatus": "delegated-draft-opinion; human-signature-pending",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "S-C02",
+      "proposedId": "story-zhang-xiufang",
+      "title": "张秀芳｜剪刀留下的线",
+      "personName": "张秀芳",
+      "personBio": "剪纸（扬州剪纸）第一批国家级代表性传承人。",
+      "region": "江苏扬州",
+      "summary": "从相连的线条，走近扬州剪纸与技艺传授。",
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "张秀芳13岁开始学扬州剪纸，成长于张氏剪纸世家，是这一家族技艺的第六代传人。在她常用的镂空技法中，纸上留下的线条需要连接起来，花鸟鱼虫便在疏密之间显出形态。"
+        },
+        {
+          "type": "paragraph",
+          "text": "中国剪纸博物馆展示的《桃花柳燕》创作于2007年：燕子、柳枝和桃花共同组成圆形画面。她也把手艺带给后来的人。扬州晚报2018年的报道记载，她在学校带徒，并着手培养美术教师。"
+        }
+      ],
+      "timeline": [],
+      "sources": [
+        {
+          "title": "中国非遗网人物条目",
+          "author": "中国非物质文化遗产网",
+          "url": "https://www.ihchina.cn/ccr_detail/2619.html",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "学艺年龄、家族传承、镂空及题材。",
+          "note": "公开资料改写，非采访。"
+        },
+        {
+          "title": "中国剪纸博物馆作品页：《桃花柳燕》",
+          "author": "中国剪纸博物馆／Google 艺术与文化",
+          "url": "https://artsandculture.google.com/asset/%E6%A1%83%E8%8A%B1%E6%9F%B3%E7%87%95/KAENUbtz6Y_XYw?hl=zh-CN",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "作者、创作年份及画面内容。",
+          "note": "公开资料改写，非采访。"
+        },
+        {
+          "title": "扬州晚报2018年报道",
+          "author": "扬州晚报",
+          "url": "https://news.sina.cn/gn/2018-05-11/detail-ihamfahw0684573.d.html?vt=4",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "学校带徒和培养美术教师。",
+          "note": "公开资料改写，非采访。"
+        }
+      ],
+      "exhibitIds": [],
+      "bindings": {
+        "craftIds": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "coverMediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "S-C02"
+        },
+        "templateId": {
+          "status": "pending-controlled-template-intake",
+          "candidate": "T-C02"
+        }
+      },
+      "sortOrder": 2,
+      "decisionStatus": "delegated-draft-opinion; human-signature-pending",
+      "publishGate": "not-approved"
+    },
+    {
+      "candidate": "S-C03",
+      "proposedId": "story-chen-qiuri",
+      "title": "陈秋日｜从学剪到传剪",
+      "personName": "陈秋日",
+      "personBio": "剪纸（漳浦剪纸）第三批国家级代表性传承人。",
+      "region": "福建漳浦",
+      "summary": "从培训班里的学习者，到向别人传授剪纸技艺。",
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "14岁时，陈秋日参加漳浦县的剪纸培训，后来向陈金、林桃等老一辈艺人学习。中国非遗网介绍，她的作品画面饱满，线条简洁而相互衔接；《兔年如意》和《老鼠娶亲》是条目列出的代表作。"
+        },
+        {
+          "type": "paragraph",
+          "text": "她也把经验传给更多人：在漳浦举办培训班，曾受文化部选派到斐济、日本传授剪纸。2021年的报道记录了她与徒弟卢淑蓉交流技艺，并展示她的作品《秋实》。从培训班里的学习者，到向别人传授技艺，剪纸在一代代人的手中延续。"
+        }
+      ],
+      "timeline": [],
+      "sources": [
+        {
+          "title": "中国非遗网人物条目",
+          "author": "中国非物质文化遗产网",
+          "url": "https://www.ihchina.cn/art/detail/id/2676.html",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "培训、师承、技艺特点、代表作和传授活动。",
+          "note": "公开资料改写，非采访。"
+        },
+        {
+          "title": "中国非遗网转载人民网报道",
+          "author": "人民网／中国非物质文化遗产网",
+          "url": "https://www.ihchina.cn/project_details/24202",
+          "accessedAt": "2026-11-02T00:00:00+08:00",
+          "citation": "师徒交流及《秋实》归属。",
+          "note": "公开资料改写，非采访。"
+        }
+      ],
+      "exhibitIds": [],
+      "bindings": {
+        "craftIds": {
+          "status": "pending-total-controller-confirmation"
+        },
+        "coverMediaId": {
+          "status": "pending-admin-upload",
+          "candidate": "S-C03"
+        },
+        "templateId": {
+          "status": "pending-controlled-template-intake",
+          "candidate": "T-C03"
+        }
+      },
+      "sortOrder": 3,
+      "decisionStatus": "delegated-draft-opinion; human-signature-pending",
+      "publishGate": "not-approved"
+    }
+  ],
+  "media": [
+    {
+      "candidate": "E-R01",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/spring-original.png",
+      "uploadFile": "docs/content/assets/m14-3c/spring-upload.webp",
+      "originalSha256": "687baa2e459b5a8997cbe6405a42a8e4789c303f4857a0a7bc7a32cf958cff86",
+      "uploadSha256": "13c60f63fccd6c0895b406dbc801ff3da1426b236a049db51cb1057761455de0",
+      "format": "webp",
+      "width": 1863,
+      "height": 1859,
+      "source": "https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Lanneixi / CC BY-SA 4.0；上传候选有损转 WebP 须说明",
+      "modification": "尺寸不变；WebP 有损压缩，需人工比较色彩和细节；不是新的独立作品",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R02",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/pig-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/pig-original.jpg",
+      "originalSha256": "72c461e721e32be38db37bc353fff55a12a097be3ab6d87c44419d51655879df",
+      "uploadSha256": "72c461e721e32be38db37bc353fff55a12a097be3ab6d87c44419d51655879df",
+      "format": "jpeg",
+      "width": 3017,
+      "height": 2437,
+      "source": "https://commons.wikimedia.org/wiki/File:Chinese_paper_cutting-Pig.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chinese_paper_cutting-Pig.jpg",
+      "license": "CC BY-SA 3.0（文件页所列可选许可之一）",
+      "attribution": "Fanghong；背景清理 PawełMM / CC BY-SA 3.0",
+      "modification": "本包未修改现行原图；Commons 历史记录2018年背景清理",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R03",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/dog-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/dog-original.jpg",
+      "originalSha256": "5b8010ee40f79d7a30160f7fe766773d102331d029496e41db4194fd0d73dece",
+      "uploadSha256": "5b8010ee40f79d7a30160f7fe766773d102331d029496e41db4194fd0d73dece",
+      "format": "jpeg",
+      "width": 2237,
+      "height": 2148,
+      "source": "https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg",
+      "license": "CC BY-SA 3.0（文件页所列可选许可之一）",
+      "attribution": "Fanghong；去边框 Bjankuloski06 / CC BY-SA 3.0",
+      "modification": "本包未修改现行原图；Commons 历史记录2018年边框移除",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R04",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/rooster-original.png",
+      "uploadFile": "docs/content/assets/m14-3c/rooster-original.png",
+      "originalSha256": "fd3fe57dddd7b06ebb7a923e7478f88c33508fb3bd1d9f00285a58cdb25ad1f3",
+      "uploadSha256": "fd3fe57dddd7b06ebb7a923e7478f88c33508fb3bd1d9f00285a58cdb25ad1f3",
+      "format": "png",
+      "width": 456,
+      "height": 374,
+      "source": "https://commons.wikimedia.org/wiki/File:RoosterHarbingerOfDawn.png",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:RoosterHarbingerOfDawn.png",
+      "license": "CC BY-SA 3.0（文件页 GFDL 迁移后列出的许可）",
+      "attribution": "Fanghong / CC BY-SA 3.0；本包未修改原图",
+      "modification": "本包未修改原图；文件页现行版本为2005年上传",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R05",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/daolingzhi-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/daolingzhi-original.jpg",
+      "originalSha256": "7732250abd5836ce66956d0d8412e9bf6f9c55db67d7e0e071b83f5845e7dd08",
+      "uploadSha256": "7732250abd5836ce66956d0d8412e9bf6f9c55db67d7e0e071b83f5845e7dd08",
+      "format": "jpeg",
+      "width": 1655,
+      "height": 863,
+      "source": "https://commons.wikimedia.org/wiki/File:Daolingzhi.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daolingzhi.jpg",
+      "license": "Public domain（PD-scan / PD-old-70）",
+      "attribution": "佚名《盗灵芝》剪纸，北京鲁迅博物馆藏；图版见《北京鲁迅博物馆藏画选》天津人民美术出版社 1986；Commons 公有领域扫描",
+      "modification": "本包未修改原图；原件为1986年画册图版扫描",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R07",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/double-happiness-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/double-happiness-original.jpg",
+      "originalSha256": "b475fe4aa8aaa8fef7bc7946d2cf176c24b50fbeff8cfc66306e8750f77fca31",
+      "uploadSha256": "b475fe4aa8aaa8fef7bc7946d2cf176c24b50fbeff8cfc66306e8750f77fca31",
+      "format": "jpeg",
+      "width": 3030,
+      "height": 3030,
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%86%D1%94%D1%80%D0%BE%D0%B3%D0%BB%D1%96%D1%84_%22%D0%9F%D0%BE%D0%B4%D0%B2%D1%96%D0%B9%D0%BD%D0%B5_%D1%89%D0%B0%D1%81%D1%82%D1%8F%22.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%D0%86%D1%94%D1%80%D0%BE%D0%B3%D0%BB%D1%96%D1%84_%22%D0%9F%D0%BE%D0%B4%D0%B2%D1%96%D0%B9%D0%BD%D0%B5_%D1%89%D0%B0%D1%81%D1%82%D1%8F%22.jpg",
+      "license": "CC BY-SA 4.0",
+      "attribution": "OlgaTkachenko，双喜字剪纸（作者自述以剪纸技法制作），CC BY-SA 4.0",
+      "modification": "本包未修改原图",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R08",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/zamenhof-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/zamenhof-original.jpg",
+      "originalSha256": "d852d2b1c9f800f6f1574503946790d437725724abfb26d29eb9021db42a9984",
+      "uploadSha256": "d852d2b1c9f800f6f1574503946790d437725724abfb26d29eb9021db42a9984",
+      "format": "jpeg",
+      "width": 800,
+      "height": 600,
+      "source": "https://commons.wikimedia.org/wiki/File:%C4%88ina_tonda%C4%B5o_kun_Zamenhof.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C4%88ina_tonda%C4%B5o_kun_Zamenhof.jpg",
+      "license": "CC0 1.0（Public Domain Dedication）",
+      "attribution": "Zhang Xuesong（雪松），柴门霍夫剪纸圆盘，2007 年第七届中国世界语大会，CC0 1.0",
+      "modification": "本包未修改原图",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R13",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/beijing-five-part-paper-arch-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/beijing-five-part-paper-arch-original.jpg",
+      "originalSha256": "9305d6b2272e05bfd43f39c969460d33b5bd01a7890591fe4a3c851d28b1b092",
+      "uploadSha256": "9305d6b2272e05bfd43f39c969460d33b5bd01a7890591fe4a3c851d28b1b092",
+      "format": "jpeg",
+      "width": 1200,
+      "height": 1200,
+      "source": "https://vazcollections.si/predmeti/fotografija-petdelni-praznicni-slavolok-iz-papirja/",
+      "sourceUrl": "https://vazcollections.si/predmeti/fotografija-petdelni-praznicni-slavolok-iz-papirja/",
+      "license": "CC BY-SA 4.0",
+      "attribution": "北京五段纸制节庆牌楼剪纸，未注明制作者，晚清，北京；Skušek 收藏相册第124张，斯洛文尼亚民族志博物馆 / VAZ，CC BY-SA 4.0",
+      "modification": "从来源页公开原图地址原样下载，未裁切、未调色、未放大；原图含相册页白边，作为档案语境保留",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R14",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/beijing-three-part-paper-arch-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/beijing-three-part-paper-arch-original.jpg",
+      "originalSha256": "7368c764182571746c060e1ebd7cb39d9ef2ae144bf9f757afbdf4615371555f",
+      "uploadSha256": "7368c764182571746c060e1ebd7cb39d9ef2ae144bf9f757afbdf4615371555f",
+      "format": "jpeg",
+      "width": 1200,
+      "height": 1200,
+      "source": "https://vazcollections.si/predmeti/fotografija-tridelni-praznicni-slavolok-iz-papirja/",
+      "sourceUrl": "https://vazcollections.si/predmeti/fotografija-tridelni-praznicni-slavolok-iz-papirja/",
+      "license": "CC BY-SA 4.0",
+      "attribution": "北京三段纸制节庆牌楼剪纸，未注明制作者，晚清，北京；Skušek 收藏相册第125张，斯洛文尼亚民族志博物馆 / VAZ，CC BY-SA 4.0",
+      "modification": "从来源页公开原图地址原样下载，未裁切、未调色、未放大；原图含相册页白边，作为档案语境保留",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "documented-candidate; human-approval-pending",
+      "distributionGate": "attribution-and-license-display-pending"
+    },
+    {
+      "candidate": "E-R17",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/hundred-fu-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/hundred-fu-upload.webp",
+      "originalSha256": "075ec1894d9041aca77b2479c073d66425a865737bd3a099e31c3bc71d93256f",
+      "uploadSha256": "5b6cd6d0d8a8afc59b5ae655f4de2c80829ff6f4cdd51b666bbdd3744aefdf56",
+      "format": "webp",
+      "width": 1530,
+      "height": 1849,
+      "source": "https://commons.wikimedia.org/wiki/File:100_Fu_(a_papercut).JPG",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:100_Fu_(a_papercut).JPG",
+      "license": "CC BY-SA 3.0",
+      "attribution": "Patricia BjaalandWelch，《100 Fu (a papercut)》 / Wikimedia Commons / CC BY-SA 3.0",
+      "modification": "原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。此派生图继续按CC BY-SA 3.0分发。后台会完整解码为PNG并生成缩略图。",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "open-license-documented; AI-delegated-review; human-signature-pending",
+      "distributionGate": "website-thumbnail-and-competition-copy-distribution-under-stated-license"
+    },
+    {
+      "candidate": "E-R18",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/goldfish-paper-cut-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/goldfish-paper-cut-upload.webp",
+      "originalSha256": "ff6052082203579613b595164044866342ad747c430893f45ca367676fc2952a",
+      "uploadSha256": "8b628dd4d0802609fb2c7b8debaa8bc2ed24875d608f8edcdee071289fec4d62",
+      "format": "webp",
+      "width": 5184,
+      "height": 3456,
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%87%91%E9%AD%9A%E5%89%AA%E7%B4%99.jpg",
+      "sourceUrl": "https://tcmb.culture.tw/zh-tw/detail?id=283402&indexCode=Culture_Object",
+      "license": "CC BY 3.0 TW（原页标注 CC BY 3.0 TW +；本集采用3.0台湾）",
+      "attribution": "金魚剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW",
+      "modification": "原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。派生图继续按CC BY 3.0 TW分发。后台会完整解码为PNG并生成缩略图。",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "open-license-documented; AI-delegated-review; human-signature-pending",
+      "distributionGate": "website-thumbnail-and-competition-copy-distribution-under-stated-license"
+    },
+    {
+      "candidate": "E-R19",
+      "role": "exhibit-primary",
+      "originalFile": "docs/content/assets/m14-3c/border-paper-cut-original.jpg",
+      "uploadFile": "docs/content/assets/m14-3c/border-paper-cut-upload.webp",
+      "originalSha256": "2e4551284fa3d531aa142e7842ad709c75530540c11765223265b4edc12e2674",
+      "uploadSha256": "d9556a4e5b8603ebfccadc6f24517f9c053c2d8a39a2f8ff80c971dbf54d3f79",
+      "format": "webp",
+      "width": 5184,
+      "height": 2912,
+      "source": "https://commons.wikimedia.org/wiki/File:%E8%8A%B1%E9%82%8A%E5%89%AA%E7%B4%99.jpg",
+      "sourceUrl": "https://tcmb.culture.tw/zh-tw/detail?id=283404&indexCode=Culture_Object",
+      "license": "CC BY 3.0 TW（原页标注 CC BY 3.0 TW +；本集采用3.0台湾）",
+      "attribution": "花邊剪紙 / 創作者：蔡坤政、蔡佐駿 / 攝影：林思維（工藝童玩組成員） / 建檔：宜蘭縣政府文化局 / 國家文化記憶庫 / CC BY 3.0 TW",
+      "modification": "原件保留；上传件按原尺寸转换为WebP quality=90、effort=6并移除EXIF/GPS等嵌入元数据；未裁切、未重绘。派生图继续按CC BY 3.0 TW分发。后台会完整解码为PNG并生成缩略图。",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "open-license-documented; AI-delegated-review; human-signature-pending",
+      "distributionGate": "website-thumbnail-and-competition-copy-distribution-under-stated-license"
+    },
+    {
+      "candidate": "S-C01",
+      "role": "story-cover",
+      "originalFile": "docs/content/assets/m14-3c/story-editorial-s01.svg",
+      "uploadFile": "docs/content/assets/m14-3c/story-editorial-s01-upload.png",
+      "originalSha256": "ed60ae470f38319b36a3a1760446116cff2d926549f7f48af0af0afec92dc969",
+      "uploadSha256": "84fbfbbdb03561d88d8b7bfc1d29079328901cca7d723b09ed56e5968fa95b08",
+      "format": "png",
+      "width": 1200,
+      "height": 1200,
+      "source": "docs/content/template-teaching.md",
+      "license": "项目生成编辑封面；AI辅助设计与整理；无第三方素材；用户委托项目使用和参赛打包；不主张独占著作权",
+      "attribution": "项目数字示意／编辑封面，非人物肖像或人物作品；AI辅助设计与整理",
+      "modification": "数字示意 SVG 光栅化；非人物照片或人物作品",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "project-generated; user-delegated-project-and-competition-use; no-exclusive-ownership-claim",
+      "distributionGate": "project-and-competition-package-use-disclosed"
+    },
+    {
+      "candidate": "S-C02",
+      "role": "story-cover",
+      "originalFile": "docs/content/assets/m14-3c/story-editorial-s02.svg",
+      "uploadFile": "docs/content/assets/m14-3c/story-editorial-s02-upload.png",
+      "originalSha256": "17db1bfb334eb45e217d5048035ab6b333feefa4b530b0e486f396ab10f794da",
+      "uploadSha256": "0b606dfbbd8a4e32dcb95328888e1a37e251f55131955fcbf2379fa46090ed60",
+      "format": "png",
+      "width": 1200,
+      "height": 1200,
+      "source": "docs/content/template-teaching.md",
+      "license": "项目生成编辑封面；AI辅助设计与整理；无第三方素材；用户委托项目使用和参赛打包；不主张独占著作权",
+      "attribution": "项目数字示意／编辑封面，非人物肖像或人物作品；AI辅助设计与整理",
+      "modification": "数字示意 SVG 光栅化；非人物照片或人物作品",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "project-generated; user-delegated-project-and-competition-use; no-exclusive-ownership-claim",
+      "distributionGate": "project-and-competition-package-use-disclosed"
+    },
+    {
+      "candidate": "S-C03",
+      "role": "story-cover",
+      "originalFile": "docs/content/assets/m14-3c/story-editorial-s03.svg",
+      "uploadFile": "docs/content/assets/m14-3c/story-editorial-s03-upload.png",
+      "originalSha256": "a0730f11219437a5476f62c41b90629f9629c3e1898c3e3250cf41aba9a7e9fc",
+      "uploadSha256": "95388bffc3755bf4c247a382f8c0fcdf12501a394a06e451cb946f35eefb23f3",
+      "format": "png",
+      "width": 1200,
+      "height": 1200,
+      "source": "docs/content/template-teaching.md",
+      "license": "项目生成编辑封面；AI辅助设计与整理；无第三方素材；用户委托项目使用和参赛打包；不主张独占著作权",
+      "attribution": "项目数字示意／编辑封面，非人物肖像或人物作品；AI辅助设计与整理",
+      "modification": "数字示意 SVG 光栅化；非人物照片或人物作品",
+      "mediaId": {
+        "status": "pending-admin-upload"
+      },
+      "rightsStatus": "project-generated; user-delegated-project-and-competition-use; no-exclusive-ownership-claim",
+      "distributionGate": "project-and-competition-package-use-disclosed"
+    }
+  ],
+  "gates": {
+    "websiteNonCommercialConfirmed": true,
+    "competitionDistribution": "open-license-basis-recorded; submission-conditions-pending",
+    "humanTeaching": "pending",
+    "roleOwners": "pending",
+    "formalPublication": "none",
+    "gContent": "open"
+  }
+}

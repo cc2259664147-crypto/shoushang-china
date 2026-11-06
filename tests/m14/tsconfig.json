@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shoushang/contracts": ["../../packages/contracts/src/index.ts"],
+      "@shoushang/papercut-core": ["../../packages/papercut-core/src/index.ts"],
+      "@shoushang/artwork-renderer": ["../../packages/artwork-renderer/src/index.ts"]
+    }
+  },
+  "include": ["./*.ts"],
+  "exclude": []
+}

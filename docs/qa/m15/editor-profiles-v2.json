@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "profile": {
+        "profileId": "editor-profile-v2-c01",
+        "profileSchemaVersion": 2,
+        "profileVersion": 1,
+        "sourceTemplate": {
+          "id": "template-v1-c01",
+          "version": 1,
+          "snapshotSha256": "e54c6734cb1a89dff210066d5bfec667fc56c925fa6f16b7bec95539b4b7273c"
+        },
+        "allowedTools": {
+          "parametric": [
+            "circle",
+            "teardrop"
+          ],
+          "freehand": {
+            "enabled": true,
+            "minArea": 0.00001,
+            "minPerimeter": 0.01,
+            "maxPoints": 512
+          }
+        },
+        "maxTotalFreehandPoints": 20000,
+        "geometryVersion": 2,
+        "rendererVersion": 2
+      },
+      "lifecycle": {
+        "newWorkEnabled": true,
+        "historicalMode": "editable"
+      },
+      "evidence": {
+        "sourceTemplateCanonicalJcs": "{\"allowedCuts\":[{\"maxHeight\":0.16,\"maxWidth\":0.16,\"minHeight\":0.025,\"minWidth\":0.025,\"shape\":\"circle\"},{\"maxHeight\":0.15,\"maxWidth\":0.15,\"minHeight\":0.03,\"minWidth\":0.03,\"shape\":\"teardrop\"}],\"craftId\":\"craft-papercut\",\"difficulty\":\"beginner\",\"digitalNotice\":\"项目生成的数字几何练习，不复刻地方传统工序，不保证可直接进行实体剪裁。\",\"enabled\":true,\"geometry\":{\"allowedRegion\":[{\"x\":0.06,\"y\":0.08},{\"x\":0.44,\"y\":0.08},{\"x\":0.44,\"y\":0.92},{\"x\":0.06,\"y\":0.92}],\"basePaper\":{\"kind\":\"square\"},\"symmetry\":{\"axis\":\"vertical\",\"kind\":\"reflection\"}},\"geometryVersion\":1,\"id\":\"template-v1-c01\",\"license\":{\"attribution\":\"《手上中国》项目设计，AI辅助整理；未使用第三方模板素材\",\"name\":\"项目生成数字练习\"},\"name\":\"方纸镜影：成对留白\",\"recommendedColors\":[\"#B82025\",\"#E59C38\",\"#276B62\"],\"rendererVersion\":1,\"rules\":{\"maxOperations\":30,\"minEdgeGap\":0.015},\"steps\":[\"选择纸色并观察左半区\",\"用圆形或水滴形成成对留白\",\"展开、调整并保存\"],\"version\":1}",
+        "profileCanonicalSha256": "f4e0a860692120b412a9614cc31c1d66d7e483900a1b8d754c5b5e85e1f651da"
+      }
+    },
+    {
+      "profile": {
+        "profileId": "editor-profile-v2-c02",
+        "profileSchemaVersion": 2,
+        "profileVersion": 1,
+        "sourceTemplate": {
+          "id": "template-v1-c02",
+          "version": 1,
+          "snapshotSha256": "ca1640c19b4dcdd2e348b5c9032a0c0d107f0e438299616998b3bce111d7d813"
+        },
+        "allowedTools": {
+          "parametric": [
+            "triangle",
+            "teardrop"
+          ],
+          "freehand": {
+            "enabled": true,
+            "minArea": 0.00001,
+            "minPerimeter": 0.01,
+            "maxPoints": 512
+          }
+        },
+        "maxTotalFreehandPoints": 20000,
+        "geometryVersion": 2,
+        "rendererVersion": 2
+      },
+      "lifecycle": {
+        "newWorkEnabled": true,
+        "historicalMode": "editable"
+      },
+      "evidence": {
+        "sourceTemplateCanonicalJcs": "{\"allowedCuts\":[{\"maxHeight\":0.12,\"maxWidth\":0.12,\"minHeight\":0.025,\"minWidth\":0.025,\"shape\":\"triangle\"},{\"maxHeight\":0.12,\"maxWidth\":0.12,\"minHeight\":0.025,\"minWidth\":0.025,\"shape\":\"teardrop\"}],\"craftId\":\"craft-papercut\",\"difficulty\":\"beginner\",\"digitalNotice\":\"项目生成的数字几何练习，不复刻地方传统工序，不保证可直接进行实体剪裁。\",\"enabled\":true,\"geometry\":{\"allowedRegion\":[{\"x\":0.07,\"y\":0.07},{\"x\":0.43,\"y\":0.07},{\"x\":0.43,\"y\":0.93},{\"x\":0.07,\"y\":0.93}],\"basePaper\":{\"kind\":\"square\"},\"symmetry\":{\"axis\":\"vertical\",\"kind\":\"reflection\"}},\"geometryVersion\":1,\"id\":\"template-v1-c02\",\"license\":{\"attribution\":\"《手上中国》项目设计，AI辅助整理；未使用第三方模板素材\",\"name\":\"项目生成数字练习\"},\"name\":\"方纸节奏：疏密与方向\",\"recommendedColors\":[\"#B82025\",\"#445566\",\"#276B62\"],\"rendererVersion\":1,\"rules\":{\"maxOperations\":50,\"minEdgeGap\":0.012},\"steps\":[\"选择纸色并观察左半区\",\"用三角与水滴排列疏密节奏\",\"旋转、展开并保存\"],\"version\":1}",
+        "profileCanonicalSha256": "7340ffd442233ccb3c3c9a90a1dbc2b8f9672ad258fe7c86f8a61d709876a925"
+      }
+    },
+    {
+      "profile": {
+        "profileId": "editor-profile-v2-c03",
+        "profileSchemaVersion": 2,
+        "profileVersion": 1,
+        "sourceTemplate": {
+          "id": "template-v1-c03",
+          "version": 1,
+          "snapshotSha256": "27d716bd5c2fc6ed56200dc8769fefcfa062178f6fe280e59865837e1006739c"
+        },
+        "allowedTools": {
+          "parametric": [
+            "circle",
+            "triangle",
+            "teardrop"
+          ],
+          "freehand": {
+            "enabled": true,
+            "minArea": 0.00001,
+            "minPerimeter": 0.01,
+            "maxPoints": 512
+          }
+        },
+        "maxTotalFreehandPoints": 20000,
+        "geometryVersion": 2,
+        "rendererVersion": 2
+      },
+      "lifecycle": {
+        "newWorkEnabled": true,
+        "historicalMode": "editable"
+      },
+      "evidence": {
+        "sourceTemplateCanonicalJcs": "{\"allowedCuts\":[{\"maxHeight\":0.14,\"maxWidth\":0.14,\"minHeight\":0.025,\"minWidth\":0.025,\"shape\":\"circle\"},{\"maxHeight\":0.14,\"maxWidth\":0.14,\"minHeight\":0.03,\"minWidth\":0.03,\"shape\":\"triangle\"},{\"maxHeight\":0.14,\"maxWidth\":0.14,\"minHeight\":0.03,\"minWidth\":0.03,\"shape\":\"teardrop\"}],\"craftId\":\"craft-papercut\",\"difficulty\":\"advanced\",\"digitalNotice\":\"项目生成的数字几何练习，不复刻地方传统工序，不保证可直接进行实体剪裁。\",\"enabled\":true,\"geometry\":{\"allowedRegion\":[{\"x\":0.53,\"y\":0.53},{\"x\":0.93,\"y\":0.53},{\"x\":0.93,\"y\":0.93},{\"x\":0.53,\"y\":0.93}],\"basePaper\":{\"kind\":\"square\"},\"symmetry\":{\"kind\":\"radial\",\"mirror\":false,\"sectors\":4}},\"geometryVersion\":1,\"id\":\"template-v1-c03\",\"license\":{\"attribution\":\"《手上中国》项目设计，AI辅助整理；未使用第三方模板素材\",\"name\":\"项目生成数字练习\"},\"name\":\"四向回旋：中心与边缘\",\"recommendedColors\":[\"#B82025\",\"#276B62\",\"#F2D9A6\"],\"rendererVersion\":1,\"rules\":{\"maxOperations\":80,\"minEdgeGap\":0.015},\"steps\":[\"选择纸色并观察右下基础域\",\"布置圆、三角或水滴切口\",\"展开比较四向重复并保存\"],\"version\":1}",
+        "profileCanonicalSha256": "b87fb364e536cc4d44fc898bee90436d0cad7d9fcdcdc0d985ce86d9b2fcca89"
+      }
+    }
+  ]
+}

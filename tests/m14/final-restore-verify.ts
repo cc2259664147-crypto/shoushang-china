@@ -1,0 +1,36 @@
+/** Verify a previously completed M14-5 HTTP joint backup through the built offline restore command. */
+import assert from 'node:assert/strict';
+import { createHash, randomUUID } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { isAbsolute, join, relative, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
+import { performance } from 'node:perf_hooks';
+import { DatabaseSync } from 'node:sqlite';
+import { ContentDatabase } from '../../apps/api/src/database';
+import { PublicContentService } from '../../apps/api/src/content';
+import { countActiveSessions } from './session-count';
+
+const source = resolve(process.argv[2] ?? ''), backup = resolve(process.argv[3] ?? ''), evidence = resolve(process.argv[4] ?? '');
+const rel = relative(tmpdir(), source);
+if (!isAbsolute(process.argv[2] ?? '') || !rel.startsWith('m14-4-') || rel.includes('..')) throw new Error('Isolated M14 source required');
+if (!isAbsolute(process.argv[3] ?? '') || !existsSync(join(backup, 'manifest.json'))) throw new Error('Completed backup required');
+if (!isAbsolute(process.argv[4] ?? '') || existsSync(evidence)) throw new Error('New evidence path required');
+mkdirSync(evidence, { recursive: true });
+const manifest = JSON.parse(readFileSync(join(backup, 'manifest.json'), 'utf8')) as { databaseHash: string; files: { key: string; file: string; hash: string }[] };
+assert.equal(createHash('sha256').update(readFileSync(join(backup, 'content.sqlite'))).digest('hex'), manifest.databaseHash);
+for (const file of manifest.files) assert.equal(createHash('sha256').update(readFileSync(join(backup, file.key, file.file))).digest('hex'), file.hash);
+const restored = join(tmpdir(), `m14-5-restored-${randomUUID()}`), started = performance.now();
+const result = spawnSync(process.execPath, [resolve('apps/api/dist/admin/maintenance.js'), 'restore', backup, restored, '--all-hosts-stopped'], { encoding: 'utf8', windowsHide: true, timeout: 120000 });
+assert.equal(result.status, 0, result.stderr || 'Restore failed'); const restoreMilliseconds = performance.now() - started;
+const db = new DatabaseSync(join(restored, 'content.sqlite'));
+const scalar = (sql: string) => Number(db.prepare(sql).get()?.n);
+const counts = { enabledAccounts: scalar('SELECT count(*) n FROM admin_accounts WHERE disabled=0'), activeSessions: countActiveSessions(db) };
+db.close();
+const restoredDb = new ContentDatabase({ path: join(restored, 'content.sqlite') });
+const snapshot = new PublicContentService(restoredDb).snapshot(); restoredDb.close();
+const publicCounts = { exhibits: snapshot.exhibits.length, stories: snapshot.stories.length, templates: snapshot.templates.length };
+assert.deepEqual({ ...counts, ...publicCounts }, { enabledAccounts: 0, activeSessions: 0, exhibits: 12, stories: 3, templates: 3 });
+const sourceDb = new DatabaseSync(join(source, 'content.sqlite')); const sourceActiveSessions = countActiveSessions(sourceDb); sourceDb.close(); assert.equal(sourceActiveSessions, 0);
+const report = { notice: '自动化隔离技术恢复验证，非生产RPO/RTO承诺', backup, restored, databaseHashVerified: true, mediaHashesVerified: manifest.files.length, restoreMilliseconds, restoredCounts: { ...counts, ...publicCounts }, sourceActiveSessions, allServicesStopped: true };
+writeFileSync(join(evidence, 'report.json'), JSON.stringify(report, null, 2)); process.stdout.write(JSON.stringify(report) + '\n');

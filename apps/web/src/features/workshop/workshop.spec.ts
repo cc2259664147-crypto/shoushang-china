@@ -58,14 +58,14 @@ test('two tabs keep a real revision conflict and allow an explicit copy', async 
 });
 
 test('back navigation asks to keep editing or save the draft', async ({ page }) => {
-  await page.goto(`/?m07db=${database()}`); await page.getByRole('link', { name: '进入剪纸工坊' }).click();
+  await page.goto(`/?m07db=${database()}`); await page.getByRole('link', { name: /^开始剪纸/ }).click();
   await page.getByRole('button', { name: '使用模板' }).click();
   await expect(page.getByText('草稿已保存')).toBeVisible();
   await page.goBack();
   await expect(page.getByRole('heading', { name: '离开工坊' })).toBeVisible();
   await page.getByRole('button', { name: '继续编辑' }).click();
   await expect(page).toHaveURL(/\/workshop\/papercut/);
-  await page.getByRole('button', { name: '返回工程检查页' }).click();
+  await page.getByRole('button', { name: '返回首页' }).click();
   await page.getByRole('button', { name: '保存草稿后离开' }).click();
   await expect(page).toHaveURL(/127\.0\.0\.1:5173\/$/);
 });
@@ -237,12 +237,12 @@ test('cancel switch during a blocked draft save keeps the current work', async (
 
 test('guarded browser back preserves the forward entry', async ({ page }) => {
   await page.goto(`/?m07db=${database()}`);
-  await page.getByRole('link', { name: '进入剪纸工坊' }).click();
+  await page.getByRole('link', { name: /^开始剪纸/ }).click();
   await page.getByRole('button', { name: '使用模板' }).click();
   await expect(page.getByText('草稿已保存')).toBeVisible();
   await page.goBack();
   await page.getByRole('button', { name: '保存草稿后离开' }).click();
-  await expect(page.getByRole('heading', { name: '手上中国 · 工程检查页' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /^手上中国\s*把好奇，\s*留在纸上。$/ })).toBeVisible();
   await page.goForward();
   await expect(page).toHaveURL(/\/workshop\/papercut/);
   await expect(page.getByRole('heading', { name: '剪纸工坊' })).toBeVisible();
@@ -270,7 +270,7 @@ test('cancel leave during a blocked save keeps the workshop open', async ({ page
   await expect(page.getByText('草稿已保存')).toBeVisible();
   await page.getByRole('button', { name: '圆形' }).click();
   await page.getByRole('button', { name: '确认剪切' }).click();
-  await page.getByRole('button', { name: '返回工程检查页' }).click();
+  await page.getByRole('button', { name: '返回首页' }).click();
   await page.evaluate(async dbName => {
     const request = indexedDB.open(dbName);
     await new Promise<void>((resolve, reject) => { request.onsuccess = () => resolve(); request.onerror = () => reject(request.error); });
